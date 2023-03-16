@@ -4,6 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:backgroundTint="#6ECFDC"
     tools:context=".PageLogActivity">
 
     <Button
@@ -27,4 +28,46 @@
         app:layout_constraintHorizontal_bias="0.498"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
+
+    <android.support.design.widget.TextInputLayout
+        android:id="@+id/enterId"
+        android:layout_width="325dp"
+        android:layout_height="52dp"
+        android:background="#A4D0F3"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.52"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.287"
+        app:passwordToggleEnabled="true">
+
+        <android.support.design.widget.TextInputEditText
+            android:id="@+id/caseId"
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            android:hint="Enter your username" />
+    </android.support.design.widget.TextInputLayout>
+
+    <android.support.design.widget.TextInputLayout
+        android:id="@+id/enterPasswd"
+        android:layout_width="325dp"
+        android:layout_height="52dp"
+        android:layout_marginTop="32dp"
+        android:layout_marginBottom="420dp"
+        android:background="#A4D0F3"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="@+id/enterId"
+        app:layout_constraintHorizontal_bias="0.25"
+        app:layout_constraintStart_toStartOf="@+id/enterId"
+        app:layout_constraintTop_toBottomOf="@+id/enterId"
+        app:layout_constraintVertical_bias="0.294">
+
+        <android.support.design.widget.TextInputEditText
+            android:id="@+id/casePasswd"
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            android:hint="Enter your password" />
+    </android.support.design.widget.TextInputLayout>
+
 </android.support.constraint.ConstraintLayout>
