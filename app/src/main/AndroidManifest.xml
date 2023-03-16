@@ -13,6 +13,12 @@
         tools:ignore="ExtraText"
         tools:targetApi="31">
         <activity
+            android:name=".BaseActivity"
+            android:exported="false" />
+        <activity
+            android:name=".PageLogActivity"
+            android:exported="false" />
+        <activity
             android:name=".VaccinTimerActivity"
             android:exported="false" />
         <activity
