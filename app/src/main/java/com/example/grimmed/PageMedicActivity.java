@@ -1,11 +1,14 @@
 package com.example.grimmed;
 
+import android.content.Intent;
 import android.support.design.widget.TabLayout;
 import android.support.v4.view.ViewPager;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.Toolbar;
 import android.util.Log;
+import android.view.View;
+import android.widget.ImageView;
 
 import com.android.volley.Request;
 import com.android.volley.RequestQueue;
@@ -41,6 +44,14 @@ public class PageMedicActivity extends AppCompatActivity implements TabLayout.On
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_page_medic);
 
+        ImageView buttonMedoc = findViewById(R.id.buttonMedoc);
+        buttonMedoc.setOnClickListener(this::onClick);
+
+        ImageView buttonVac = findViewById(R.id.buttonVac);
+        buttonVac.setOnClickListener(this::onClick);
+
+        ImageView buttonProfil = findViewById(R.id.buttonProfil);
+        buttonProfil.setOnClickListener(this::onClick);
 
         //Adding toolbar to the activity
         // Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
@@ -71,6 +82,23 @@ public class PageMedicActivity extends AppCompatActivity implements TabLayout.On
 
         //----------------------------->
         
+    }
+
+    public void onClick(View v) {
+        if (v.getId() == R.id.buttonMedoc) {
+            Intent intent = new Intent(this, PageMedicActivity.class);
+            startActivity(intent);
+        }
+
+        if (v.getId() == R.id.buttonVac) {
+            Intent intent = new Intent(this, VaccinTimerActivity.class);
+            startActivity(intent);
+        }
+
+        if (v.getId() == R.id.buttonProfil) {
+            Intent intent = new Intent(this, ProfilActivity.class);
+            startActivity(intent);
+        }
     }
 
     @Override
