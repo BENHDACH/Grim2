@@ -5,10 +5,30 @@ import android.support.v4.view.ViewPager;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.Toolbar;
+import android.util.Log;
+
+import com.android.volley.Request;
+import com.android.volley.RequestQueue;
+import com.android.volley.toolbox.JsonObjectRequest;
+import com.android.volley.toolbox.Volley;
+
+import org.json.JSONException;
+import org.json.JSONObject;
+
+import java.io.BufferedReader;
+import java.io.IOException;
+import java.io.InputStreamReader;
+import java.net.HttpURLConnection;
+import java.net.MalformedURLException;
+import java.net.ProtocolException;
+import java.net.URL;
+
+import javax.net.ssl.HttpsURLConnection;
+import javax.net.ssl.SSLHandshakeException;
 
 //Implementing the interface OnTabSelectedListener to our MainActivity
 //This interface would help in swiping views
-public class PageMedicActivity extends AppCompatActivity implements TabLayout.OnTabSelectedListener{
+public class PageMedicActivity extends AppCompatActivity implements TabLayout.OnTabSelectedListener {
 
     //This is our tablayout
     private TabLayout tabLayout;
@@ -21,9 +41,10 @@ public class PageMedicActivity extends AppCompatActivity implements TabLayout.On
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_page_medic);
 
+
         //Adding toolbar to the activity
-       // Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
-       // setSupportActionBar(toolbar);
+        // Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
+        // setSupportActionBar(toolbar);
 
         //Initializing the tablayout
         tabLayout = (TabLayout) findViewById(R.id.tabLayout);
@@ -45,6 +66,11 @@ public class PageMedicActivity extends AppCompatActivity implements TabLayout.On
 
         //Adding onTabSelectedListener to swipe views
         tabLayout.setOnTabSelectedListener(this);
+
+        //makeRequest();
+
+        //----------------------------->
+        
     }
 
     @Override
@@ -61,4 +87,31 @@ public class PageMedicActivity extends AppCompatActivity implements TabLayout.On
     public void onTabReselected(TabLayout.Tab tab) {
 
     }
+
+    private void makeRequest() {
+        RequestQueue queue = Volley.newRequestQueue(this);
+        JSONObject params = new JSONObject();
+        try {
+            params.put(NetworkAPI.idShopKey, 1);
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
+        JsonObjectRequest request = new JsonObjectRequest(
+                Request.Method.POST,
+                NetworkAPI.url,
+                params,
+                response -> {
+                    try {
+                        Log.d("request", response.toString(2));
+                    } catch (JSONException e) {
+                        throw new RuntimeException(e);
+                    }
+                    //parseData(response.toString());
+                },
+                error -> Log.e("request", error.toString())
+        );
+        queue.add(request);
+
+    }
+
 }
