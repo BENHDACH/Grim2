@@ -21,6 +21,9 @@ public class VaccinTimerActivity extends AppCompatActivity {
 
         ImageView buttonProfil3 = findViewById(R.id.buttonProfil3);
         buttonProfil3.setOnClickListener(this::onClick);
+
+        ImageView backHome = findViewById(R.id.backHome);
+        backHome.setOnClickListener(this::onClick);
     }
 
     public void onClick(View v) {
@@ -36,6 +39,11 @@ public class VaccinTimerActivity extends AppCompatActivity {
 
         if (v.getId() == R.id.buttonProfil3) {
             Intent intent = new Intent(this, ProfilActivity.class);
+            startActivity(intent);
+        }
+
+        if (v.getId() == R.id.backHome) {
+            Intent intent = new Intent(this, BaseActivity.class);
             startActivity(intent);
         }
     }
