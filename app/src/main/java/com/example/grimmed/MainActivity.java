@@ -46,7 +46,7 @@ public class MainActivity extends AppCompatActivity {
             Intent intent = new Intent(this, PageLogActivity.class);
             startActivity(intent);
         } else if (v.getId() == R.id.sig) {
-            Intent intent = new Intent(this, PageMedicActivity.class);
+            Intent intent = new Intent(this, PageSignActivity.class);
             startActivity(intent);
         }
     }
