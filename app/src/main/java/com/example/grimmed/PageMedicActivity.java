@@ -1,38 +1,23 @@
 package com.example.grimmed;
 
 import android.content.Intent;
-import android.graphics.pdf.PdfDocument;
 import android.os.AsyncTask;
 import android.support.design.widget.TabLayout;
 import android.support.v4.view.ViewPager;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
-import android.support.v7.widget.Toolbar;
 import android.util.Log;
 import android.view.View;
 import android.widget.ImageView;
-
-import com.android.volley.Request;
-import com.android.volley.RequestQueue;
-import com.android.volley.toolbox.JsonObjectRequest;
-import com.android.volley.toolbox.Volley;
-
-import org.json.JSONException;
-import org.json.JSONObject;
 
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
 import java.net.HttpURLConnection;
-import java.net.MalformedURLException;
-import java.net.ProtocolException;
 import java.net.URL;
 import java.nio.charset.StandardCharsets;
 import java.util.logging.Level;
 import java.util.logging.Logger;
-
-import javax.net.ssl.HttpsURLConnection;
-import javax.net.ssl.SSLHandshakeException;
 
 //Implementing the interface OnTabSelectedListener to our MainActivity
 //This interface would help in swiping views
@@ -60,6 +45,9 @@ public class PageMedicActivity extends AppCompatActivity implements TabLayout.On
         ImageView buttonProfil = findViewById(R.id.buttonProfil);
         buttonProfil.setOnClickListener(this::onClick);
 
+        ImageView backHome4= findViewById(R.id.backHome4);
+        backHome4.setOnClickListener(this::onClick);
+
         //Adding toolbar to the activity
         // Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         // setSupportActionBar(toolbar);
@@ -86,7 +74,7 @@ public class PageMedicActivity extends AppCompatActivity implements TabLayout.On
         tabLayout.setOnTabSelectedListener(this);
 
         //makeRequest();
-        //new NetworkTask().execute();
+        new NetworkTask().execute();
 
         //----------------------------->
         
@@ -105,6 +93,10 @@ public class PageMedicActivity extends AppCompatActivity implements TabLayout.On
 
         if (v.getId() == R.id.buttonProfil) {
             Intent intent = new Intent(this, ProfilActivity.class);
+            startActivity(intent);
+        }
+        if (v.getId() == R.id.backHome4) {
+            Intent intent = new Intent(this, BaseActivity.class);
             startActivity(intent);
         }
     }
