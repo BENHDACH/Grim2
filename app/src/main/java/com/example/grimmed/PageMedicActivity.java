@@ -1,33 +1,23 @@
 package com.example.grimmed;
 
 import android.content.Intent;
+import android.os.AsyncTask;
 import android.support.design.widget.TabLayout;
 import android.support.v4.view.ViewPager;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
-import android.support.v7.widget.Toolbar;
 import android.util.Log;
 import android.view.View;
 import android.widget.ImageView;
-
-import com.android.volley.Request;
-import com.android.volley.RequestQueue;
-import com.android.volley.toolbox.JsonObjectRequest;
-import com.android.volley.toolbox.Volley;
-
-import org.json.JSONException;
-import org.json.JSONObject;
 
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
 import java.net.HttpURLConnection;
-import java.net.MalformedURLException;
-import java.net.ProtocolException;
 import java.net.URL;
-
-import javax.net.ssl.HttpsURLConnection;
-import javax.net.ssl.SSLHandshakeException;
+import java.nio.charset.StandardCharsets;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 //Implementing the interface OnTabSelectedListener to our MainActivity
 //This interface would help in swiping views
@@ -38,6 +28,8 @@ public class PageMedicActivity extends AppCompatActivity implements TabLayout.On
 
     //This is our viewPager
     private ViewPager viewPager;
+
+    private static final Logger LOGGER = Logger.getLogger(PageMedicActivity.class.getName());
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -52,6 +44,9 @@ public class PageMedicActivity extends AppCompatActivity implements TabLayout.On
 
         ImageView buttonProfil = findViewById(R.id.buttonProfil);
         buttonProfil.setOnClickListener(this::onClick);
+
+        ImageView backHome4= findViewById(R.id.backHome4);
+        backHome4.setOnClickListener(this::onClick);
 
         //Adding toolbar to the activity
         // Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
@@ -79,6 +74,7 @@ public class PageMedicActivity extends AppCompatActivity implements TabLayout.On
         tabLayout.setOnTabSelectedListener(this);
 
         //makeRequest();
+        new NetworkTask().execute();
 
         //----------------------------->
         
@@ -99,6 +95,10 @@ public class PageMedicActivity extends AppCompatActivity implements TabLayout.On
             Intent intent = new Intent(this, ProfilActivity.class);
             startActivity(intent);
         }
+        if (v.getId() == R.id.backHome4) {
+            Intent intent = new Intent(this, BaseActivity.class);
+            startActivity(intent);
+        }
     }
 
     @Override
@@ -115,31 +115,68 @@ public class PageMedicActivity extends AppCompatActivity implements TabLayout.On
     public void onTabReselected(TabLayout.Tab tab) {
 
     }
-
     private void makeRequest() {
-        RequestQueue queue = Volley.newRequestQueue(this);
-        JSONObject params = new JSONObject();
-        try {
-            params.put(NetworkAPI.idShopKey, 1);
-        } catch (JSONException e) {
-            e.printStackTrace();
-        }
-        JsonObjectRequest request = new JsonObjectRequest(
-                Request.Method.POST,
-                NetworkAPI.url,
-                params,
-                response -> {
-                    try {
-                        Log.d("request", response.toString(2));
-                    } catch (JSONException e) {
-                        throw new RuntimeException(e);
-                    }
-                    //parseData(response.toString());
-                },
-                error -> Log.e("request", error.toString())
-        );
-        queue.add(request);
+            try {
+                // Create a URL object from the API endpoint
+                URL url = new URL("https://restcountries.com/v3.1/all");
 
+                // Open a connection to the URL using HttpURLConnection
+                HttpURLConnection conn = (HttpURLConnection) url.openConnection();
+                conn.setRequestMethod("GET");
+
+                // Read the response from the API
+                BufferedReader in = new BufferedReader(new InputStreamReader(conn.getInputStream(), StandardCharsets.UTF_8));
+                StringBuilder responseBuilder = new StringBuilder();
+                String inputLine;
+                while ((inputLine = in.readLine()) != null) {
+                    responseBuilder.append(inputLine);
+                }
+                in.close();
+
+                // Print the response to the console using a log
+                LOGGER.log(Level.INFO, responseBuilder.toString());
+
+                // Disconnect the connection
+                conn.disconnect();
+
+            } catch (Exception e) {
+                LOGGER.log(Level.SEVERE, "Error: " + e.getMessage(), e);
+            }
+        }
+
+
+        //----------> AJOUT TEST
+
+    private class NetworkTask extends AsyncTask<Void, Void, String> {
+
+        @Override
+        protected String doInBackground(Void... voids) {
+            // Perform network operation here
+            String result = "";
+            try {
+                URL url = new URL("https://restcountries.com/v3.1/all");
+                HttpURLConnection conn = (HttpURLConnection) url.openConnection();
+                conn.setRequestMethod("GET");
+                conn.connect();
+
+                BufferedReader in = new BufferedReader(new InputStreamReader(conn.getInputStream(), StandardCharsets.UTF_8));
+                String line;
+                while ((line = in.readLine()) != null) {
+                    result += line;
+                }
+                in.close();
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+            Log.e("VOICIII",result);
+            return result;
+        }
+
+        @Override
+        protected void onPostExecute(String result) {
+            // Update UI with the result
+            //mTextView.setText(result);
+        }
     }
 
 }
