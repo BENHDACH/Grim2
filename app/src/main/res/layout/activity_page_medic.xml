@@ -10,6 +10,16 @@
     <!-- our toolbar -->
 
     <!-- our tablayout to display tabs  -->
+    <ImageView
+        android:id="@+id/backHome4"
+        android:layout_width="54dp"
+        android:layout_height="48dp"
+        android:layout_marginTop="50dp"
+        android:layout_marginEnd="16dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:srcCompat="@drawable/microsoftteams_image__17_" />
+
     <android.support.design.widget.TabLayout
         android:id="@+id/tabLayout"
         android:layout_width="match_parent"
@@ -22,17 +32,18 @@
         app:layout_constraintTop_toTopOf="parent" />
 
     <!-- View pager to swipe views -->
+
     <android.support.v4.view.ViewPager
         android:id="@+id/pager"
-        android:layout_width="578dp"
-        android:layout_height="1070dp"
-        android:layout_marginTop="8dp"
+        android:layout_width="410dp"
+        android:layout_height="535dp"
+        android:layout_marginTop="55dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.444"
+        app:layout_constraintHorizontal_bias="0.379"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/tabLayout"
-        app:layout_constraintVertical_bias="0.0" >
+        app:layout_constraintVertical_bias="0.0">
 
     </android.support.v4.view.ViewPager>
 
