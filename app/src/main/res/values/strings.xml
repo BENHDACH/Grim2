@@ -1,4 +1,8 @@
 <resources>
     <string name="app_name">Grimmed</string>
     <string name="titleMainCo">Dear Grimoire Tell Me...</string>
+    <string name="title_activity_base2">Base2Activity</string>
+    <string name="title_medoc">Médicaments</string>
+    <string name="title_vac">Vaccins</string>
+    <string name="title_profil">Profil</string>
 </resources>
