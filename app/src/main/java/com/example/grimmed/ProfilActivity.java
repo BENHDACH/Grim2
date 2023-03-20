@@ -21,6 +21,9 @@ public class ProfilActivity extends AppCompatActivity {
 
         ImageView buttonProfil4 = findViewById(R.id.buttonProfil4);
         buttonProfil4.setOnClickListener(this::onClick);
+
+        ImageView backHome2 = findViewById(R.id.backHome2);
+        backHome2.setOnClickListener(this::onClick);
     }
 
     public void onClick(View v) {
@@ -36,6 +39,11 @@ public class ProfilActivity extends AppCompatActivity {
 
         if (v.getId() == R.id.buttonProfil4) {
             Intent intent = new Intent(this, ProfilActivity.class);
+            startActivity(intent);
+        }
+
+        if (v.getId() == R.id.backHome2) {
+            Intent intent = new Intent(this, BaseActivity.class);
             startActivity(intent);
         }
     }
