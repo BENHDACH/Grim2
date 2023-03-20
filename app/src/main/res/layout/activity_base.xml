@@ -8,11 +8,12 @@
 
     <View
         android:id="@+id/view"
-        android:layout_width="407dp"
-        android:layout_height="53dp"
+        android:layout_width="409dp"
+        android:layout_height="67dp"
         android:background="@color/white"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent" />
 
     <ImageView
