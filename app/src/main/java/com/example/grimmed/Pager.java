@@ -26,7 +26,7 @@ public class Pager extends FragmentStatePagerAdapter {
         //Returning the current tabs
         switch (position) {
             case 0:
-                Tab1 tab1 = new Tab1();
+                Tab1 tab1 = new Tab1("my message");
                 return tab1;
             case 1:
                 Tab2 tab2 = new Tab2();
