@@ -1,6 +1,7 @@
 package com.example.grimmed;
 
 import android.content.Intent;
+import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
@@ -24,6 +25,11 @@ public class ProfilActivity extends AppCompatActivity {
 
         ImageView backHome2 = findViewById(R.id.backHome2);
         backHome2.setOnClickListener(this::onClick);
+
+        ActionBar actionBar = getSupportActionBar();
+        if (actionBar != null) {
+            actionBar.setTitle("Profil");
+        }
     }
 
     public void onClick(View v) {

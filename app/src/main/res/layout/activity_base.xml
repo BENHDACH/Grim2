@@ -67,6 +67,7 @@
         app:layout_constraintStart_toStartOf="parent" />
 
     <SearchView
+        android:id="@+id/searchView"
         android:layout_width="410dp"
         android:layout_height="67dp"
         android:layout_marginTop="116dp"
@@ -74,5 +75,47 @@
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
+
+    <ImageView
+        android:id="@+id/estomac"
+        android:layout_width="140dp"
+        android:layout_height="140dp"
+        android:layout_marginStart="40dp"
+        android:layout_marginTop="52dp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/searchView"
+        app:srcCompat="@drawable/estomac" />
+
+    <ImageView
+        android:id="@+id/tete"
+        android:layout_width="140dp"
+        android:layout_height="140dp"
+        android:layout_marginTop="52dp"
+        android:layout_marginEnd="16dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.626"
+        app:layout_constraintStart_toEndOf="@+id/estomac"
+        app:layout_constraintTop_toBottomOf="@+id/searchView"
+        app:srcCompat="@drawable/tete" />
+
+    <ImageView
+        android:id="@+id/gorge"
+        android:layout_width="140dp"
+        android:layout_height="140dp"
+        android:layout_marginTop="32dp"
+        app:layout_constraintEnd_toEndOf="@+id/estomac"
+        app:layout_constraintStart_toStartOf="@+id/estomac"
+        app:layout_constraintTop_toBottomOf="@+id/estomac"
+        app:srcCompat="@drawable/gorge" />
+
+    <ImageView
+        android:id="@+id/coeur"
+        android:layout_width="140dp"
+        android:layout_height="140dp"
+        android:layout_marginTop="32dp"
+        app:layout_constraintEnd_toEndOf="@+id/tete"
+        app:layout_constraintStart_toStartOf="@+id/tete"
+        app:layout_constraintTop_toBottomOf="@+id/tete"
+        app:srcCompat="@drawable/coeur" />
 
 </android.support.constraint.ConstraintLayout>
