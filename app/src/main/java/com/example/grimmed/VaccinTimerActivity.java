@@ -1,6 +1,7 @@
 package com.example.grimmed;
 
 import android.content.Intent;
+import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
@@ -24,6 +25,13 @@ public class VaccinTimerActivity extends AppCompatActivity {
 
         ImageView backHome = findViewById(R.id.backHome);
         backHome.setOnClickListener(this::onClick);
+
+        ActionBar actionBar = getSupportActionBar();
+        if (actionBar != null) {
+            actionBar.setTitle("Vaccin Timer");
+        }
+
+
     }
 
     public void onClick(View v) {

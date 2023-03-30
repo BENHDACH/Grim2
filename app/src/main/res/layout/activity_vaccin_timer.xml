@@ -75,4 +75,10 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:srcCompat="@drawable/microsoftteams_image__17_" />
+
+    <android.support.v7.widget.RecyclerView
+        android:layout_width="408dp"
+        android:layout_height="567dp"
+        tools:layout_editor_absoluteX="2dp"
+        tools:layout_editor_absoluteY="101dp" />
 </android.support.constraint.ConstraintLayout>
