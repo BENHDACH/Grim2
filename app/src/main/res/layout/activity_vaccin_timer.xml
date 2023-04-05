@@ -77,8 +77,22 @@
         app:srcCompat="@drawable/microsoftteams_image__17_" />
 
     <android.support.v7.widget.RecyclerView
-        android:layout_width="408dp"
-        android:layout_height="567dp"
-        tools:layout_editor_absoluteX="2dp"
-        tools:layout_editor_absoluteY="101dp" />
+        android:id="@+id/recyclerVaccin"
+        android:layout_width="413dp"
+        android:layout_height="437dp"
+        android:layout_marginTop="108dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.666"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <ImageView
+        android:id="@+id/plusVaccinNotif"
+        android:layout_width="86dp"
+        android:layout_height="64dp"
+        android:tint="#95FFFFFF"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/recyclerVaccin"
+        app:srcCompat="@drawable/plusicone" />
 </android.support.constraint.ConstraintLayout>
