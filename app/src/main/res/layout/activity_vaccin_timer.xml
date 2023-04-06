@@ -90,9 +90,11 @@
         android:id="@+id/plusVaccinNotif"
         android:layout_width="86dp"
         android:layout_height="64dp"
-        android:tint="#95FFFFFF"
+        android:layout_marginTop="32dp"
+        android:tint="@color/blue"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.498"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/recyclerVaccin"
-        app:srcCompat="@drawable/plusicone" />
+        app:srcCompat="@android:drawable/ic_menu_add" />
 </android.support.constraint.ConstraintLayout>
