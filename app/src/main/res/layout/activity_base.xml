@@ -72,6 +72,7 @@
         android:layout_height="54dp"
         android:layout_marginStart="24dp"
         android:layout_marginTop="124dp"
+        android:queryHint="Trouver un médicament"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
@@ -108,14 +109,14 @@
         app:srcCompat="@drawable/gorge" />
 
     <ImageView
-        android:id="@+id/coeur"
+        android:id="@+id/cycle"
         android:layout_width="140dp"
         android:layout_height="140dp"
         android:layout_marginTop="32dp"
         app:layout_constraintEnd_toEndOf="@+id/tete"
         app:layout_constraintStart_toStartOf="@+id/tete"
         app:layout_constraintTop_toBottomOf="@+id/tete"
-        app:srcCompat="@drawable/coeur" />
+        app:srcCompat="@drawable/cycle" />
 
     <ImageView
         android:id="@+id/imageView2"
@@ -129,5 +130,17 @@
         app:layout_constraintTop_toTopOf="@+id/searchView"
         app:layout_constraintVertical_bias="0.472"
         app:srcCompat="@drawable/microsoftteams_image__18_" />
+
+    <TextView
+        android:id="@+id/symptResearch"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="16dp"
+        android:text="Rechercher par symptômes"
+        android:textStyle="bold"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.17"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/searchView" />
 
 </android.support.constraint.ConstraintLayout>
