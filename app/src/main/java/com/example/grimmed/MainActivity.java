@@ -9,6 +9,13 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
 
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
+
 public class MainActivity extends AppCompatActivity {
 
     @Override
@@ -17,14 +24,24 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
         TextView textView = findViewById(R.id.titleCo);
 
-        /*Button button = findViewById(R.id.button);
-        button.setOnClickListener(this::onClick);
+        /** Ici vous pouvez set la base de données
+         La réference sera Medicaments -- modifié le nom (du médicament) et la setValue(...),
+         si vous utilisez le même nom de médicament les valeurs seront écrasé pour ce médicament
+         enlever les commentaires avec *** et lancer, dès la première page sa sera envoyé  **/
 
-        Button button2 = findViewById(R.id.button2);
-        button2.setOnClickListener(this::onClick);
+        /***
+         FirebaseDatabase database = FirebaseDatabase.getInstance();
+         DatabaseReference myRef = database.getReference("Medicaments");
 
-        Button button3 = findViewById(R.id.button3);
-        button3.setOnClickListener(this::onClick);*/
+         List<String> composition = new ArrayList<>(Arrays.asList("C1", "C2", "C3"));
+         List<String> cible = new ArrayList<>(Arrays.asList("Tête", "Dos", "Gorge"));
+
+         myRef.child("Nom").child("Composition").setValue(composition);
+         myRef.child("Nom").child("EffectS").setValue("Description");
+         myRef.child("Nom").child("Prix").setValue("3");
+         myRef.child("Nom").child("Usage").setValue("Par voie orale = avale simple non ?");
+         myRef.child("Nom").child("Cible").setValue(cible);
+        ***/
 
         Button log = findViewById(R.id.log);
         log.setOnClickListener(this::onClick);

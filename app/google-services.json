@@ -1,0 +1,40 @@
+{
+  "project_info": {
+    "project_number": "796372429839",
+    "firebase_url": "https://grimmeddata-default-rtdb.europe-west1.firebasedatabase.app",
+    "project_id": "grimmeddata",
+    "storage_bucket": "grimmeddata.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:796372429839:android:43f272b64ac03dc768077a",
+        "android_client_info": {
+          "package_name": "com.example.grimmed"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "796372429839-51tf68isqu33pmeamfsbp1c33rnjaan7.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCmpB74pBhzinlMEq9ebHw6plnN-IrW-W0"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "796372429839-51tf68isqu33pmeamfsbp1c33rnjaan7.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
