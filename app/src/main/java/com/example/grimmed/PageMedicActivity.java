@@ -11,12 +11,27 @@ import android.util.Log;
 import android.view.View;
 import android.widget.ImageView;
 
+import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.Task;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
+
+import org.json.JSONArray;
+import org.json.JSONException;
+import org.json.JSONObject;
+import org.springframework.lang.NonNull;
+
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
 import java.net.HttpURLConnection;
 import java.net.URL;
 import java.nio.charset.StandardCharsets;
+import java.util.Arrays;
+import java.util.Map;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
@@ -82,7 +97,45 @@ public class PageMedicActivity extends AppCompatActivity implements TabLayout.On
         if (actionBar != null) {
             actionBar.setTitle("Médicaments");
         }
+
+        myListening();
         
+    }
+
+    private void myListening() {
+
+        DatabaseReference medReference = FirebaseDatabase.getInstance().getReference("Medicaments");
+        medReference.addListenerForSingleValueEvent(new ValueEventListener() {
+            @Override
+            public void onDataChange(DataSnapshot dataSnapshot) {
+                Object nom = dataSnapshot.getValue(Object.class);
+                //On peut connaître le nombre de nom de médicament dans notre base
+                long number = dataSnapshot.getChildrenCount();
+                Log.e("MedocLenght","Here is the lenght !!:"+number);
+                JSONObject myMedoc = new JSONObject((Map) nom);
+                //On demande de recup un Object ou Array ou String etc...
+                JSONArray newV = null;
+                try {
+                    newV = myMedoc.getJSONObject("Nom").getJSONArray("Cible");
+                } catch (JSONException e) {
+                    throw new RuntimeException(e);
+                }
+                Log.e("My value","Hi :"+newV.length());
+                //On recup une valeur d'un array
+                try {
+                    Log.e("DirectVa","Hi f"+newV.get(0));
+                } catch (JSONException e) {
+                    throw new RuntimeException(e);
+                }
+                // Use the value of nom here
+            }
+
+            @Override
+            public void onCancelled(DatabaseError databaseError) {
+                // Getting data failed, log a message
+                Log.e("Hein", "loadData:onCancelled", databaseError.toException());
+            }
+        });
     }
 
     public void onClick(View v) {
