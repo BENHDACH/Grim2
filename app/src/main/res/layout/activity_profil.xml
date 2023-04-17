@@ -81,9 +81,9 @@
         android:id="@+id/imageView"
         android:layout_width="209dp"
         android:layout_height="144dp"
-        android:layout_marginTop="112dp"
+        android:layout_marginTop="88dp"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.545"
+        app:layout_constraintHorizontal_bias="0.544"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:srcCompat="@drawable/microsoftteams_image__10_" />
@@ -101,5 +101,16 @@
         app:layout_constraintHorizontal_bias="0.51"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/imageView" />
+
+    <Switch
+        android:id="@+id/enc"
+        android:layout_width="352dp"
+        android:layout_height="42dp"
+        android:layout_marginTop="16dp"
+        android:text="Enceinte"
+        android:textSize="20sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/name" />
 
 </android.support.constraint.ConstraintLayout>
