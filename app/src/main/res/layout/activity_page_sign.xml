@@ -21,64 +21,119 @@
         android:id="@+id/pageInsc"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="104dp"
-        android:text="Bienvenue sur GrimMed !"
+        android:layout_marginTop="176dp"
+        android:text="Welcome to GrimMed !"
+        android:textSize="20sp"
+        android:textStyle="bold"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.498"
+        app:layout_constraintHorizontal_bias="0.219"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
     <android.support.design.widget.TextInputLayout
         android:id="@+id/enterEmail"
         android:layout_width="325dp"
-        android:layout_height="52dp"
-        android:background="#A4D0F3"
+        android:layout_height="45dp"
+        android:background="@drawable/login_page"
+        android:drawableStart="@drawable/user"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.523"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.243"
-        app:passwordToggleEnabled="true">
+        app:layout_constraintVertical_bias="0.33"
+        app:passwordToggleEnabled="false">
 
         <android.support.design.widget.TextInputEditText
-            android:id="@+id/caseIdEmail"
-            android:layout_width="match_parent"
-            android:layout_height="50dp"
-            android:hint="Enter your email address" />
+            android:id="@+id/caseEmail"
+            android:layout_width="310dp"
+            android:layout_height="wrap_content"
+            android:background="@color/transparent"
+            android:drawableStart="@android:drawable/sym_action_email"
+            android:drawableTint="#3F559A"
+            android:hint="Email address"
+            android:paddingStart="10dp" />
     </android.support.design.widget.TextInputLayout>
 
     <android.support.design.widget.TextInputLayout
-        android:id="@+id/enterUserName"
+        android:id="@+id/enterId"
         android:layout_width="325dp"
-        android:layout_height="52dp"
-        android:layout_marginTop="64dp"
-        android:background="#A4D0F3"
+        android:layout_height="45dp"
+        android:layout_marginTop="32dp"
+        android:layout_marginBottom="420dp"
+        android:background="@drawable/login_page"
+        android:drawableStart="@drawable/user"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="@+id/enterEmail"
+        app:layout_constraintHorizontal_bias="0.25"
         app:layout_constraintStart_toStartOf="@+id/enterEmail"
         app:layout_constraintTop_toBottomOf="@+id/enterEmail"
+        app:layout_constraintVertical_bias="0.287
+"
         app:passwordToggleEnabled="true">
 
         <android.support.design.widget.TextInputEditText
             android:id="@+id/caseId"
-            android:layout_width="match_parent"
-            android:layout_height="50dp"
-            android:hint="Enter your username" />
+            android:layout_width="310dp"
+            android:layout_height="wrap_content"
+            android:background="@color/transparent"
+            android:drawableStart="?android:attr/fingerprintAuthDrawable"
+            android:drawableTint="#3F559A"
+            android:hint="Username"
+            android:paddingStart="10dp" />
     </android.support.design.widget.TextInputLayout>
+
 
     <android.support.design.widget.TextInputLayout
         android:id="@+id/enterPasswd"
         android:layout_width="325dp"
-        android:layout_height="52dp"
-        android:layout_marginTop="64dp"
-        android:background="#A4D0F3"
-        app:layout_constraintEnd_toEndOf="@+id/enterUserName"
-        app:layout_constraintStart_toStartOf="@+id/enterUserName"
-        app:layout_constraintTop_toBottomOf="@+id/enterUserName">
+        android:layout_height="45dp"
+        android:layout_marginTop="32dp"
+        android:layout_marginBottom="420dp"
+        android:background="@drawable/login_page"
+        android:drawableStart="@drawable/user"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="@+id/enterId"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="@+id/enterId"
+        app:layout_constraintTop_toBottomOf="@+id/enterId"
+        app:layout_constraintVertical_bias="0.072"
+        app:passwordToggleEnabled="true">
 
         <android.support.design.widget.TextInputEditText
             android:id="@+id/casePasswd"
-            android:layout_width="match_parent"
-            android:layout_height="50dp"
-            android:hint="Enter your password" />
+            android:layout_width="310dp"
+            android:layout_height="wrap_content"
+            android:background="@color/transparent"
+            android:drawableStart="@android:drawable/ic_lock_lock"
+            android:drawableTint="#3F559A"
+            android:hint="Password"
+            android:paddingStart="10dp"
+            android:password="true" />
     </android.support.design.widget.TextInputLayout>
+
+    <TextView
+        android:id="@+id/redirectionLog"
+        android:layout_width="wrap_content"
+        android:layout_height="17dp"
+        android:layout_marginBottom="32dp"
+        android:text="Already have an account ? Login Here !"
+        android:textAllCaps="false"
+        android:textColor="#3F559A"
+        android:textStyle="bold"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent" />
+
+    <ImageView
+        android:id="@+id/imageView4"
+        android:layout_width="158dp"
+        android:layout_height="90dp"
+        android:layout_marginTop="32dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.498"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:srcCompat="@drawable/book" />
+
 </android.support.constraint.ConstraintLayout>
