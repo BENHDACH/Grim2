@@ -6,6 +6,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.ImageView;
+import android.widget.TextView;
 
 public class ProfilActivity extends AppCompatActivity {
 
@@ -25,6 +26,12 @@ public class ProfilActivity extends AppCompatActivity {
 
         ImageView backHome2 = findViewById(R.id.backHome2);
         backHome2.setOnClickListener(this::onClick);
+
+        TextView usual = findViewById(R.id.usual);
+        usual.setOnClickListener(this :: onClick);
+
+        TextView allergies = findViewById(R.id.allergies);
+        allergies.setOnClickListener(this :: onClick);
 
         ActionBar actionBar = getSupportActionBar();
         if (actionBar != null) {
@@ -50,6 +57,16 @@ public class ProfilActivity extends AppCompatActivity {
 
         if (v.getId() == R.id.backHome2) {
             Intent intent = new Intent(this, BaseActivity.class);
+            startActivity(intent);
+        }
+
+        if (v.getId() == R.id.usual) {
+            Intent intent = new Intent(this, DetailActivity.class);
+            startActivity(intent);
+        }
+
+        if (v.getId() == R.id.allergies) {
+            Intent intent = new Intent(this, DetailActivity.class);
             startActivity(intent);
         }
     }
