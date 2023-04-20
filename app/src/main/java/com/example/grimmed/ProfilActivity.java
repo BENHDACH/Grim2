@@ -33,6 +33,11 @@ public class ProfilActivity extends AppCompatActivity {
         TextView allergies = findViewById(R.id.allergies);
         allergies.setOnClickListener(this :: onClick);
 
+        TextView child = findViewById(R.id.child);
+        child.setOnClickListener(this :: onClick);
+
+
+
         ActionBar actionBar = getSupportActionBar();
         if (actionBar != null) {
             actionBar.setTitle("Profil");
@@ -66,6 +71,11 @@ public class ProfilActivity extends AppCompatActivity {
         }
 
         if (v.getId() == R.id.allergies) {
+            Intent intent = new Intent(this, DetailActivity.class);
+            startActivity(intent);
+        }
+
+        if (v.getId() == R.id.child) {
             Intent intent = new Intent(this, DetailActivity.class);
             startActivity(intent);
         }

@@ -104,7 +104,7 @@
 
     <Switch
         android:id="@+id/enc"
-        android:layout_width="352dp"
+        android:layout_width="409dp"
         android:layout_height="42dp"
         android:layout_marginTop="16dp"
         android:text="Enceinte"
@@ -115,7 +115,7 @@
 
     <TextView
         android:id="@+id/allergies"
-        android:layout_width="113dp"
+        android:layout_width="409dp"
         android:layout_height="33dp"
         android:layout_marginTop="56dp"
         android:text="Allergies"
@@ -149,9 +149,20 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/allergies" />
 
+    <View
+        android:id="@+id/view13"
+        android:layout_width="409dp"
+        android:layout_height="1dp"
+        android:background="@color/blue"
+        android:backgroundTint="@color/blue"
+        app:layout_constraintBottom_toTopOf="@+id/child"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/usual" />
+
     <TextView
         android:id="@+id/usual"
-        android:layout_width="113dp"
+        android:layout_width="409dp"
         android:layout_height="34dp"
         android:layout_marginTop="44dp"
         android:text="Traitement"
@@ -161,5 +172,18 @@
         app:layout_constraintHorizontal_bias="0.1"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/allergies" />
+
+    <TextView
+        android:id="@+id/child"
+        android:layout_width="409dp"
+        android:layout_height="34dp"
+        android:layout_marginTop="52dp"
+        android:text="Enfant"
+        android:textColor="@color/black"
+        android:textSize="20sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.1"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/usual" />
 
 </android.support.constraint.ConstraintLayout>
