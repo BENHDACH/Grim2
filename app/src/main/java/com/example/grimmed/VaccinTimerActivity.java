@@ -48,11 +48,7 @@ public class VaccinTimerActivity extends AppCompatActivity {
         initAffichageIcone();
 
         recyclerView = findViewById(R.id.recyclerVaccin);
-        items.add("A");
-        items.add("O");
-        items.add("I");
-        items.add("E");
-        items.add("Y");
+
         itemsObjets.add(new String[]{"nom du vaccin", "dd/mm/yy", "SET?"});
         VaccinAdapter adapter = new VaccinAdapter(items);
         recyclerView.setAdapter(adapter);

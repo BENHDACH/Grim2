@@ -41,6 +41,12 @@ public class BaseActivity extends AppCompatActivity {
 
         ImageView sympCycle = findViewById(R.id.cycle);
         sympCycle.setOnClickListener(this::onClick);
+
+        ImageView loupe = findViewById(R.id.loupe);
+        loupe.setOnClickListener(this::onClick);
+
+        ImageView qrCode = findViewById(R.id.qr);
+        qrCode.setOnClickListener(this::onClick);
     }
 
     public void onClick(View v) {
@@ -73,6 +79,15 @@ public class BaseActivity extends AppCompatActivity {
 
         if (v.getId() == R.id.cycle) {
             Toast.makeText(getApplicationContext(),"Menstruations", Toast.LENGTH_SHORT).show();
+        }
+
+        if (v.getId() == R.id.loupe) {
+            Intent intent = new Intent(this, SearchActivity.class);
+            startActivity(intent);
+        }
+
+        if (v.getId() == R.id.qr) {
+            Toast.makeText(getApplicationContext(),"Scan QR Code", Toast.LENGTH_SHORT).show();
         }
     }
 }

@@ -66,81 +66,94 @@
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent" />
 
-    <SearchView
-        android:id="@+id/searchView"
-        android:layout_width="296dp"
-        android:layout_height="54dp"
-        android:layout_marginStart="24dp"
-        android:layout_marginTop="124dp"
-        android:queryHint="Trouver un médicament"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
-
     <ImageView
         android:id="@+id/estomac"
         android:layout_width="140dp"
         android:layout_height="140dp"
         android:layout_marginStart="40dp"
-        android:layout_marginTop="52dp"
+        android:layout_marginTop="68dp"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/searchView"
+        app:layout_constraintTop_toBottomOf="@+id/loupe"
         app:srcCompat="@drawable/estomac" />
-
-    <ImageView
-        android:id="@+id/tete"
-        android:layout_width="140dp"
-        android:layout_height="140dp"
-        android:layout_marginTop="52dp"
-        android:layout_marginEnd="16dp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.533"
-        app:layout_constraintStart_toEndOf="@+id/estomac"
-        app:layout_constraintTop_toBottomOf="@+id/searchView"
-        app:srcCompat="@drawable/tete" />
-
-    <ImageView
-        android:id="@+id/gorge"
-        android:layout_width="140dp"
-        android:layout_height="140dp"
-        android:layout_marginTop="32dp"
-        app:layout_constraintEnd_toEndOf="@+id/estomac"
-        app:layout_constraintStart_toStartOf="@+id/estomac"
-        app:layout_constraintTop_toBottomOf="@+id/estomac"
-        app:srcCompat="@drawable/gorge" />
 
     <ImageView
         android:id="@+id/cycle"
         android:layout_width="140dp"
         android:layout_height="140dp"
-        android:layout_marginTop="32dp"
+        android:layout_marginTop="40dp"
         app:layout_constraintEnd_toEndOf="@+id/tete"
+        app:layout_constraintHorizontal_bias="1.0"
         app:layout_constraintStart_toStartOf="@+id/tete"
         app:layout_constraintTop_toBottomOf="@+id/tete"
         app:srcCompat="@drawable/cycle" />
 
     <ImageView
-        android:id="@+id/imageView2"
-        android:layout_width="50dp"
-        android:layout_height="53dp"
-        android:layout_marginStart="16dp"
-        app:layout_constraintBottom_toBottomOf="@+id/searchView"
-        app:layout_constraintEnd_toEndOf="parent"
+        android:id="@+id/gorge"
+        android:layout_width="140dp"
+        android:layout_height="140dp"
+        android:layout_marginTop="40dp"
+        app:layout_constraintEnd_toEndOf="@+id/estomac"
         app:layout_constraintHorizontal_bias="0.0"
-        app:layout_constraintStart_toEndOf="@+id/searchView"
-        app:layout_constraintTop_toTopOf="@+id/searchView"
-        app:layout_constraintVertical_bias="0.472"
-        app:srcCompat="@drawable/microsoftteams_image__18_" />
+        app:layout_constraintStart_toStartOf="@+id/estomac"
+        app:layout_constraintTop_toBottomOf="@+id/estomac"
+        app:srcCompat="@drawable/gorge" />
+
+    <ImageView
+        android:id="@+id/tete"
+        android:layout_width="140dp"
+        android:layout_height="140dp"
+        android:layout_marginTop="68dp"
+        android:layout_marginEnd="16dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.626"
+        app:layout_constraintStart_toEndOf="@+id/estomac"
+        app:layout_constraintTop_toBottomOf="@+id/qr"
+        app:srcCompat="@drawable/tete" />
 
     <TextView
         android:id="@+id/symptResearch"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="16dp"
-        android:text="Rechercher par symptômes"
+        android:layout_marginBottom="12dp"
+        android:text="Symptômes"
+        android:textSize="18sp"
         android:textStyle="bold"
+        app:layout_constraintBottom_toTopOf="@+id/estomac"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.17"
+        app:layout_constraintHorizontal_bias="0.126"
+        app:layout_constraintStart_toStartOf="parent" />
+
+    <ImageView
+        android:id="@+id/loupe"
+        android:layout_width="140dp"
+        android:layout_height="140dp"
+        android:layout_marginStart="40dp"
+        android:layout_marginTop="64dp"
+        android:layout_marginEnd="40dp"
+        app:layout_constraintEnd_toStartOf="@+id/qr"
+        app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/searchView" />
+        app:layout_constraintTop_toTopOf="parent"
+        app:srcCompat="@drawable/search" />
+
+    <ImageView
+        android:id="@+id/qr"
+        android:layout_width="140dp"
+        android:layout_height="140dp"
+        android:layout_marginTop="64dp"
+        android:layout_marginEnd="44dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:srcCompat="@drawable/qrcode" />
+
+    <View
+        android:id="@+id/view9"
+        android:layout_width="327dp"
+        android:layout_height="1dp"
+        android:layout_marginTop="220dp"
+        android:background="#C9535353"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
 
 </android.support.constraint.ConstraintLayout>
