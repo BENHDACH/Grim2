@@ -1,14 +1,19 @@
 package com.example.grimmed;
 
+import android.annotation.SuppressLint;
+import android.content.res.ColorStateList;
 import android.graphics.Color;
 import android.support.design.widget.TextInputLayout;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.CheckBox;
 import android.widget.EditText;
+import android.widget.ImageView;
 import android.widget.TextView;
 
+import java.util.Arrays;
 import java.util.List;
 import java.util.Locale;
 
@@ -22,7 +27,7 @@ public class VaccinAdapter extends RecyclerView.Adapter<VaccinAdapter.ViewHolder
 
     // inner class to hold a reference to each item view
     public static class ViewHolder extends RecyclerView.ViewHolder {
-        public TextView textView;
+        //public TextView textView;
         public TextInputLayout dateExpiLayout;
         public TextInputLayout nameVaccinLayout;
         public TextView textSetNameVaccin;
@@ -33,9 +38,13 @@ public class VaccinAdapter extends RecyclerView.Adapter<VaccinAdapter.ViewHolder
         public EditText dateVaccinEditText;
         public Boolean setVaccin = false;
 
+        public ImageView saveVaccin;
+
+        @SuppressLint("ResourceAsColor")
         public ViewHolder(View view) {
             super(view);
-            textView = view.findViewById(R.id.textView);
+            //textView = view.findViewById(R.id.textView);
+            saveVaccin = view.findViewById(R.id.saveVaccin);
             dateExpiLayout = view.findViewById(R.id.dateExpi);
             nameVaccinLayout = view.findViewById(R.id.nameVaccin);
             textSetNameVaccin = view.findViewById(R.id.textSetNameVaccin);
@@ -43,7 +52,7 @@ public class VaccinAdapter extends RecyclerView.Adapter<VaccinAdapter.ViewHolder
             setBackground = view.findViewById(R.id.setBackground);
             nameVaccinEditText = nameVaccinLayout.getEditText();
             dateVaccinEditText = dateExpiLayout.getEditText();
-            textView.setTextColor(Color.BLUE);
+            //saveVaccin.setTextColor(R.color.checkVaccin);
 
         }
 
@@ -60,16 +69,17 @@ public class VaccinAdapter extends RecyclerView.Adapter<VaccinAdapter.ViewHolder
     @Override
     public void onBindViewHolder(ViewHolder holder, int position) {
         String item = items.get(position);
-        holder.textView.setText(item);
+        //holder.textView.setText(item);
         //holder.textSetDateExpi.setText("");
 
 
-        holder.textView.setOnClickListener(new View.OnClickListener() {
+        holder.saveVaccin.setOnClickListener(new View.OnClickListener(){
+            @SuppressLint("ResourceAsColor")
             @Override
             public void onClick(View v) {
                 holder.setVaccin = !holder.setVaccin;
                 if(holder.setVaccin){
-                    holder.textView.setTextColor(Color.RED);
+                    //holder.checkVaccin.setTextColor(Color.RED);
                     holder.dateExpiLayout.setVisibility(View.GONE);
                     holder.nameVaccinLayout.setVisibility(View.GONE);
                     holder.textSetNameVaccin.setVisibility(View.VISIBLE);
@@ -79,12 +89,13 @@ public class VaccinAdapter extends RecyclerView.Adapter<VaccinAdapter.ViewHolder
                     // On récup la valeur venue des Input Layout dans une variable
                     String vaccineName = holder.nameVaccinEditText.getText().toString();
                     String dateE = holder.dateVaccinEditText.getText().toString();
+
                     // On set le text avec ces valeurs
                     holder.textSetNameVaccin.setText(vaccineName);
                     holder.textSetDateExpi.setText(dateE);
 
                 }else{
-                    holder.textView.setTextColor(Color.BLUE);
+                    holder.setBackground.setBackgroundColor(R.color.checkVaccin);
                     holder.dateExpiLayout.setVisibility(View.VISIBLE);
                     holder.nameVaccinLayout.setVisibility(View.VISIBLE);
                     holder.textSetNameVaccin.setVisibility(View.GONE);
@@ -92,7 +103,7 @@ public class VaccinAdapter extends RecyclerView.Adapter<VaccinAdapter.ViewHolder
                     holder.setBackground.setVisibility(View.GONE);
                     //Quand on appuye sur le rouge on passe ici
                     // donc il faudra supprimer de la list cette elm
-                    items.remove(item);
+                    //items.remove(item);
                 }
             }
         });
@@ -109,8 +120,7 @@ public class VaccinAdapter extends RecyclerView.Adapter<VaccinAdapter.ViewHolder
     }
 
     void addOne(){
-
+        List<String> myList = Arrays.asList("L","","","false");
         items.add(String.format(Locale.getDefault(),"%d",items.size() + 1));
-
     }
 }
