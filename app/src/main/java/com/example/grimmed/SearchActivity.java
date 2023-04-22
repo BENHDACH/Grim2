@@ -321,7 +321,7 @@ public class SearchActivity extends AppCompatActivity {
         DatabaseReference myRef = database.getReference("Medicaments");
 
         /*** /!\ Les compositions en minuscules et les cibles + nom avec une majuscule au début merci <3 ***/
-        
+
         List<String> composition = new ArrayList<>(Arrays.asList("paracétamol", "povidone K 30", "monoglycérides diacétyles", "arôme", "maltodextrine","gomme arabique" ,"eau"  ));
         //List<String> cible = new ArrayList<>(Arrays.asList("Tête", "Dos", "Gorge"));
         List<String> cible = new ArrayList<>(Arrays.asList("Tête"));
@@ -331,7 +331,7 @@ public class SearchActivity extends AppCompatActivity {
         myRef.child(nom).child("EffectS").setValue(": Affectations du systèmes immunitaires, de la peau, des tissus sous-cutanés. Un sur dosage est dangereux et peut causer des érythèmes, des urticaires ou encore des chocs anaphylactiques");
         myRef.child(nom).child("Prix").setValue("2,45");
         myRef.child(nom).child("Usage").setValue("Enfant de 11 à 25kg, 1 sachet toutes les 6 heures (4 max par jours)");
-        myRef.child(nom).child("Cible").setValue(cible.get(0));
+        myRef.child(nom).child("Cible").setValue(cible);
         myRef.child(nom).child("ContreI").setValue("Insuffisance hépatocellulaire sévère");
         myRef.child(nom).child("Url").setValue("https://www.medicament.com/8276/doliprane-200mg-12-sachets-dose-pour-solution-buvable.jpg");
 
