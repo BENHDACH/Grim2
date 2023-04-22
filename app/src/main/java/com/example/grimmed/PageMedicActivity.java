@@ -30,7 +30,9 @@ import java.io.InputStreamReader;
 import java.net.HttpURLConnection;
 import java.net.URL;
 import java.nio.charset.StandardCharsets;
+import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.List;
 import java.util.Map;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -97,6 +99,19 @@ public class PageMedicActivity extends AppCompatActivity implements TabLayout.On
         if (actionBar != null) {
             actionBar.setTitle("Médicaments");
         }
+
+
+         FirebaseDatabase database = FirebaseDatabase.getInstance();
+         DatabaseReference myRef = database.getReference("Cible");
+
+         List<String> composition = new ArrayList<>(Arrays.asList("C1", "C2", "C3"));
+         //List<String> cible = new ArrayList<>(Arrays.asList("Tête", "Dos", "Gorge"));
+
+         myRef.child("Tête").child("List").setValue(composition);
+         //myRef.child("Dos").child("List").setValue(composition);
+         myRef.child("Gorge").child("List").setValue(composition);
+
+
 
         myListening();
         

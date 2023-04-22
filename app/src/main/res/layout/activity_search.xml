@@ -16,4 +16,54 @@
         app:layout_constraintHorizontal_bias="0.498"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
+
+    <SearchView
+        android:id="@+id/searchView2"
+        android:layout_width="407dp"
+        android:layout_height="50dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/textView2"
+        app:layout_constraintVertical_bias="0.106" />
+
+    <android.support.v7.widget.RecyclerView
+        android:id="@+id/recyclerSearch"
+        android:layout_width="361dp"
+        android:layout_height="410dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/searchView2"
+        app:layout_constraintVertical_bias="0.628" />
+
+    <Button
+        android:id="@+id/buttonCible"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Par cible"
+        app:layout_constraintBottom_toTopOf="@+id/recyclerSearch"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/searchView2" />
+
+    <Button
+        android:id="@+id/buttonNom"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Par Nom"
+        app:layout_constraintBottom_toTopOf="@+id/recyclerSearch"
+        app:layout_constraintEnd_toStartOf="@+id/buttonCible"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/searchView2" />
+
+    <Button
+        android:id="@+id/buttonCompo"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Par Compo"
+        app:layout_constraintBottom_toTopOf="@+id/recyclerSearch"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/buttonCible"
+        app:layout_constraintTop_toBottomOf="@+id/searchView2" />
 </android.support.constraint.ConstraintLayout>
