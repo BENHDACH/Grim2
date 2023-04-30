@@ -74,9 +74,9 @@ public class PageMedicActivity extends AppCompatActivity implements TabLayout.On
         tabLayout = (TabLayout) findViewById(R.id.tabLayout);
 
         //Adding the tabs using addTab() method
-        tabLayout.addTab(tabLayout.newTab().setText("Tab1"));
-        tabLayout.addTab(tabLayout.newTab().setText("Tab2"));
-        tabLayout.addTab(tabLayout.newTab().setText("Tab3"));
+        tabLayout.addTab(tabLayout.newTab().setText("Notice"));
+        tabLayout.addTab(tabLayout.newTab().setText("Symptomes"));
+        tabLayout.addTab(tabLayout.newTab().setText("Composition"));
         tabLayout.setTabGravity(TabLayout.GRAVITY_FILL);
 
         //Initializing viewPager
