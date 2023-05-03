@@ -8,6 +8,7 @@ import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.View;
 import android.widget.ImageView;
+import android.widget.TextView;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -73,6 +74,7 @@ public class VaccinTimerActivity extends AppCompatActivity {
 
         ImageView plusVaccin = findViewById(R.id.plusVaccinNotif);
         plusVaccin.setOnClickListener(this::onClick);
+
     }
 
     public void onClick(View v) {
@@ -99,7 +101,6 @@ public class VaccinTimerActivity extends AppCompatActivity {
 
             VaccinAdapter adapter = new VaccinAdapter(items);
             recyclerView.setAdapter(adapter);
-
             adapter.addOne();
         }
     }
