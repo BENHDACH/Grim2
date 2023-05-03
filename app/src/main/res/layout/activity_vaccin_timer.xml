@@ -121,4 +121,5 @@
         android:textStyle="bold"
         app:layout_constraintStart_toEndOf="@+id/nomVacc"
         app:layout_constraintTop_toTopOf="parent" />
+
 </android.support.constraint.ConstraintLayout>

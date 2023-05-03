@@ -5,6 +5,7 @@ import android.content.res.ColorStateList;
 import android.graphics.Color;
 import android.support.design.widget.TextInputLayout;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -12,6 +13,7 @@ import android.widget.CheckBox;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import java.util.Arrays;
 import java.util.List;
@@ -101,8 +103,8 @@ public class VaccinAdapter extends RecyclerView.Adapter<VaccinAdapter.ViewHolder
 
                 }else{ //Pas de click sur bouton Enregistrer
                     holder.setBackground.setBackgroundColor(R.color.checkVaccin);
-                    holder.dateExpiLayout.setVisibility(View.VISIBLE);
-                    holder.nameVaccinLayout.setVisibility(View.VISIBLE);
+                    holder.dateExpiLayout.setVisibility(View.GONE);
+                    holder.nameVaccinLayout.setVisibility(View.GONE);
                     holder.textSetNameVaccin.setVisibility(View.GONE);
                     holder.textSetDateExpi.setVisibility(View.GONE);
                     holder.setBackground.setVisibility(View.GONE);
