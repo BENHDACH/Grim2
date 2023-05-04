@@ -1,5 +1,6 @@
 package com.example.grimmed;
 
+import android.content.Intent;
 import android.graphics.Color;
 import android.support.design.widget.TextInputLayout;
 import android.support.v7.widget.RecyclerView;
@@ -7,6 +8,7 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
 import android.widget.EditText;
 import android.widget.TextView;
 
@@ -24,9 +26,15 @@ import java.util.List;
 import java.util.Locale;
 import java.util.Map;
 
+
 public class SearchAdapter extends RecyclerView.Adapter<SearchAdapter.ViewHolder> {
 
     private List<String> items;
+   /* private AdapterView.OnItemClickListener mListener;
+
+    public void setOnItemClickListener(AdapterView.OnItemClickListener listener) {
+        mListener = listener;
+    }*/
     public SearchAdapter(List<String> items) {
         this.items = items;
     }
@@ -62,12 +70,14 @@ public class SearchAdapter extends RecyclerView.Adapter<SearchAdapter.ViewHolder
 
 
 
-        holder.textView.setOnClickListener(new View.OnClickListener() {
+        /*holder.textView.setOnClickListener(new View.OnClickListener() {
             @Override
-            public void onClick(View view) {
-                //Start activity
+            public void onClick(View v) {
+                if (mListener != null) {
+                    mListener.onItemClick(v, position);
+                }
             }
-        });
+        });*/
 
 
     }

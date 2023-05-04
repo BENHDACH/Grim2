@@ -46,6 +46,11 @@ public class SearchActivity extends AppCompatActivity {
 
         SearchView searchView = findViewById(R.id.searchView2);
 
+        Bundle bundle = getIntent().getExtras();
+        whichB = bundle.getString("whichB");
+        recupCesNoms(bundle.getString("nom"),whichB);
+        displayResult();
+
         searchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
             @Override
             public boolean onQueryTextSubmit(String query) {
@@ -68,7 +73,7 @@ public class SearchActivity extends AppCompatActivity {
             }
         });
 
-        firebaseSetup();
+        //firebaseSetup();
 
         Button bNom = findViewById(R.id.buttonNom);
         bNom.setOnClickListener(this::onClick);
@@ -321,19 +326,19 @@ public class SearchActivity extends AppCompatActivity {
         DatabaseReference myRef = database.getReference("Medicaments");
 
         /*** /!\ Les compositions en minuscules et les cibles + nom avec une majuscule au début merci <3 ***/
-        
-        List<String> composition = new ArrayList<>(Arrays.asList("paracétamol", "povidone K 30", "monoglycérides diacétyles", "arôme", "maltodextrine","gomme arabique" ,"eau"  ));
-        //List<String> cible = new ArrayList<>(Arrays.asList("Tête", "Dos", "Gorge"));
-        List<String> cible = new ArrayList<>(Arrays.asList("Tête"));
-        String nom = "Doliprane 200mg poudre pour solution buvable";
 
+        List<String> composition = new ArrayList<>(Arrays.asList("xylène ", "alpha-tocophérol acétate", "amande huile", "lavande essence"));
+        //List<String> cible = new ArrayList<>(Arrays.asList("Tête", "Dos", "Gorge"));
+        List<String> cible = new ArrayList<>(Arrays.asList("Oreille"));
+        String nom = "Cerulyse 5g 100g, solution pour instillation auricullaire";
+        //myRef.child(userName).setValue(OBJECT);
         myRef.child(nom).child("Composition").setValue(composition);
-        myRef.child(nom).child("EffectS").setValue(": Affectations du systèmes immunitaires, de la peau, des tissus sous-cutanés. Un sur dosage est dangereux et peut causer des érythèmes, des urticaires ou encore des chocs anaphylactiques");
-        myRef.child(nom).child("Prix").setValue("2,45");
-        myRef.child(nom).child("Usage").setValue("Enfant de 11 à 25kg, 1 sachet toutes les 6 heures (4 max par jours)");
-        myRef.child(nom).child("Cible").setValue(cible.get(0));
-        myRef.child(nom).child("ContreI").setValue("Insuffisance hépatocellulaire sévère");
-        myRef.child(nom).child("Url").setValue("https://www.medicament.com/8276/doliprane-200mg-12-sachets-dose-pour-solution-buvable.jpg");
+        myRef.child(nom).child("EffectS").setValue(": Allergie, irritation");
+        myRef.child(nom).child("Prix").setValue("9,80");
+        myRef.child(nom).child("Usage").setValue("Bouchon mous : Quelques gouttes dans l’oreille bouchée. Bouchon dur : Quelques gouttes dans l’oreille 3 fois par jour ");
+        myRef.child(nom).child("Cible").setValue(cible);
+        myRef.child(nom).child("ContreI").setValue("Consulter votre médecin, ne pas utiliser en cas de perforation du tympan d’origine infectieuse ou traumatique. Ne convient pas à la grossesse");
+        myRef.child(nom).child("Url").setValue("https://www.mon-pharmacien-conseil.com/10341-large_default/cerulyse-gouttes-auriculaire-10ml.jpg");
 
         /*** /!\ Pas besoin de t'occuper de ce qui est en bas c'est automatisé /!\ ***/
 
@@ -405,6 +410,7 @@ public class SearchActivity extends AppCompatActivity {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
                 boolean checkAddCible = true;
+                Log.e("Bjr ?","");
                 //Si il existe pas on le creer
                 if (!dataSnapshot.exists()) {
                     myCibleRef.child("Noms").setValue(cible);
@@ -436,6 +442,7 @@ public class SearchActivity extends AppCompatActivity {
                                 throw new RuntimeException(e);
                             }
                         }
+                        Log.e("Ephemer",""+checkAddCible+" "+myArray);
                         //Si la composition en i n'est pas présente on la save
                         if(checkAddCible){
                             ephemer.put(cible.get(i));
@@ -462,6 +469,7 @@ public class SearchActivity extends AppCompatActivity {
                                 throw new RuntimeException(e);
                             }
                         }
+                        Log.e("NomMedicCIble",""+Noms);
                         medicationList.setMedications(Noms);
                         myCibleRef.child("Noms").setValue(medicationList.getMedications());
                     }
@@ -487,8 +495,6 @@ public class SearchActivity extends AppCompatActivity {
                     if (!dataSnapshot.exists()) {
                         List<String> nomFirstMedic = new ArrayList<>(Arrays.asList(nom));
                         testreference.child("Noms").setValue(nomFirstMedic);
-
-
                     }
                     //Si il existe
                     else{
@@ -501,6 +507,7 @@ public class SearchActivity extends AppCompatActivity {
                         try {
                             myArray = myMedoc.getJSONArray("Noms");
                         } catch (JSONException e) {
+                            Log.e("L'erreur est :",""+myMedoc);
                             throw new RuntimeException(e);
                         }
                         //On parcours la liste
