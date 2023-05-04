@@ -113,7 +113,7 @@ public class PageMedicActivity extends AppCompatActivity implements TabLayout.On
 
 
 
-        myListening();
+        //myListening();
         
     }
 

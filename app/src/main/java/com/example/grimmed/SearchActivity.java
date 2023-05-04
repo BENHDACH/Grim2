@@ -1,5 +1,6 @@
 package com.example.grimmed;
 
+import android.content.Intent;
 import android.support.annotation.NonNull;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -32,6 +33,9 @@ public class SearchActivity extends AppCompatActivity {
     private List<String> items = new ArrayList<String>();
 
     private Boolean extraCible = false;
+    private Boolean checkComplet = false;
+    private Bundle bundle;
+
 
     private String whichB = "Nom";
     @Override
@@ -49,7 +53,7 @@ public class SearchActivity extends AppCompatActivity {
         SearchView searchView = findViewById(R.id.searchView2);
 
 
-        Bundle bundle = getIntent().getExtras();
+        bundle = getIntent().getExtras();
         if(getIntent().hasExtra("value")){
             extraCible = bundle.getBoolean("value");
         }
@@ -65,6 +69,7 @@ public class SearchActivity extends AppCompatActivity {
             @Override
             public boolean onQueryTextSubmit(String query) {
                 Log.e("SearchView", "Query submitted: " + query);
+                getResultSearch(query);
                 return false;
             }
             @Override
@@ -73,11 +78,6 @@ public class SearchActivity extends AppCompatActivity {
                 if(!Objects.equals(newText, "")){
                     getResultSearch(newText);
                 }
-                /* permet de set la valeur sur la barre de recherche
-                if(newText.equals("Do")){
-                    String suggestedText = "Doliprane"; // Replace with your own logic to suggest text
-                    searchView.setQuery(suggestedText, false);
-                }*/
 
                 return false;
             }
@@ -111,6 +111,7 @@ public class SearchActivity extends AppCompatActivity {
 
     private void getResultSearch(String searchName){
         int x = searchName.length();
+        checkComplet = false;
 
         items.clear();
         //Cas simple on cherche par nom
@@ -259,6 +260,7 @@ public class SearchActivity extends AppCompatActivity {
 
     private void recupCesNoms(String nomComplet, String compoOrCible) {
         items.clear();
+        checkComplet = true;
         if(compoOrCible.equals("Cible")){
             DatabaseReference cibleReference = FirebaseDatabase.getInstance().getReference("Cible").child(nomComplet);
             cibleReference.addListenerForSingleValueEvent(new ValueEventListener() {
@@ -324,11 +326,37 @@ public class SearchActivity extends AppCompatActivity {
     private void displayResult() {
         recyclerView = findViewById(R.id.recyclerSearch);
 
-        SearchAdapter adapter = new SearchAdapter(items);
+        SearchAdapter adapter = new SearchAdapter(items, this);
         recyclerView.setAdapter(adapter);
 
         LinearLayoutManager layoutManager = new LinearLayoutManager(this);
         recyclerView.setLayoutManager(layoutManager);
+    }
+
+    /* Une fonction pour check chaque clique sur le recycler view (appellé dans l'adapter)*/
+    public void onItemClick(String item) {
+        Log.e("MyName IS", item);
+        //Si l'item obtenu provient du mode Nom (c'est donc un médicament)
+        if(whichB.equals("Nom")){
+            Intent intent = new Intent(this, PageMedicActivity.class);
+            intent.putExtra("nomMedoc",item);
+            startActivity(intent);
+        }
+        //Sinon l'item obtenu provient du mode Compo/Cible, on check si le nom est complet
+        else if (checkComplet) {
+            //Si oui, c'est un médicament
+            Intent intent = new Intent(this, PageMedicActivity.class);
+            intent.putExtra("nomMedoc",item);
+            startActivity(intent);
+        }
+        else{
+            //Si NON on le set en mode complet
+            SearchView searchView = findViewById(R.id.searchView2);
+            searchView.setQuery(item,true);
+        }
+
+
+
     }
 
     private void firebaseSetup(){
