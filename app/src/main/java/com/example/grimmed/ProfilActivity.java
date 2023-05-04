@@ -1,11 +1,14 @@
 package com.example.grimmed;
 
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.support.v7.app.ActionBar;
+import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.ImageView;
+import android.widget.Switch;
 import android.widget.TextView;
 
 public class ProfilActivity extends AppCompatActivity {
@@ -37,6 +40,8 @@ public class ProfilActivity extends AppCompatActivity {
         TextView child = findViewById(R.id.child);
         child.setOnClickListener(this :: onClick);
 
+        Switch enceinte = findViewById(R.id.enc);
+        enceinte.setOnClickListener(this::onClick);
 
 
         ActionBar actionBar = getSupportActionBar();
@@ -81,6 +86,20 @@ public class ProfilActivity extends AppCompatActivity {
         if (v.getId() == R.id.child) {
             Intent intent = new Intent(this, DetailActivity.class);
             startActivity(intent);
+        }
+
+        if (v.getId() == R.id.enc){
+            AlertDialog alertDialog= new AlertDialog.Builder(ProfilActivity.this).create();
+            alertDialog.setTitle("Pregnant Alert");
+            alertDialog.setMessage("Be aware that some medicines are not compatible with pregnancy. Please consult your doctor.");
+            alertDialog.setButton(AlertDialog.BUTTON_NEUTRAL, "OK",
+                    new DialogInterface.OnClickListener() {
+                        @Override
+                        public void onClick(DialogInterface dialog, int which) {
+                            dialog.dismiss();
+                        }
+                    });
+            alertDialog.show();
         }
     }
 }
