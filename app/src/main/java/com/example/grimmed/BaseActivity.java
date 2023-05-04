@@ -67,6 +67,10 @@ public class BaseActivity extends AppCompatActivity {
 
         if (v.getId() == R.id.tete) {
             Toast.makeText(getApplicationContext(),"Maux de tête", Toast.LENGTH_SHORT).show();
+            Intent intent = new Intent(this, SearchActivity.class);
+            intent.putExtra("whichB","Cible");
+            intent.putExtra("nom","Tête");
+            startActivity(intent);
         }
 
         if (v.getId() == R.id.estomac) {

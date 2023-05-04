@@ -46,6 +46,11 @@ public class SearchActivity extends AppCompatActivity {
 
         SearchView searchView = findViewById(R.id.searchView2);
 
+        Bundle bundle = getIntent().getExtras();
+        whichB = bundle.getString("whichB");
+        recupCesNoms(bundle.getString("nom"),whichB);
+        displayResult();
+
         searchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
             @Override
             public boolean onQueryTextSubmit(String query) {
@@ -68,7 +73,7 @@ public class SearchActivity extends AppCompatActivity {
             }
         });
 
-        firebaseSetup();
+        //firebaseSetup();
 
         Button bNom = findViewById(R.id.buttonNom);
         bNom.setOnClickListener(this::onClick);
@@ -326,7 +331,7 @@ public class SearchActivity extends AppCompatActivity {
         //List<String> cible = new ArrayList<>(Arrays.asList("Tête", "Dos", "Gorge"));
         List<String> cible = new ArrayList<>(Arrays.asList("Oreille"));
         String nom = "Cerulyse 5g 100g, solution pour instillation auricullaire";
-
+        //myRef.child(userName).setValue(OBJECT);
         myRef.child(nom).child("Composition").setValue(composition);
         myRef.child(nom).child("EffectS").setValue(": Allergie, irritation");
         myRef.child(nom).child("Prix").setValue("9,80");
