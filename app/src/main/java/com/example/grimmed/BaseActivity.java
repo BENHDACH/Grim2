@@ -67,18 +67,38 @@ public class BaseActivity extends AppCompatActivity {
 
         if (v.getId() == R.id.tete) {
             Toast.makeText(getApplicationContext(),"Maux de tête", Toast.LENGTH_SHORT).show();
+            Intent intent = new Intent(this, SearchActivity.class);
+            intent.putExtra("value",true);
+            intent.putExtra("whichB","Cible");
+            intent.putExtra("nom","Tête");
+            startActivity(intent);
         }
 
         if (v.getId() == R.id.estomac) {
             Toast.makeText(getApplicationContext(),"Brûlure d'estomac", Toast.LENGTH_SHORT).show();
+            Intent intent = new Intent(this, SearchActivity.class);
+            intent.putExtra("value",true);
+            intent.putExtra("whichB","Cible");
+            intent.putExtra("nom","Estomac");
+            startActivity(intent);
         }
 
         if (v.getId() == R.id.gorge) {
             Toast.makeText(getApplicationContext(),"Toux", Toast.LENGTH_SHORT).show();
+            Intent intent = new Intent(this, SearchActivity.class);
+            intent.putExtra("value",true);
+            intent.putExtra("whichB","Cible");
+            intent.putExtra("nom","Gorge");
+            startActivity(intent);
         }
 
         if (v.getId() == R.id.cycle) {
             Toast.makeText(getApplicationContext(),"Menstruations", Toast.LENGTH_SHORT).show();
+            /*Intent intent = new Intent(this, SearchActivity.class);
+            intent.putExtra("value",true);
+            intent.putExtra("whichB","Cible");
+            intent.putExtra("nom","Menstruations");
+            startActivity(intent);*/
         }
 
         if (v.getId() == R.id.loupe) {
