@@ -1,10 +1,13 @@
 package com.example.grimmed;
 
 import android.support.annotation.NonNull;
+import android.support.design.widget.TextInputLayout;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.EditText;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import java.util.Arrays;
@@ -20,11 +23,19 @@ public class DetailAdapter extends RecyclerView.Adapter<DetailAdapter.ViewHolder
     }
 
     public static class ViewHolder extends RecyclerView.ViewHolder {
-        public TextView titre;
+        public TextInputLayout nameMédocEditText;
+        public TextInputLayout nameMedocLayout;
+        public ImageView saveMedoc;
+
+        public ImageView deleteMedoc;
 
         public ViewHolder(View view) {
             super(view);
-            titre = view.findViewById(R.id.titre);
+            nameMédocEditText = view.findViewById(R.id.nameMédoc);
+            nameMedocLayout = view.findViewById(R.id.nameMédoc);
+            saveMedoc = view.findViewById(R.id.saveM);
+            deleteMedoc = view.findViewById(R.id.deleteM);
+
         }
 
     }
