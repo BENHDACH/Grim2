@@ -26,6 +26,7 @@ public class DetailActivity extends AppCompatActivity {
         Boolean allergies = bundle.getBoolean("allergies", false);
         Boolean usual = bundle.getBoolean("usual", false);
 
+
         if (allergies == true){
             consignes.setText(R.string.allergies);
         }
