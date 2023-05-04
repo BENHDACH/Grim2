@@ -2,6 +2,7 @@ package com.example.grimmed;
 
 import android.content.Intent;
 import android.os.AsyncTask;
+import android.provider.ContactsContract;
 import android.support.design.widget.TabLayout;
 import android.support.v4.view.ViewPager;
 import android.support.v7.app.ActionBar;
@@ -11,8 +12,6 @@ import android.util.Log;
 import android.view.View;
 import android.widget.ImageView;
 
-import com.google.android.gms.tasks.OnCompleteListener;
-import com.google.android.gms.tasks.Task;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
@@ -22,7 +21,6 @@ import com.google.firebase.database.ValueEventListener;
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
-import org.springframework.lang.NonNull;
 
 import java.io.BufferedReader;
 import java.io.IOException;
@@ -30,9 +28,6 @@ import java.io.InputStreamReader;
 import java.net.HttpURLConnection;
 import java.net.URL;
 import java.nio.charset.StandardCharsets;
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.List;
 import java.util.Map;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -70,6 +65,8 @@ public class PageMedicActivity extends AppCompatActivity implements TabLayout.On
         // Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         // setSupportActionBar(toolbar);
 
+
+
         //Initializing the tablayout
         tabLayout = (TabLayout) findViewById(R.id.tabLayout);
 
@@ -78,15 +75,6 @@ public class PageMedicActivity extends AppCompatActivity implements TabLayout.On
         tabLayout.addTab(tabLayout.newTab().setText("Symptomes"));
         tabLayout.addTab(tabLayout.newTab().setText("Composition"));
         tabLayout.setTabGravity(TabLayout.GRAVITY_FILL);
-
-        //Initializing viewPager
-        viewPager = (ViewPager) findViewById(R.id.pager);
-
-        //Creating our pager adapter
-        Pager adapter = new Pager(getSupportFragmentManager(), tabLayout.getTabCount());
-
-        //Adding adapter to pager
-        viewPager.setAdapter(adapter);
 
         //Adding onTabSelectedListener to swipe views
         tabLayout.setOnTabSelectedListener(this);
@@ -101,20 +89,50 @@ public class PageMedicActivity extends AppCompatActivity implements TabLayout.On
         }
 
 
-         FirebaseDatabase database = FirebaseDatabase.getInstance();
-         DatabaseReference myRef = database.getReference("Cible");
-
-         List<String> composition = new ArrayList<>(Arrays.asList("C1", "C2", "C3"));
-         //List<String> cible = new ArrayList<>(Arrays.asList("Tête", "Dos", "Gorge"));
-
-         myRef.child("Tête").child("List").setValue(composition);
-         //myRef.child("Dos").child("List").setValue(composition);
-         myRef.child("Gorge").child("List").setValue(composition);
-
-
-
+        Bundle bundle = getIntent().getExtras();
+        if(getIntent().hasExtra("nomMedoc")){
+           //Log.e("MArche?",":"+bundle.getString("nomMedoc"));
+            myListeningTest(bundle.getString("nomMedoc"));
+        }
         //myListening();
+
+        pagerSetup();
         
+    }
+
+    private void myListeningTest(String nomMedoc) {
+
+        DatabaseReference medReference = FirebaseDatabase.getInstance().getReference("Medicaments").child(nomMedoc);
+        medReference.addListenerForSingleValueEvent(new ValueEventListener() {
+            @Override
+            public void onDataChange(DataSnapshot dataSnapshot) {
+                Object nom = dataSnapshot.getValue(Object.class);
+                JSONObject myMedoc = new JSONObject((Map) nom);
+                Log.e("JsonObject",""+myMedoc);
+
+                DataUser.defaultObject = myMedoc;
+                pagerSetup();
+
+            }
+
+            @Override
+            public void onCancelled(DatabaseError databaseError) {
+                // Getting data failed, log a message
+                Log.e("Hein", "loadData:onCancelled", databaseError.toException());
+            }
+        });
+    }
+
+    private void pagerSetup(){
+        //Initializing viewPager
+        viewPager = (ViewPager) findViewById(R.id.pager);
+
+
+        //Creating our pager adapter
+        Pager adapter = new Pager(getSupportFragmentManager(), tabLayout.getTabCount(),DataUser.defaultObject);
+
+        //Adding adapter to pager
+        viewPager.setAdapter(adapter);
     }
 
     private void myListening() {

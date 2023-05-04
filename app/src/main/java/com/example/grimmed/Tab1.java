@@ -6,9 +6,10 @@ import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
 import android.widget.TextView;
 
-import org.w3c.dom.Text;
+import com.squareup.picasso.Picasso;
 
 /**
  * Created by Belal on 2/3/2016.
@@ -19,9 +20,11 @@ import org.w3c.dom.Text;
 public class Tab1 extends Fragment {
 
     private String msg;
+    private String url;
     @SuppressLint("ValidFragment")
-    public  Tab1(String msg){
+    public  Tab1(String msg, String url){
         this.msg = msg;
+        this.url = url;
     }
 
     //Overriden method onCreateView
@@ -34,6 +37,10 @@ public class Tab1 extends Fragment {
         TextView textView = view.findViewById(R.id.textViewTest);
 
         textView.setText(msg);
+
+        ImageView imageView = view.findViewById(R.id.imageMedoc);
+        Picasso.get().load(url).into(imageView);
+
         return (view);
     }
 
