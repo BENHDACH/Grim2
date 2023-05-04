@@ -3,6 +3,10 @@ package com.example.grimmed;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentStatePagerAdapter;
+import android.util.Log;
+
+import org.json.JSONException;
+import org.json.JSONObject;
 
 /**
  * Created by Belal on 2/3/2016.
@@ -12,12 +16,14 @@ public class Pager extends FragmentStatePagerAdapter {
 
     //integer to count number of tabs
     int tabCount;
+    JSONObject myMedoc;
 
     //Constructor to the class
-    public Pager(FragmentManager fm, int tabCount) {
+    public Pager(FragmentManager fm, int tabCount, JSONObject myMedoc) {
         super(fm);
         //Initializing tab count
         this.tabCount= tabCount;
+        this.myMedoc = myMedoc;
     }
 
     //Overriding method getItem
@@ -26,13 +32,29 @@ public class Pager extends FragmentStatePagerAdapter {
         //Returning the current tabs
         switch (position) {
             case 0:
-                Tab1 tab1 = new Tab1("my message");
+                Tab1 tab1 = null;
+                try {
+                    tab1 = new Tab1(myMedoc.getString("Usage"),myMedoc.getString("Url"));
+                } catch (JSONException e) {
+                    Log.e("Error tab1 Pager","Usage ou Url non conforme");
+                    throw new RuntimeException(e);
+                }
                 return tab1;
             case 1:
-                Tab2 tab2 = new Tab2();
+                Tab2 tab2 = null;
+                try {
+                    tab2 = new Tab2(myMedoc.getString("EffectS"));
+                } catch (JSONException e) {
+                    throw new RuntimeException(e);
+                }
                 return tab2;
             case 2:
-                Tab3 tab3 = new Tab3();
+                Tab3 tab3 = null;
+                try {
+                    tab3 = new Tab3(myMedoc.getJSONArray("Composition"));
+                } catch (JSONException e) {
+                    throw new RuntimeException(e);
+                }
                 return tab3;
             default:
                 return null;
