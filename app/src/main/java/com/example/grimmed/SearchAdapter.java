@@ -30,13 +30,13 @@ import java.util.Map;
 public class SearchAdapter extends RecyclerView.Adapter<SearchAdapter.ViewHolder> {
 
     private List<String> items;
-   /* private AdapterView.OnItemClickListener mListener;
-
-    public void setOnItemClickListener(AdapterView.OnItemClickListener listener) {
-        mListener = listener;
-    }*/
-    public SearchAdapter(List<String> items) {
+    private SearchActivity listener;
+    public interface OnItemClickListener {
+        void onItemClick(String item);
+    }
+    public SearchAdapter(List<String> items, SearchActivity listener) {
         this.items = items;
+        this.listener = listener;
     }
 
     // inner class to hold a reference to each item view
@@ -47,8 +47,6 @@ public class SearchAdapter extends RecyclerView.Adapter<SearchAdapter.ViewHolder
         public ViewHolder(View view) {
             super(view);
             textView = view.findViewById(R.id.nomSearch);
-
-
         }
 
     }
@@ -68,16 +66,12 @@ public class SearchAdapter extends RecyclerView.Adapter<SearchAdapter.ViewHolder
 
         //holder.textSetDateExpi.setText("");
 
-
-
-        /*holder.textView.setOnClickListener(new View.OnClickListener() {
+        holder.textView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if (mListener != null) {
-                    mListener.onItemClick(v, position);
-                }
+                listener.onItemClick(item);
             }
-        });*/
+        });
 
 
     }
