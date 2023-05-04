@@ -10,6 +10,7 @@ import android.widget.TextView;
 
 public class ProfilActivity extends AppCompatActivity {
 
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -67,11 +68,13 @@ public class ProfilActivity extends AppCompatActivity {
 
         if (v.getId() == R.id.usual) {
             Intent intent = new Intent(this, DetailActivity.class);
+            intent.putExtra("usual", true);
             startActivity(intent);
         }
 
         if (v.getId() == R.id.allergies) {
             Intent intent = new Intent(this, DetailActivity.class);
+            intent.putExtra("allergies", true);
             startActivity(intent);
         }
 
