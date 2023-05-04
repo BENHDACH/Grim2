@@ -47,7 +47,7 @@ public class SearchAdapter extends RecyclerView.Adapter<SearchAdapter.ViewHolder
         public ViewHolder(View view) {
             super(view);
             textView = view.findViewById(R.id.nomSearch);
-            textView.setTextColor(Color.BLUE);
+
 
         }
 
