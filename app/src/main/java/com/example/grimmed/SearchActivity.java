@@ -31,6 +31,8 @@ public class SearchActivity extends AppCompatActivity {
     private RecyclerView recyclerView;
     private List<String> items = new ArrayList<String>();
 
+    private Boolean extraCible = false;
+
     private String whichB = "Nom";
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -46,10 +48,18 @@ public class SearchActivity extends AppCompatActivity {
 
         SearchView searchView = findViewById(R.id.searchView2);
 
+
         Bundle bundle = getIntent().getExtras();
-        whichB = bundle.getString("whichB");
-        recupCesNoms(bundle.getString("nom"),whichB);
-        displayResult();
+        if(getIntent().hasExtra("value")){
+            extraCible = bundle.getBoolean("value");
+        }
+
+        if(extraCible){
+            whichB = bundle.getString("whichB");
+            recupCesNoms(bundle.getString("nom"),whichB);
+            displayResult();
+        }
+
 
         searchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
             @Override
