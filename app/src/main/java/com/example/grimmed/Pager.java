@@ -51,7 +51,7 @@ public class Pager extends FragmentStatePagerAdapter {
             case 2:
                 Tab3 tab3 = null;
                 try {
-                    tab3 = new Tab3(myMedoc.getJSONArray("Composition"),myMedoc.getString("prix"),myMedoc.getString("ContreI"));
+                    tab3 = new Tab3(myMedoc.getJSONArray("Composition"),myMedoc.getString("Prix"),myMedoc.getString("ContreI"));
                 } catch (JSONException e) {
                     throw new RuntimeException(e);
                 }
