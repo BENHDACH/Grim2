@@ -40,7 +40,7 @@ public class ChildAdapter extends RecyclerView.Adapter<ChildAdapter.ViewHolder>{
         public ViewHolder(View view) {
 
             super(view);
-            nameChildEditText = view.findViewById(R.id.nameChild);
+            nameChildEditText = view.findViewById(R.id.textNameChild);
             nameChildLayout = view.findViewById(R.id.nameChild);
             vaccinChild = view.findViewById(R.id.vaccinChild);
             allChild = view.findViewById(R.id.allChild);

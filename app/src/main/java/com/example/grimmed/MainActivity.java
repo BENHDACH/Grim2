@@ -2,7 +2,9 @@ package com.example.grimmed;
 
 import android.annotation.SuppressLint;
 import android.content.Intent;
+import android.graphics.Color;
 import android.graphics.Typeface;
+import android.graphics.drawable.GradientDrawable;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
@@ -43,11 +45,19 @@ public class MainActivity extends AppCompatActivity {
          myRef.child("Nom").child("Cible").setValue(cible);
         ***/
 
+        GradientDrawable gradientDrawable = new GradientDrawable();
+        gradientDrawable.setShape(GradientDrawable.RECTANGLE);
+        gradientDrawable.setColor(Color.parseColor("#D6D6D6")); // Récupère la couleur gris à partir des ressources de l'application
+        gradientDrawable.setCornerRadius(50);
+
         Button log = findViewById(R.id.log);
+        log.setBackground(gradientDrawable);
         log.setOnClickListener(this::onClick);
 
         Button sig = findViewById(R.id.sig);
+        sig.setBackground(gradientDrawable);
         sig.setOnClickListener(this::onClick);
+
 
         //On change la police
         Typeface font = Typeface.createFromAsset(getAssets(), "font/MysteryQuest-Regular.ttf");

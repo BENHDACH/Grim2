@@ -31,7 +31,7 @@ public class DetailAdapter extends RecyclerView.Adapter<DetailAdapter.ViewHolder
 
         public ViewHolder(View view) {
             super(view);
-            nameMédocEditText = view.findViewById(R.id.nameMédoc);
+            nameMédocEditText = view.findViewById(R.id.textNameMédoc);
             nameMedocLayout = view.findViewById(R.id.nameMédoc);
             saveMedoc = view.findViewById(R.id.saveM);
             deleteMedoc = view.findViewById(R.id.deleteM);
