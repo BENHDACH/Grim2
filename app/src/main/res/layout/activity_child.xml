@@ -6,6 +6,18 @@
     android:layout_height="match_parent"
     tools:context=".ChildActivity">
 
+    <ImageView
+        android:id="@+id/plusEnfants"
+        android:layout_width="67dp"
+        android:layout_height="52dp"
+        android:tint="@color/blue"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.498"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/enfantsList"
+        app:srcCompat="@drawable/microsoftteams_image__21_" />
+
     <TextView
         android:id="@+id/lesEnfants"
         android:layout_width="297dp"
@@ -22,9 +34,11 @@
 
     <android.support.v7.widget.RecyclerView
         android:id="@+id/enfantsList"
-        android:layout_width="409dp"
-        android:layout_height="555dp"
+        android:layout_width="399dp"
+        android:layout_height="445dp"
         app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/lesEnfants" />
+        app:layout_constraintTop_toBottomOf="@+id/lesEnfants"
+        app:layout_constraintVertical_bias="0.25" />
 </android.support.constraint.ConstraintLayout>

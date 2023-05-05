@@ -88,15 +88,14 @@
 
     <ImageView
         android:id="@+id/plusVaccinNotif"
-        android:layout_width="86dp"
-        android:layout_height="64dp"
-        android:layout_marginTop="32dp"
+        android:layout_width="67dp"
+        android:layout_height="52dp"
+        android:layout_marginTop="60dp"
         android:tint="@color/blue"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.498"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/recyclerVaccin"
-        app:srcCompat="@android:drawable/ic_menu_add" />
+        app:srcCompat="@drawable/microsoftteams_image__21_" />
 
     <TextView
         android:id="@+id/nomVacc"
