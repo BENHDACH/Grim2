@@ -29,8 +29,7 @@ public class Tab2 extends Fragment {
         View view = inflater.inflate(R.layout.fragment_tab2, container, false);
         //Returning the layout file after inflating
         //Change R.layout.tab1 in you classes
-        @SuppressLint({"MissingInflatedId", "LocalSuppress"})
-        TextView textView = view.findViewById(R.id.textViewTest);
+        TextView textView = view.findViewById(R.id.textCompo);
 
         textView.setText(effectS);
         //Returning the layout file after inflating

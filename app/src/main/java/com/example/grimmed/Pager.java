@@ -34,9 +34,9 @@ public class Pager extends FragmentStatePagerAdapter {
             case 0:
                 Tab1 tab1 = null;
                 try {
-                    tab1 = new Tab1(myMedoc.getString("Usage"),myMedoc.getString("Url"));
+                    tab1 = new Tab1(myMedoc.getString("Usage"),myMedoc.getString("Url"),myMedoc.getString("Cible"));
                 } catch (JSONException e) {
-                    Log.e("Error tab1 Pager","Usage ou Url non conforme");
+                    Log.e("Error tab1 Pager","Usage,Url, Cible non conforme");
                     throw new RuntimeException(e);
                 }
                 return tab1;
@@ -51,7 +51,7 @@ public class Pager extends FragmentStatePagerAdapter {
             case 2:
                 Tab3 tab3 = null;
                 try {
-                    tab3 = new Tab3(myMedoc.getJSONArray("Composition"));
+                    tab3 = new Tab3(myMedoc.getJSONArray("Composition"),myMedoc.getString("prix"),myMedoc.getString("ContreI"));
                 } catch (JSONException e) {
                     throw new RuntimeException(e);
                 }

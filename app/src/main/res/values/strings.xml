@@ -3,4 +3,5 @@
     <string name="titleMainCo">Dear Grimoire Tell Me...</string>
     <string name="allergies">Entrez vos allergies</string>
     <string name="usual_traitement">Entrez votre traitement usuel</string>
+    <string name="secondaryTitle">Ce médicament est couramment utilisé pour :</string>
 </resources>

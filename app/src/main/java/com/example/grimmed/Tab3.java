@@ -20,8 +20,13 @@ import org.json.JSONException;
 public class Tab3 extends Fragment {
 
     private JSONArray composition;
-    public Tab3(JSONArray composition) {
+    private String prix;
+    private String contreIndic;
+    public Tab3(JSONArray composition, String prix, String contreIndic) {
+
         this.composition = composition;
+        this.prix = prix;
+        this.contreIndic = contreIndic;
     }
 
     //Overriden method onCreateView
@@ -31,7 +36,12 @@ public class Tab3 extends Fragment {
         //Returning the layout file after inflating
         //Change R.layout.tab1 in you classes
         @SuppressLint({"MissingInflatedId", "LocalSuppress"})
-        TextView textView = view.findViewById(R.id.textViewTest);
+        TextView textComposition = view.findViewById(R.id.textCompo);
+        TextView textContreI = view.findViewById(R.id.textContreIndic);
+        TextView textPrice = view.findViewById(R.id.textPrice);
+
+
+
         String textCompo ="";
         for(int i =0; i<composition.length();i++){
             try {
@@ -40,7 +50,9 @@ public class Tab3 extends Fragment {
                 throw new RuntimeException(e);
             }
         }
-        textView.setText(textCompo);
+        textComposition.setText(textCompo);
+        textContreI.setText(contreIndic);
+        textPrice.setText(prix);
         //Returning the layout file after inflating
         //Change R.layout.tab1 in you classes
         return (view);
