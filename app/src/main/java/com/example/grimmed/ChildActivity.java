@@ -55,7 +55,7 @@ public class ChildActivity extends AppCompatActivity {
     }
     public void onClick(View v) {
         if (v.getId() == R.id.plusEnfants) {
-            VaccinAdapter adapter = new VaccinAdapter(items);
+            ChildAdapter adapter = new ChildAdapter(items, this);
             recyclerView.setAdapter(adapter);
             adapter.addOne();
         }
