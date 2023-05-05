@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <android.support.design.widget.TextInputLayout
+        android:id="@+id/nameChild"
+        android:layout_width="416dp"
+        android:layout_height="66dp"
+        android:layout_marginTop="16dp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <android.support.design.widget.TextInputEditText
+            android:id="@+id/textNameChild"
+            android:layout_width="match_parent"
+            android:layout_height="47dp"
+            android:hint="nom de l'enfant" />
+    </android.support.design.widget.TextInputLayout>
+
+    <ImageView
+        android:id="@+id/vaccinChild"
+        android:layout_width="58dp"
+        android:layout_height="45dp"
+        android:layout_marginStart="44dp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/nameChild"
+        app:srcCompat="@drawable/microsoftteams_image__14_" />
+
+    <ImageView
+        android:id="@+id/allChild"
+        android:layout_width="65dp"
+        android:layout_height="49dp"
+        android:layout_marginStart="60dp"
+        app:layout_constraintBottom_toBottomOf="@+id/vaccinChild"
+        app:layout_constraintStart_toEndOf="@+id/vaccinChild"
+        app:layout_constraintTop_toBottomOf="@+id/nameChild"
+        app:layout_constraintVertical_bias="0.0"
+        app:srcCompat="@drawable/microsoftteams_image__19_" />
+
+    <ImageView
+        android:id="@+id/usualChild"
+        android:layout_width="56dp"
+        android:layout_height="47dp"
+        android:layout_marginStart="60dp"
+        android:layout_marginEnd="44dp"
+        app:layout_constraintBottom_toBottomOf="@+id/allChild"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.578"
+        app:layout_constraintStart_toEndOf="@+id/allChild"
+        app:layout_constraintTop_toBottomOf="@+id/nameChild"
+        app:layout_constraintVertical_bias="0.0"
+        app:srcCompat="@drawable/microsoftteams_image__20_" />
+
+    <View
+        android:id="@+id/view10"
+        android:layout_width="409dp"
+        android:layout_height="1dp"
+        android:layout_marginTop="8dp"
+        android:background="@color/blue"
+        android:backgroundTint="@color/blue"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/allChild" />
+</android.support.constraint.ConstraintLayout>

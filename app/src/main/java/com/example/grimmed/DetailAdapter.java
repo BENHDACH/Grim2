@@ -45,13 +45,13 @@ public class DetailAdapter extends RecyclerView.Adapter<DetailAdapter.ViewHolder
         return new DetailAdapter.ViewHolder(view);
     }
 
-    @Override
-    public void onBindViewHolder(@NonNull ViewHolder viewHolder, int i) {
+    //@Override
+   // public void onBindViewHolder(@NonNull ViewHolder viewHolder, int i) {
 
-    }
+  //  }
 
     // binds the data to the TextView in each row
-    public void onBindViewHolder(VaccinAdapter.ViewHolder holder, int position) {
+    public void onBindViewHolder(DetailAdapter.ViewHolder holder, int position) {
         String item = items.get(position);
         //holder.textView.setText(item);
         //holder.textSetDateExpi.setText("");
