@@ -83,7 +83,7 @@ public class SearchActivity extends AppCompatActivity {
             }
         });
 
-        //firebaseSetup();
+        firebaseSetup();
 
         Button bNom = findViewById(R.id.buttonNom);
         bNom.setOnClickListener(this::onClick);
@@ -365,19 +365,19 @@ public class SearchActivity extends AppCompatActivity {
 
         /*** /!\ Les compositions en minuscules et les cibles + nom avec une majuscule au début merci <3 ***/
 
-        List<String> composition = new ArrayList<>(Arrays.asList("xylène ", "alpha-tocophérol acétate", "amande huile", "lavande essence"));
+        List<String> composition = new ArrayList<>(Arrays.asList("ibuprofène", "cellulose microcristalline", "stéarate de magnésium", "croscarmellose sodique"));
         //List<String> cible = new ArrayList<>(Arrays.asList("Tête", "Dos", "Gorge"));
-        List<String> cible = new ArrayList<>(Arrays.asList("Oreille"));
-        String nom = "Cerulyse 5g 100g, solution pour instillation auricullaire";
+        List<String> cible = new ArrayList<>(Arrays.asList("Menstruations"));
+        String nom = "Nurofen 400mg";
         //myRef.child(userName).setValue(OBJECT);
         myRef.child(nom).child("Composition").setValue(composition);
-        myRef.child(nom).child("EffectS").setValue(": Allergie, irritation");
-        myRef.child(nom).child("Prix").setValue("9,80");
-        myRef.child(nom).child("Usage").setValue("Bouchon mous : Quelques gouttes dans l’oreille bouchée. Bouchon dur : Quelques gouttes dans l’oreille 3 fois par jour ");
+        myRef.child(nom).child("EffectS").setValue("Douleurs abdominales, nausées, vomissements, diarrhée, vertiges, maux de tête");
+        myRef.child(nom).child("Prix").setValue("4,88");
+        myRef.child(nom).child("Usage").setValue("1 à 1,5 comprimés toutes les 4 à 6 heures selon la douleur");
         myRef.child(nom).child("Cible").setValue(cible);
-        myRef.child(nom).child("ContreI").setValue("Consulter votre médecin, ne pas utiliser en cas de perforation du tympan d’origine infectieuse ou traumatique. Ne convient pas à la grossesse");
-        myRef.child(nom).child("Url").setValue("https://www.mon-pharmacien-conseil.com/10341-large_default/cerulyse-gouttes-auriculaire-10ml.jpg");
-
+        myRef.child(nom).child("ContreI").setValue("ulcère gastroduodénal, asthme, insuffisance cardiaque, insuffisance hépatique ou rénale sévère");
+        myRef.child(nom).child("Url").setValue("https://www.pharma-gdd.com/media/cache/resolve/product_show/nurofen-400-mg-ibuprofene-douleurs-et-fievre-migraine-chez-ladulte-12-comprimes-face.jpg");
+        myRef.child(nom).child("Enceinte").setValue("1");
         /*** /!\ Pas besoin de t'occuper de ce qui est en bas c'est automatisé /!\ ***/
 
         /** 1e etape préparation automatisé à la liste des noms (pour recherche selon noms) **/

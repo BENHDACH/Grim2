@@ -94,11 +94,11 @@ public class BaseActivity extends AppCompatActivity {
 
         if (v.getId() == R.id.cycle) {
             Toast.makeText(getApplicationContext(),"Menstruations", Toast.LENGTH_SHORT).show();
-            /*Intent intent = new Intent(this, SearchActivity.class);
+            Intent intent = new Intent(this, SearchActivity.class);
             intent.putExtra("value",true);
             intent.putExtra("whichB","Cible");
             intent.putExtra("nom","Menstruations");
-            startActivity(intent);*/
+            startActivity(intent);
         }
 
         if (v.getId() == R.id.loupe) {
