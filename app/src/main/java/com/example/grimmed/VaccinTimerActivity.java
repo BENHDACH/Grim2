@@ -104,4 +104,6 @@ public class VaccinTimerActivity extends AppCompatActivity {
             adapter.addOne();
         }
     }
+
+
 }

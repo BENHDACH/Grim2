@@ -25,21 +25,23 @@ public class DetailActivity extends AppCompatActivity {
         Bundle bundle = getIntent().getExtras();
         Boolean allergies = bundle.getBoolean("allergies", false);
         Boolean usual = bundle.getBoolean("usual", false);
+        Boolean all = bundle.getBoolean("all", false);
+        Boolean use = bundle.getBoolean("use", false);
 
 
-        if (allergies == true){
+        if ((allergies == true) ||(all == true) ){
             consignes.setText(R.string.allergies);
         }
-        if (usual == true){
+        if ((usual == true) || (use == true)){
             consignes.setText(R.string.usual_traitement);
         }
 
         ActionBar actionBar = getSupportActionBar();
         if (actionBar != null) {
-            if (allergies == true){
+            if ((allergies == true) ||(all == true) ){
                 actionBar.setTitle("Allergies");
             }
-            if (usual == true){
+            if ((usual == true) || (use == true)){
                 actionBar.setTitle("Traitement");
             }
 
