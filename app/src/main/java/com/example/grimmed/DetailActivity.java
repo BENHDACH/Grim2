@@ -6,6 +6,8 @@ import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
+import android.view.View;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import java.util.ArrayList;
@@ -22,6 +24,8 @@ public class DetailActivity extends AppCompatActivity {
         setContentView(R.layout.activity_detail);
         Log.e("PROBLEME", "PROBLEME");
         TextView consignes = findViewById(R.id.consignes);
+        ImageView plusDetail = findViewById(R.id.plusDetail);
+        plusDetail.setOnClickListener(this::onClick);
         Bundle bundle = getIntent().getExtras();
         Boolean allergies = bundle.getBoolean("allergies", false);
         Boolean usual = bundle.getBoolean("usual", false);
@@ -55,5 +59,13 @@ public class DetailActivity extends AppCompatActivity {
 
         LinearLayoutManager layoutManager = new LinearLayoutManager(this);
         recyclerView.setLayoutManager(layoutManager);
+    }
+
+    public void onClick(View v) {
+        if (v.getId() == R.id.plusDetail) {
+            VaccinAdapter adapter = new VaccinAdapter(items);
+            recyclerView.setAdapter(adapter);
+            adapter.addOne();
+        }
     }
 }

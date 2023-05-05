@@ -6,16 +6,27 @@
     android:layout_height="match_parent"
     tools:context=".DetailActivity">
 
-    <android.support.v7.widget.RecyclerView
-        android:id="@+id/listAT"
-        android:layout_width="366dp"
-        android:layout_height="521dp"
+    <ImageView
+        android:id="@+id/plusDetail"
+        android:layout_width="67dp"
+        android:layout_height="52dp"
+        android:tint="@color/blue"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.488"
+        app:layout_constraintHorizontal_bias="0.498"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/listAT"
+        app:srcCompat="@drawable/microsoftteams_image__21_" />
+
+    <android.support.v7.widget.RecyclerView
+        android:id="@+id/listAT"
+        android:layout_width="345dp"
+        android:layout_height="377dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.676" />
+        app:layout_constraintVertical_bias="0.449" />
 
     <TextView
         android:id="@+id/consignes"
