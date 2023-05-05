@@ -6,4 +6,25 @@
     android:layout_height="match_parent"
     tools:context=".ChildActivity">
 
+    <TextView
+        android:id="@+id/lesEnfants"
+        android:layout_width="297dp"
+        android:layout_height="90dp"
+        android:layout_marginTop="40dp"
+        android:text="Ici vous pouvez gérer les allergies, traitements et vaccins de vos enfants"
+        android:textColor="@color/black"
+        android:textSize="20sp"
+        android:textStyle="italic"
+        app:layout_constraintBottom_toTopOf="@+id/listAT"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <android.support.v7.widget.RecyclerView
+        android:id="@+id/enfantsList"
+        android:layout_width="409dp"
+        android:layout_height="555dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/lesEnfants" />
 </android.support.constraint.ConstraintLayout>
