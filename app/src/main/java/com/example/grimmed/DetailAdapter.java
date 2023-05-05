@@ -23,7 +23,7 @@ public class DetailAdapter extends RecyclerView.Adapter<DetailAdapter.ViewHolder
     }
 
     public static class ViewHolder extends RecyclerView.ViewHolder {
-        public TextInputLayout nameMédocEditText;
+        public EditText nameMédocEditText;
         public TextInputLayout nameMedocLayout;
         public ImageView saveMedoc;
 
@@ -63,7 +63,7 @@ public class DetailAdapter extends RecyclerView.Adapter<DetailAdapter.ViewHolder
     }
 
     void addOne(){
-        List<String> myList = Arrays.asList("L","","","false");
+        List<String> listAT = Arrays.asList("L","","","false");
         items.add(String.format(Locale.getDefault(),"%d",items.size() + 1));
     }
 }

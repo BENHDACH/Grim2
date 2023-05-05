@@ -9,6 +9,7 @@ import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.EditText;
 import android.widget.ImageView;
 
 import java.util.Arrays;
@@ -27,7 +28,7 @@ public class ChildAdapter extends RecyclerView.Adapter<ChildAdapter.ViewHolder>{
     }
 
     public static class ViewHolder extends RecyclerView.ViewHolder {
-        public TextInputLayout nameChildEditText;
+        public EditText nameChildEditText;
         public TextInputLayout nameChildLayout;
         public ImageView vaccinChild;
         public ImageView allChild;
@@ -94,7 +95,7 @@ public class ChildAdapter extends RecyclerView.Adapter<ChildAdapter.ViewHolder>{
     }
 
     void addOne(){
-        List<String> myList = Arrays.asList("L","","","false");
+        List<String> listEnfants = Arrays.asList("L","","","false");
         items.add(String.format(Locale.getDefault(),"%d",items.size() + 1));
     }
 

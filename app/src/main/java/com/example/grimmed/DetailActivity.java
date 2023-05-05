@@ -63,7 +63,7 @@ public class DetailActivity extends AppCompatActivity {
 
     public void onClick(View v) {
         if (v.getId() == R.id.plusDetail) {
-            VaccinAdapter adapter = new VaccinAdapter(items);
+            DetailAdapter adapter = new DetailAdapter(items);
             recyclerView.setAdapter(adapter);
             adapter.addOne();
         }
