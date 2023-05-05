@@ -19,30 +19,45 @@
         android:textStyle="bold"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toTopOf="parent"
+        />
 
     <Button
         android:id="@+id/log"
-        android:layout_width="wrap_content"
+        android:layout_width="0dp"
         android:layout_height="wrap_content"
+        android:layout_marginStart="100dp"
+        android:layout_marginTop="16dp"
+        android:layout_marginEnd="100dp"
         android:layout_marginBottom="184dp"
         android:text="Log In"
+        android:textColor="#3C6CA6"
+        android:textSize="20sp"
+        android:textStyle="bold"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.498"
-        app:layout_constraintStart_toStartOf="parent" />
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/grimLogo"
+        app:layout_constraintWidth_percent="0.70"
+        />
 
     <Button
         android:id="@+id/sig"
-        android:layout_width="wrap_content"
+        android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:text="Sign Up"
+        android:textColor="#3C6CA6"
+        android:textSize="20sp"
+        android:textStyle="bold"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.501"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/log"
-        app:layout_constraintVertical_bias="0.242" />
+        app:layout_constraintVertical_bias="0.242"
+        app:layout_constraintWidth_percent="0.70"
+        />
 
     <ImageView
         android:id="@+id/grimLogo"
@@ -52,14 +67,16 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/titleCo"
-        app:srcCompat="@drawable/icon_grimmed" />
+        app:srcCompat="@drawable/icon_grimmed"
+        />
 
     <TextView
         android:id="@+id/emergency"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:drawableStart="@android:drawable/stat_sys_warning"
-        android:drawableEnd="@android:drawable/stat_sys_speakerphone"
+        android:layout_marginStart="24dp"
+        android:layout_marginEnd="24dp"
+        android:drawableStart="@android:drawable/stat_sys_speakerphone"
         android:drawableTint="#DD0000"
         android:text="In case of emergency, please contact the SAMU 15"
         android:textColor="#E80505"
@@ -68,6 +85,7 @@
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/sig" />
+        app:layout_constraintTop_toBottomOf="@+id/sig"
+        />
 
 </android.support.constraint.ConstraintLayout>
