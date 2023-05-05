@@ -20,11 +20,13 @@ import com.squareup.picasso.Picasso;
 public class Tab1 extends Fragment {
 
     private String msg;
+    private String cibleMsg;
     private String url;
     @SuppressLint("ValidFragment")
-    public  Tab1(String msg, String url){
+    public  Tab1(String msg, String url, String cibleMsg){
         this.msg = msg;
         this.url = url;
+        this.cibleMsg = cibleMsg;
     }
 
     //Overriden method onCreateView
@@ -34,9 +36,11 @@ public class Tab1 extends Fragment {
         //Returning the layout file after inflating
         //Change R.layout.tab1 in you classes
         @SuppressLint({"MissingInflatedId", "LocalSuppress"})
-        TextView textView = view.findViewById(R.id.textViewTest);
+        TextView textView = view.findViewById(R.id.textCompo);
+        TextView secondaryText = view.findViewById(R.id.textSecondEffect);
 
         textView.setText(msg);
+        secondaryText.setText(cibleMsg);
 
         ImageView imageView = view.findViewById(R.id.imageMedoc);
         Picasso.get().load(url).into(imageView);
