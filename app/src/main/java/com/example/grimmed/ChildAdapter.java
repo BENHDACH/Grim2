@@ -1,5 +1,8 @@
 package com.example.grimmed;
 
+import static android.support.v4.content.ContextCompat.startActivity;
+
+import android.content.Intent;
 import android.support.annotation.NonNull;
 import android.support.design.widget.TextInputLayout;
 import android.support.v7.widget.RecyclerView;
@@ -15,9 +18,12 @@ import java.util.Locale;
 public class ChildAdapter extends RecyclerView.Adapter<ChildAdapter.ViewHolder>{
 
     private List<String> items;
+    private ChildActivity childActivity;
 
-    public ChildAdapter(List<String> items) {
+    public ChildAdapter(List<String> items, ChildActivity childActivity) {
+
         this.items = items;
+        this.childActivity = childActivity;
     }
 
     public static class ViewHolder extends RecyclerView.ViewHolder {
@@ -26,6 +32,10 @@ public class ChildAdapter extends RecyclerView.Adapter<ChildAdapter.ViewHolder>{
         public ImageView vaccinChild;
         public ImageView allChild;
         public ImageView usualChild;
+        public Boolean setVaccin = false;
+        public Boolean setAll = false;
+        public Boolean setUsual = false;
+
         public ViewHolder(View view) {
 
             super(view);
@@ -51,9 +61,32 @@ public class ChildAdapter extends RecyclerView.Adapter<ChildAdapter.ViewHolder>{
     // binds the data to the TextView in each row-
     public void onBindViewHolder(ChildAdapter.ViewHolder holder, int position) {
         String item = items.get(position);
-        //holder.textView.setText(item);
-        //holder.textSetDateExpi.setText("");
+       /** holder.allChild.set;
+        holder.usualChild.setImageIcon();
+        holder.vaccinChild.setImageIcon();**/
+
+        holder.vaccinChild.setOnClickListener(new View.OnClickListener(){
+            @Override
+            public void onClick(View v) {
+                childActivity.changeActivity(1);
+            }
+        });
+        holder.usualChild.setOnClickListener(new View.OnClickListener(){
+            @Override
+            public void onClick(View v) {
+                childActivity.changeActivity(2);
+            }
+        });
+        holder.allChild.setOnClickListener(new View.OnClickListener(){
+            @Override
+            public void onClick(View v) {
+                childActivity.changeActivity(3);
+            }
+        });
     }
+
+
+
 
     @Override
     public int getItemCount() {
@@ -64,5 +97,7 @@ public class ChildAdapter extends RecyclerView.Adapter<ChildAdapter.ViewHolder>{
         List<String> myList = Arrays.asList("L","","","false");
         items.add(String.format(Locale.getDefault(),"%d",items.size() + 1));
     }
+
+
 
     }

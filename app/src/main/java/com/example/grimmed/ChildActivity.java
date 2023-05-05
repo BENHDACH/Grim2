@@ -1,5 +1,6 @@
 package com.example.grimmed;
 
+import android.content.Intent;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -24,10 +25,26 @@ public class ChildActivity extends AppCompatActivity {
         recyclerView = findViewById(R.id.enfantsList);
 
         items.add("");
-        ChildAdapter adapter = new ChildAdapter(items);
+        ChildAdapter adapter = new ChildAdapter(items, this);
         recyclerView.setAdapter(adapter);
 
         LinearLayoutManager layoutManager = new LinearLayoutManager(this);
         recyclerView.setLayoutManager(layoutManager);
+    }
+    public void changeActivity(int i) {
+        if(i==1) {
+            Intent intent = new Intent(this, VaccinTimerActivity.class);
+            startActivity(intent);
+        }
+        if(i==2) {
+            Intent intent = new Intent(this, DetailActivity.class);
+            intent.putExtra("use", true);
+            startActivity(intent);
+        }
+        if(i==3) {
+            Intent intent = new Intent(this, DetailActivity.class);
+            intent.putExtra("all", true);
+            startActivity(intent);
+        }
     }
 }
