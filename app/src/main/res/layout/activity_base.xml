@@ -144,7 +144,7 @@
         android:layout_marginEnd="44dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:srcCompat="@drawable/qrcode" />
+        app:srcCompat="@drawable/capture_d_cran_2023_05_06_125719" />
 
     <View
         android:id="@+id/view9"
