@@ -29,6 +29,8 @@ public class DetailAdapter extends RecyclerView.Adapter<DetailAdapter.ViewHolder
 
         public ImageView deleteMedoc;
 
+        public Boolean setDetail = false;
+
         public ViewHolder(View view) {
             super(view);
             nameMédocEditText = view.findViewById(R.id.textNameMédoc);
