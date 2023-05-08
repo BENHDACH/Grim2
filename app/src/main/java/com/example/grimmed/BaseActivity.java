@@ -5,7 +5,6 @@ import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
-import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.Toast;
 
@@ -45,8 +44,8 @@ public class BaseActivity extends AppCompatActivity {
         ImageView loupe = findViewById(R.id.loupe);
         loupe.setOnClickListener(this::onClick);
 
-        ImageView qrCode = findViewById(R.id.qr);
-        qrCode.setOnClickListener(this::onClick);
+        ImageView mamie = findViewById(R.id.mamie);
+        mamie.setOnClickListener(this::onClick);
     }
 
     public void onClick(View v) {
@@ -106,8 +105,10 @@ public class BaseActivity extends AppCompatActivity {
             startActivity(intent);
         }
 
-        if (v.getId() == R.id.qr) {
-            Toast.makeText(getApplicationContext(),"Scan QR Code", Toast.LENGTH_SHORT).show();
+        if (v.getId() == R.id.mamie) {
+            Toast.makeText(getApplicationContext(),"Remèdes de grand-mère", Toast.LENGTH_SHORT).show();
+            Intent intent = new Intent(this, MamieActivity.class);
+            startActivity(intent);
         }
     }
 }
