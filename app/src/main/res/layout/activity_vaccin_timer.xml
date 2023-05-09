@@ -106,6 +106,7 @@
         android:text="Nom du vaccin"
         android:textSize="16sp"
         android:textStyle="bold"
+        android:visibility="invisible"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
@@ -118,7 +119,31 @@
         android:text="Date du vaccin"
         android:textSize="16sp"
         android:textStyle="bold"
+        android:visibility="invisible"
         app:layout_constraintStart_toEndOf="@+id/nomVacc"
         app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/listeVide"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Enregistrez vos rendez-vous de vaccins ici et recevez une notification le moment venu !"
+        android:textAlignment="center"
+        android:textColor="#8C8F8989"
+        android:textStyle="bold"
+        app:layout_constraintBottom_toTopOf="@+id/view5"
+        app:layout_constraintEnd_toEndOf="@+id/recyclerVaccin"
+        app:layout_constraintStart_toStartOf="@+id/recyclerVaccin"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <ImageView
+        android:id="@+id/cloche"
+        android:layout_width="72dp"
+        android:layout_height="62dp"
+        app:layout_constraintBottom_toTopOf="@+id/listeVide"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.498"
+        app:layout_constraintStart_toStartOf="parent"
+        app:srcCompat="@drawable/cloche" />
 
 </android.support.constraint.ConstraintLayout>
