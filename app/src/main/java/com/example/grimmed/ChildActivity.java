@@ -29,6 +29,9 @@ public class ChildActivity extends AppCompatActivity {
         ImageView plusDetail = findViewById(R.id.plusEnfants);
         plusDetail.setOnClickListener(this::onClick);
 
+        ImageView backHome7 = findViewById(R.id.backHome7);
+        backHome7.setOnClickListener(this::onClick);
+
         items.add("");
         ChildAdapter adapter = new ChildAdapter(items, this);
         recyclerView.setAdapter(adapter);
@@ -58,6 +61,11 @@ public class ChildActivity extends AppCompatActivity {
             ChildAdapter adapter = new ChildAdapter(items, this);
             recyclerView.setAdapter(adapter);
             adapter.addOne();
+        }
+
+        if (v.getId() == R.id.backHome7) {
+            Intent intent = new Intent(this, BaseActivity.class);
+            startActivity(intent);
         }
     }
 }

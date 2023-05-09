@@ -1,5 +1,6 @@
 package com.example.grimmed;
 
+import android.content.Intent;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -31,6 +32,9 @@ public class DetailActivity extends AppCompatActivity {
         Boolean usual = bundle.getBoolean("usual", false);
         Boolean all = bundle.getBoolean("all", false);
         Boolean use = bundle.getBoolean("use", false);
+
+        ImageView backHome6 = findViewById(R.id.backHome6);
+        backHome6.setOnClickListener(this::onClick);
 
 
         if ((allergies == true) ||(all == true) ){
@@ -66,6 +70,11 @@ public class DetailActivity extends AppCompatActivity {
             DetailAdapter adapter = new DetailAdapter(items);
             recyclerView.setAdapter(adapter);
             adapter.addOne();
+        }
+
+        if (v.getId() == R.id.backHome6) {
+            Intent intent = new Intent(this, BaseActivity.class);
+            startActivity(intent);
         }
     }
 }
