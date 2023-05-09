@@ -102,6 +102,14 @@ public class VaccinTimerActivity extends AppCompatActivity {
             VaccinAdapter adapter = new VaccinAdapter(items);
             recyclerView.setAdapter(adapter);
             adapter.addOne();
+            ImageView imageView = findViewById(R.id.cloche);
+            imageView.setVisibility(View.GONE);
+            TextView textView = findViewById(R.id.listeVide);
+            textView.setVisibility(View.GONE);
+            TextView nomVaccin = findViewById(R.id.nomVacc);
+            nomVaccin.setVisibility(View.VISIBLE);
+            TextView dateVaccin = findViewById(R.id.dateVacc);
+            dateVaccin.setVisibility(View.VISIBLE);
         }
     }
 
