@@ -24,6 +24,7 @@ import org.json.JSONObject;
 
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.Objects;
@@ -84,7 +85,7 @@ public class SearchActivity extends AppCompatActivity {
             }
         });
 
-        firebaseSetup();
+        firebaseSetup2();
 
         Button bNom = findViewById(R.id.buttonNom);
         bNom.setOnClickListener(this::onClick);
@@ -370,9 +371,32 @@ public class SearchActivity extends AppCompatActivity {
 
     }
 
-    private void firebaseSetup(){
+    private void firebaseSetup2(){
+
         FirebaseDatabase database = FirebaseDatabase.getInstance();
+        DatabaseReference virgule = database.getReference("Recette");
+        // Utiliser la phrase générique : "ce traitement est utilisé généralement pour +symptome
+        String symptome = "Démangéaisons";
+        List<String> recette = new ArrayList<>(Arrays.asList("Appliquez de l'huile d'amande douce pour apaiser les démangeaisons","Appliquez une compresse d'eau froide sur les zones touchées pour soulager les démangeaisons"));
+        virgule.child(symptome).child("Traitement").setValue(recette);
+        virgule.child(symptome).child("Cible").setValue("les démangeaisons");
+        virgule.child(symptome).child("Score").setValue("50");
+    }
+    private void firebaseSetup(){
+
+
+        FirebaseDatabase database = FirebaseDatabase.getInstance();
+
         DatabaseReference myRef = database.getReference("Medicaments");
+
+        DatabaseReference e = database.getReference("User");
+
+        DatabaseReference virgule = database.getReference("Recette");
+        // Utiliser la phrase générique : "ce traitement est utilisé généralement pour +symptome
+        String symptome = "Mal de gorge";
+        List<String> recette = new ArrayList<>(Arrays.asList("Mélangez du miel, du jus de citron et de l'eau chaude. Boire cette solution apaise le mal de gorge","Gargarisez-vous avec de l'eau salée tiède plusieurs fois par jour pour aider à réduire l'inflammation et la douleur"));
+        virgule.child(symptome).child("Traitement").setValue(recette);
+        virgule.child(symptome).child("Cible").setValue("les maux de gorges");
 
         /*** /!\ Les compositions en minuscules et les cibles + nom avec une majuscule au début merci <3 ***/
 
@@ -392,7 +416,47 @@ public class SearchActivity extends AppCompatActivity {
         /*** /!\ Pas besoin de t'occuper de ce qui est en bas c'est automatisé /!\ ***/
 
         /** 1e etape préparation automatisé à la liste des noms (pour recherche selon noms) **/
+
         DatabaseReference myNameRef = database.getReference("ListNom");
+
+        e.child("username").child("password").setValue("admin");
+        e.child("username").child("allergie").setValue("ibuprofène");
+        e.child("username").child("traitement").setValue("Doliprane");
+        e.child("username").child("enceinte").setValue("0");
+
+        HashMap<String, HashMap<String, String>> vaccins = new HashMap<>();
+        HashMap<String, String> vaccin1 = new HashMap<>();
+        vaccin1.put("nom", "Polio");
+        vaccin1.put("date", "15/12/15");
+        vaccins.put("vaccin1", vaccin1);
+
+        HashMap<String, String> vaccin2 = new HashMap<>();
+        vaccin2.put("nom", "Tétanos");
+        vaccin2.put("date", "21/03/20");
+        vaccins.put("vaccin2", vaccin2);
+
+        e.child("username").child("vaccins").setValue(vaccins);
+
+        HashMap<String, HashMap<String, String>> vaccinsEnfant = new HashMap<>();
+        HashMap<String, String> vaccinEnfant1 = new HashMap<>();
+        vaccinEnfant1.put("nom", "Polio");
+        vaccinEnfant1.put("date", "15/12/15");
+        vaccinsEnfant.put("vaccin1", vaccinEnfant1);
+
+        HashMap<String, String> vaccinEnfant2 = new HashMap<>();
+        vaccinEnfant2.put("nom", "Tétanos");
+        vaccinEnfant2.put("date", "21/03/20");
+        vaccinsEnfant.put("vaccin2", vaccinEnfant2);
+
+        e.child("username").child("enfant").child("vaccins").setValue(vaccinsEnfant);
+        e.child("username").child("enfant").child("nom").setValue("Jason");
+        e.child("username").child("enfant").child("traitement").setValue("Doliprane");
+        e.child("username").child("enfant").child("allergie").setValue("Aucune");
+
+
+
+
+
         myNameRef.addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
