@@ -9,6 +9,7 @@ import android.support.v7.widget.RecyclerView;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
+import android.widget.ImageView;
 import android.widget.SearchView;
 
 import com.google.firebase.database.DataSnapshot;
@@ -94,6 +95,9 @@ public class SearchActivity extends AppCompatActivity {
         Button bCompo = findViewById(R.id.buttonCompo);
         bCompo.setOnClickListener(this::onClick);
 
+        ImageView backHome5 = findViewById(R.id.backHome5);
+        backHome5.setOnClickListener(this::clickHome);
+
 
     }
 
@@ -106,6 +110,13 @@ public class SearchActivity extends AppCompatActivity {
         }
         else if (v.getId() == R.id.buttonCompo) {
             whichB = "Compo";
+        }
+    }
+
+    private void clickHome(View v) {
+        if (v.getId() == R.id.backHome5) {
+            Intent intent = new Intent(this, BaseActivity.class);
+            startActivity(intent);
         }
     }
 

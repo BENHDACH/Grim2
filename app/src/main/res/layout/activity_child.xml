@@ -7,6 +7,16 @@
     tools:context=".ChildActivity">
 
     <ImageView
+        android:id="@+id/backHome7"
+        android:layout_width="54dp"
+        android:layout_height="48dp"
+        android:layout_marginTop="16dp"
+        android:layout_marginEnd="16dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:srcCompat="@drawable/microsoftteams_image__17_" />
+
+    <ImageView
         android:id="@+id/plusEnfants"
         android:layout_width="67dp"
         android:layout_height="52dp"
@@ -22,7 +32,7 @@
         android:id="@+id/lesEnfants"
         android:layout_width="297dp"
         android:layout_height="90dp"
-        android:layout_marginTop="40dp"
+        android:layout_marginTop="76dp"
         android:text="Ici vous pouvez gérer les allergies, traitements et vaccins de vos enfants"
         android:textColor="@color/black"
         android:textSize="20sp"
