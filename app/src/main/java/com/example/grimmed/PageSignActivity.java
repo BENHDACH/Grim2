@@ -9,6 +9,7 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
@@ -29,6 +30,10 @@ public class PageSignActivity extends AppCompatActivity {
     EditText emailEditText;
     EditText usernameEditText;
     EditText pswEditText;
+
+    Boolean mailCheck = false;
+    Boolean pswCheck = false;
+    final Boolean[] usernameCheck = {false};
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -46,13 +51,7 @@ public class PageSignActivity extends AppCompatActivity {
 
     public void onClick(View v){
         if (v.getId() == R.id.sigPage) {
-
-            if(verificationDonnees()){
-                saveDataUser();
-                Intent intent = new Intent(this, BaseActivity.class);
-                startActivity(intent);
-            }
-
+            verificationDonnees();
         }
 
         if (v.getId() == R.id.redirectionLog) {
@@ -63,11 +62,8 @@ public class PageSignActivity extends AppCompatActivity {
 
 
 
-    private Boolean verificationDonnees() {
+    private void verificationDonnees() {
         //Etape 1 verif mail
-        Boolean mailCheck = false;
-        Boolean pswCheck = false;
-        final Boolean[] usernameCheck = {false};
 
         String emailText = emailEditText.getText().toString();
         String pswText = pswEditText.getText().toString();
@@ -97,11 +93,15 @@ public class PageSignActivity extends AppCompatActivity {
         DatabaseReference userReference = FirebaseDatabase.getInstance().getReference("User").child(userText);
         userReference.addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
-            public void onDataChange(DataSnapshot dataSnapshot) {
+            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+
                 //Si il n'y a pas d'user avec ce nom..
                 if (!dataSnapshot.exists()) {
                     usernameCheck[0] = true;
                 }
+
+                afterCheck();
+
             }
 
             @Override
@@ -110,7 +110,15 @@ public class PageSignActivity extends AppCompatActivity {
             }
         });
 
-        return usernameCheck[0] && pswCheck && mailCheck;
+    }
+
+    private void afterCheck() {
+        if(usernameCheck[0] && mailCheck && pswCheck){
+            saveDataUser();
+        }
+        else{
+            Toast.makeText(this, "Manque un truc bitch", Toast.LENGTH_SHORT).show();
+        }
     }
 
     public static boolean isValidEmail(String email) {
@@ -136,5 +144,8 @@ public class PageSignActivity extends AppCompatActivity {
         myRef.child(userText).child("enceinte").setValue("0");
         myRef.child(userText).child("vaccins").setValue("");
         myRef.child(userText).child("allergie").setValue("Aucune");
+
+        Intent intent = new Intent(this, BaseActivity.class);
+        startActivity(intent);
     }
 }
