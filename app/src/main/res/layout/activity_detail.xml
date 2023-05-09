@@ -7,6 +7,16 @@
     tools:context=".DetailActivity">
 
     <ImageView
+        android:id="@+id/backHome6"
+        android:layout_width="54dp"
+        android:layout_height="48dp"
+        android:layout_marginTop="16dp"
+        android:layout_marginEnd="16dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:srcCompat="@drawable/microsoftteams_image__17_" />
+
+    <ImageView
         android:id="@+id/plusDetail"
         android:layout_width="67dp"
         android:layout_height="52dp"
