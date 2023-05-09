@@ -89,18 +89,21 @@ public class ProfilActivity extends AppCompatActivity {
             startActivity(intent);
         }
 
-        if (v.getId() == R.id.enc){
-            AlertDialog alertDialog= new AlertDialog.Builder(ProfilActivity.this).create();
-            alertDialog.setTitle("Pregnant Alert");
-            alertDialog.setMessage("Be aware that some medicines are not compatible with pregnancy. Please consult your doctor.");
-            alertDialog.setButton(AlertDialog.BUTTON_NEUTRAL, "OK",
-                    new DialogInterface.OnClickListener() {
-                        @Override
-                        public void onClick(DialogInterface dialog, int which) {
-                            dialog.dismiss();
-                        }
-                    });
-            alertDialog.show();
+        if (v.getId() == R.id.enc) {
+            Switch enceinte = findViewById(R.id.enc);
+            if (enceinte.isChecked()) {
+                AlertDialog alertDialog = new AlertDialog.Builder(ProfilActivity.this).create();
+                alertDialog.setTitle("Pregnant Alert");
+                alertDialog.setMessage("Be aware that some medicines are not compatible with pregnancy. Please consult your doctor.");
+                alertDialog.setButton(AlertDialog.BUTTON_NEUTRAL, "OK",
+                        new DialogInterface.OnClickListener() {
+                            @Override
+                            public void onClick(DialogInterface dialog, int which) {
+                                dialog.dismiss();
+                            }
+                        });
+                alertDialog.show();
+            }
         }
     }
 }
