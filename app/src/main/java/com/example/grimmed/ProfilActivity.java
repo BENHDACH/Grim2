@@ -94,6 +94,14 @@ public class ProfilActivity extends AppCompatActivity {
                     estEnceinte = true;
                 }
 
+                Switch enceinte = findViewById(R.id.enc);
+                if(estEnceinte){
+                    enceinte.setChecked(true);
+                }
+                else{
+                    enceinte.setChecked(false);
+                }
+
             }
 
             @Override
@@ -152,7 +160,8 @@ public class ProfilActivity extends AppCompatActivity {
 
         if (v.getId() == R.id.enc) {
             Switch enceinte = findViewById(R.id.enc);
-            if (enceinte.isChecked() || estEnceinte) {
+
+            if (enceinte.isChecked() && !estEnceinte) {
                 AlertDialog alertDialog = new AlertDialog.Builder(ProfilActivity.this).create();
                 alertDialog.setTitle("Attention !");
                 alertDialog.setMessage("Certains médicaments ne sont pas compatibles avec la grossesse. Veuillez consulter votre médecin.");
