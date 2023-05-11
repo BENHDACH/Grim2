@@ -97,8 +97,12 @@ public class ProfilActivity extends AppCompatActivity {
         }
 
         if (v.getId() == R.id.logOut) {
+            DataUser.username="Default";
             Intent intent = new Intent(this, MainActivity.class);
             startActivity(intent);
+
+            finish();
+
         }
 
         if (v.getId() == R.id.enc) {
@@ -117,5 +121,11 @@ public class ProfilActivity extends AppCompatActivity {
                 alertDialog.show();
             }
         }
+    }
+
+    @Override
+    protected void onDestroy() {
+        Log.e("deco", ""+DataUser.username);
+        super.onDestroy();
     }
 }
