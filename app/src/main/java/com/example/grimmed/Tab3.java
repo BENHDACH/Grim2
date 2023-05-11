@@ -39,6 +39,7 @@ public class Tab3 extends Fragment {
         TextView textComposition = view.findViewById(R.id.textCompo);
         TextView textContreI = view.findViewById(R.id.textContreIndic);
         TextView textPrice = view.findViewById(R.id.textPrice);
+        String concatPrice = prix+"€";
 
 
 
@@ -52,7 +53,7 @@ public class Tab3 extends Fragment {
         }
         textComposition.setText(textCompo);
         textContreI.setText(contreIndic);
-        textPrice.setText(prix);
+        textPrice.setText(concatPrice);
         //Returning the layout file after inflating
         //Change R.layout.tab1 in you classes
         return (view);
