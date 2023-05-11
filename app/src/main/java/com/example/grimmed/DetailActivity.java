@@ -26,6 +26,7 @@ import org.json.JSONObject;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
+import java.util.Objects;
 
 public class DetailActivity extends AppCompatActivity {
 
@@ -37,6 +38,8 @@ public class DetailActivity extends AppCompatActivity {
     Boolean usual;
     Boolean all;
     Boolean use;
+
+    String childName;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -51,6 +54,7 @@ public class DetailActivity extends AppCompatActivity {
         usual = bundle.getBoolean("usual", false);
         all = bundle.getBoolean("all", false);
         use = bundle.getBoolean("use", false);
+        childName = bundle.getString("childName","");
 
         ImageView backHome6 = findViewById(R.id.backHome6);
         backHome6.setOnClickListener(this::onClick);
@@ -73,22 +77,6 @@ public class DetailActivity extends AppCompatActivity {
             }
 
         }
-
-        /*
-        String crypthello = null;
-        try {
-            crypthello = AES.encrypt("Hello");
-        } catch (Exception e) {
-            throw new RuntimeException(e);
-        }
-        Log.e("HelloCrypt",""+crypthello);
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
-            try {
-                Log.e("HelloDecrypt",""+AES.decrypt(crypthello));
-            } catch (Exception e) {
-                throw new RuntimeException(e);
-            }
-        }*/
 
         getData();
 
@@ -121,7 +109,7 @@ public class DetailActivity extends AppCompatActivity {
         FirebaseDatabase database = FirebaseDatabase.getInstance();
         DatabaseReference myRef = database.getReference("User");
 
-        if(item!="DELETE"){
+        if(!Objects.equals(item, "DELETE")){
             String encryptedItem = AES.encrypt(item);
             items.add(encryptedItem);
         }
@@ -129,11 +117,16 @@ public class DetailActivity extends AppCompatActivity {
         if (allergies){
             myRef.child(DataUser.username).child("allergie").setValue(items);
         }
-        else if(all){
-            myRef.child(DataUser.username).child("").child("allergie").setValue(items);
+        else if(all && !Objects.equals(childName, "")){
+            myRef.child(DataUser.username).child("enfant").child(childName)
+                    .child("allergie").setValue(items);
         }
-        else if(usual || use){
+        else if(usual){
             myRef.child(DataUser.username).child("traitement").setValue(items);
+        }
+        else if(use && !Objects.equals(childName, "")){
+            myRef.child(DataUser.username).child("enfant").child(childName)
+                    .child("traitement").setValue(items);
         }
 
         getData();
@@ -153,11 +146,18 @@ public class DetailActivity extends AppCompatActivity {
                 JSONArray newV = null;
 
                 try {
-                    if(allergies || all){
+                    if(allergies){
                         newV = myInfo.getJSONArray("allergie");
-
-                    } else if (usual || use) {
+                    }else if(all && !Objects.equals(childName, "")){
+                        newV = myInfo.getJSONObject("enfant").getJSONObject(childName)
+                                .getJSONArray("allergie");
+                    }
+                    else if (usual) {
                         newV = myInfo.getJSONArray("traitement");
+                    }
+                    else if(use && !Objects.equals(childName, "")){
+                        newV = myInfo.getJSONObject("enfant").getJSONObject(childName)
+                                .getJSONArray("traitement");
                     }
                 } catch (JSONException e) {
                     newV = new JSONArray();
@@ -168,17 +168,9 @@ public class DetailActivity extends AppCompatActivity {
                 for (int i = 0; i < newV.length(); i++) {
 
                     try {
-                        if(newV.getString(i)!=" "){
+                        if(!Objects.equals(newV.getString(i), " ")){
 
                             items.add(newV.getString(i));
-
-                            String encrypt = newV.getString(i);
-                            Log.e("Encrypt"," "+encrypt);
-
-                            if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.O) {
-                                String decrypt = AES.decrypt(encrypt);
-                                Log.e("Decrypt",""+decrypt);
-                            }
 
                             if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
                                 itemsDecrypt.add(AES.decrypt(newV.getString(i)));
@@ -192,7 +184,6 @@ public class DetailActivity extends AppCompatActivity {
                         throw new RuntimeException(e);
                     }
                 }
-
                 setRecyclerView();
             }
             @Override

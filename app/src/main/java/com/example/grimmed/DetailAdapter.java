@@ -15,6 +15,7 @@ import android.widget.TextView;
 import java.util.Arrays;
 import java.util.List;
 import java.util.Locale;
+import java.util.Objects;
 
 public class DetailAdapter extends RecyclerView.Adapter<DetailAdapter.ViewHolder> {
 
@@ -66,7 +67,7 @@ public class DetailAdapter extends RecyclerView.Adapter<DetailAdapter.ViewHolder
         //holder.textSetDateExpi.setText("");
         EditText nameMedocLayout = holder.nameMédocEditText;
 
-        if(item!=" "){
+        if(!Objects.equals(item, " ")){
             checkerVisibility(false, holder);
             nameMedocLayout.setText(item);
             holder.deleteMedoc.setOnClickListener(new View.OnClickListener() {
@@ -77,13 +78,10 @@ public class DetailAdapter extends RecyclerView.Adapter<DetailAdapter.ViewHolder
                     } catch (Exception e) {
                         throw new RuntimeException(e);
                     }
-
-
                 }
             });
         }
-        else{
-            Log.e("Cool2",""+item);
+        else{;
             checkerVisibility(true, holder);
             holder.saveMedoc.setOnClickListener(new View.OnClickListener() {
 

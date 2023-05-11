@@ -6,6 +6,7 @@ import android.content.Intent;
 import android.support.annotation.NonNull;
 import android.support.design.widget.TextInputLayout;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -15,6 +16,7 @@ import android.widget.ImageView;
 import java.util.Arrays;
 import java.util.List;
 import java.util.Locale;
+import java.util.Objects;
 
 public class ChildAdapter extends RecyclerView.Adapter<ChildAdapter.ViewHolder>{
 
@@ -70,41 +72,42 @@ public class ChildAdapter extends RecyclerView.Adapter<ChildAdapter.ViewHolder>{
         holder.vaccinChild.setImageIcon();**/
         EditText nameChildLayout = holder.nameChildEditText;
 
-        if(item!=" "){
+        if(!Objects.equals(item, " ")){
+            nameChildLayout.setText(item);
             checkerVisibility(false, holder);
-            holder.enrgChild.setOnClickListener(new View.OnClickListener(){
-                @Override
-                public void onClick(View v) {
-                    try {
-                        childActivity.saveOnData(nameChildLayout.getText().toString());
-                    } catch (Exception e) {
-                        throw new RuntimeException(e);
-                    }
-                }
-            });
-
         }else{
             checkerVisibility(true, holder);
         }
+
+        holder.enrgChild.setOnClickListener(new View.OnClickListener(){
+            @Override
+            public void onClick(View v) {
+                try {
+                    childActivity.saveOnData(nameChildLayout.getText().toString());
+                } catch (Exception e) {
+                    throw new RuntimeException(e);
+                }
+            }
+        });
 
 
 
         holder.vaccinChild.setOnClickListener(new View.OnClickListener(){
             @Override
             public void onClick(View v) {
-                childActivity.changeActivity(1);
+                childActivity.changeActivity(1,item);
             }
         });
         holder.usualChild.setOnClickListener(new View.OnClickListener(){
             @Override
             public void onClick(View v) {
-                childActivity.changeActivity(2);
+                childActivity.changeActivity(2,item);
             }
         });
         holder.allChild.setOnClickListener(new View.OnClickListener(){
             @Override
             public void onClick(View v) {
-                childActivity.changeActivity(3);
+                childActivity.changeActivity(3,item);
             }
         });
 
