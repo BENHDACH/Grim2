@@ -9,6 +9,9 @@ import android.support.v7.widget.RecyclerView;
 import android.view.View;
 import android.widget.ImageView;
 
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -67,5 +70,14 @@ public class ChildActivity extends AppCompatActivity {
             Intent intent = new Intent(this, BaseActivity.class);
             startActivity(intent);
         }
+    }
+
+    public void saveOnData(String item) {
+
+        FirebaseDatabase database = FirebaseDatabase.getInstance();
+        DatabaseReference myRef = database.getReference("User");
+
+        //Un enfant de l'username est enregistrez
+        myRef.child(DataUser.username).child(item).setValue("");
     }
 }
