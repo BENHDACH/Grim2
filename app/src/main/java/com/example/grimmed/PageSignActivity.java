@@ -1,6 +1,7 @@
 package com.example.grimmed;
 
 import android.content.Intent;
+import android.os.Build;
 import android.support.annotation.NonNull;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -21,11 +22,15 @@ import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import java.security.MessageDigest;
+import java.security.NoSuchAlgorithmException;
+import java.security.SecureRandom;
+import java.util.Base64;
 import java.util.Map;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
-public class PageSignActivity extends AppCompatActivity {
+public class PageSignActivity extends AppCompatActivity  {
 
     EditText emailEditText;
     EditText usernameEditText;
@@ -75,6 +80,7 @@ public class PageSignActivity extends AppCompatActivity {
         Log.e("MailValid?", "" + mailCheck);
 
 
+        /*
         //A t-il au moins 10 characters ?
         if (pswText.length() >= 10) {
             //A t-il au moins 1 chiffre ?
@@ -86,7 +92,8 @@ public class PageSignActivity extends AppCompatActivity {
                     }
                 }
             }
-        }
+        }*/
+        pswCheck =true;
         Log.e("PswValid?", "" + pswCheck);
 
         /** Etape 3 username check (être ou ne pas être ?) **/
@@ -100,7 +107,11 @@ public class PageSignActivity extends AppCompatActivity {
                     usernameCheck[0] = true;
                 }
 
-                afterCheck();
+                try {
+                    afterCheck();
+                } catch (NoSuchAlgorithmException e) {
+                    throw new RuntimeException(e);
+                }
 
             }
 
@@ -112,7 +123,7 @@ public class PageSignActivity extends AppCompatActivity {
 
     }
 
-    private void afterCheck() {
+    private void afterCheck() throws NoSuchAlgorithmException {
         if(usernameCheck[0] && mailCheck && pswCheck){
             saveDataUser();
         }
@@ -127,17 +138,22 @@ public class PageSignActivity extends AppCompatActivity {
         Matcher matcher = pattern.matcher(email);
         return matcher.matches();
     }
-    private void saveDataUser() {
+    private void saveDataUser() throws NoSuchAlgorithmException {
         String emailText = emailEditText.getText().toString();
         String pswText = pswEditText.getText().toString();
         String userText = usernameEditText.getText().toString();
+
+        //Hash&Salt Password
+        String salt = DataUser.generateSalt();
+        String hashedPassword = DataUser.hashAndSaltPassword(pswText, salt);
 
         FirebaseDatabase database = FirebaseDatabase.getInstance();
         DatabaseReference myRef = database.getReference("User");
 
         myRef.child(userText).child("email").setValue(emailText);
-        //A cacher avec un HASH !
-        myRef.child(userText).child("password").setValue(pswText);
+        //On place dans la hash et le salt pour recup le bon mdp
+        myRef.child(userText).child("password").child("mdp").setValue(hashedPassword);
+        myRef.child(userText).child("password").child("salt").setValue(salt);
 
         //Il faut remplir le reste par def
         myRef.child(userText).child("traitement").setValue("");
@@ -148,4 +164,9 @@ public class PageSignActivity extends AppCompatActivity {
         Intent intent = new Intent(this, BaseActivity.class);
         startActivity(intent);
     }
+
+
+
+
+
 }

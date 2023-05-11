@@ -1,8 +1,10 @@
 package com.example.grimmed;
 
+import android.media.Image;
 import android.support.annotation.NonNull;
 import android.support.design.widget.TextInputLayout;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -18,8 +20,12 @@ public class DetailAdapter extends RecyclerView.Adapter<DetailAdapter.ViewHolder
 
     private List<String> items;
 
-    public DetailAdapter(List<String> items) {
+    private DetailActivity listener;
+
+    public DetailAdapter(List<String> items,DetailActivity listener) {
+
         this.items = items;
+        this.listener = listener;
     }
 
     public static class ViewHolder extends RecyclerView.ViewHolder {
@@ -55,8 +61,39 @@ public class DetailAdapter extends RecyclerView.Adapter<DetailAdapter.ViewHolder
     // binds the data to the TextView in each row
     public void onBindViewHolder(DetailAdapter.ViewHolder holder, int position) {
         String item = items.get(position);
+        int myPosition = position;
         //holder.textView.setText(item);
         //holder.textSetDateExpi.setText("");
+        EditText nameMedocLayout = holder.nameMédocEditText;
+        Log.e("HHH",""+items);
+
+        if(item!=""){
+            nameMedocLayout.setText(item);
+            Log.e("MOOO","HEIN 2 3 LoL");
+            holder.saveMedoc.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    try {
+                        listener.deleteOnData(myPosition);
+                    } catch (Exception e) {
+                        throw new RuntimeException(e);
+                    }
+                }
+            });
+        }
+        else{
+            holder.saveMedoc.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    try {
+                        listener.saveOnData(item);
+                    } catch (Exception e) {
+                        throw new RuntimeException(e);
+                    }
+                }
+            });
+        }
+
     }
 
     @Override
