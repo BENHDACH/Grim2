@@ -7,54 +7,70 @@
     android:layout_height="match_parent"
     android:orientation="vertical">
 
-    <TextView
-        android:id="@+id/textCompo"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_centerHorizontal="true"
-        android:layout_centerVertical="true"
-        android:text="Tab 1"
-        android:textAppearance="?android:attr/textAppearanceLarge"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintRight_toRightOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.562" />
-
     <ImageView
-        android:id="@+id/imageMedoc"
+        android:id="@+id/imagenotice"
         android:layout_width="148dp"
         android:layout_height="132dp"
-        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.498"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.322"
-        app:srcCompat="@drawable/microsoftteams_image__11_" />
-
-    <TextView
-        android:id="@+id/textSecondEffect"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginBottom="608dp"
-        android:text="TextView"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.504"
-        app:layout_constraintStart_toStartOf="parent" />
+        app:srcCompat="@drawable/notice" />
 
     <TextView
         android:id="@+id/titleSecondary"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="36dp"
+        android:layout_marginStart="32dp"
+        android:layout_marginTop="32dp"
+        android:layout_marginEnd="32dp"
         android:text="@string/secondaryTitle"
-        android:textSize="16sp"
-        android:textStyle="bold"
+        android:textSize="20sp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toBottomOf="@+id/imagenotice" />
 
+    <TextView
+        android:id="@+id/textSecondEffect"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="TextView"
+        android:textColor="#C50707"
+        android:textSize="20sp"
+        app:layout_constraintEnd_toEndOf="@+id/titleSecondary"
+        app:layout_constraintStart_toStartOf="@+id/titleSecondary"
+        app:layout_constraintTop_toBottomOf="@+id/titleSecondary" />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_vertical"
+        android:layout_marginTop="32dp"
+        android:background="@drawable/login_page"
+        android:backgroundTint="#3C6CA6"
+        android:orientation="horizontal"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/textSecondEffect">
+
+    <ImageView
+        android:id="@+id/imageMedoc"
+        android:layout_width="148dp"
+        android:layout_height="132dp"
+        android:layout_gravity="center_vertical"
+        app:srcCompat="@drawable/microsoftteams_image__11_"
+        android:padding="16dp"/>
+
+    <TextView
+        android:id="@+id/textCompo"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:padding="16dp"
+        android:text="Tab 1"
+        android:textAppearance="?android:attr/textAppearanceLarge"
+        android:textColor="#FFFFFF"
+        android:textSize="20sp"
+        android:layout_gravity="center_vertical"/>
+
+    </LinearLayout>
 
 </android.support.constraint.ConstraintLayout>
