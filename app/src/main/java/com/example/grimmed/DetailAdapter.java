@@ -65,12 +65,13 @@ public class DetailAdapter extends RecyclerView.Adapter<DetailAdapter.ViewHolder
         //holder.textView.setText(item);
         //holder.textSetDateExpi.setText("");
         EditText nameMedocLayout = holder.nameMédocEditText;
-        Log.e("HHH",""+items);
 
-        if(item!=""){
+        Log.e("Cool",""+item);
+        if(item!=" "){
+            Log.e("Cool",""+item);
+            checkerVisibility(false, holder);
             nameMedocLayout.setText(item);
-            Log.e("MOOO","HEIN 2 3 LoL");
-            holder.saveMedoc.setOnClickListener(new View.OnClickListener() {
+            holder.deleteMedoc.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
                     try {
@@ -78,18 +79,25 @@ public class DetailAdapter extends RecyclerView.Adapter<DetailAdapter.ViewHolder
                     } catch (Exception e) {
                         throw new RuntimeException(e);
                     }
+
+
                 }
             });
         }
         else{
+            Log.e("Cool2",""+item);
+            checkerVisibility(true, holder);
             holder.saveMedoc.setOnClickListener(new View.OnClickListener() {
+
                 @Override
                 public void onClick(View v) {
+
                     try {
-                        listener.saveOnData(item);
+                        listener.saveOnData(nameMedocLayout.getText().toString());
                     } catch (Exception e) {
                         throw new RuntimeException(e);
                     }
+
                 }
             });
         }
@@ -101,10 +109,17 @@ public class DetailAdapter extends RecyclerView.Adapter<DetailAdapter.ViewHolder
         return items.size();
     }
 
-    void addOne(){
-        List<String> listAT = Arrays.asList("L","","","false");
-        items.add(String.format(Locale.getDefault(),"%d",items.size() + 1));
+    private void checkerVisibility(Boolean enrg, ViewHolder holder){
+        if(!enrg){
+            holder.saveMedoc.setVisibility(View.GONE);
+            holder.deleteMedoc.setVisibility(View.VISIBLE);
+        }else{
+            holder.deleteMedoc.setVisibility(View.GONE);
+            holder.saveMedoc.setVisibility(View.VISIBLE);
+        }
+
     }
+
 }
 
 
