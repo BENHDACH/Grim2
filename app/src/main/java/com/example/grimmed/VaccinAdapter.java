@@ -1,30 +1,31 @@
 package com.example.grimmed;
 
 import android.annotation.SuppressLint;
-import android.content.res.ColorStateList;
-import android.graphics.Color;
 import android.support.design.widget.TextInputLayout;
 import android.support.v7.widget.RecyclerView;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.CheckBox;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import java.util.Arrays;
 import java.util.List;
 import java.util.Locale;
+import java.util.Objects;
 
 public class VaccinAdapter extends RecyclerView.Adapter<VaccinAdapter.ViewHolder> {
 
     private List<String> items;
+    private List<String> itemsDate;
 
-    public VaccinAdapter(List<String> items) {
+    private VaccinTimerActivity listener;
+
+    public VaccinAdapter(List<String> items, List<String> itemsDate, VaccinTimerActivity listener) {
         this.items = items;
+        this.itemsDate = itemsDate;
+        this.listener = listener;
     }
 
     // inner class to hold a reference to each item view
@@ -74,62 +75,71 @@ public class VaccinAdapter extends RecyclerView.Adapter<VaccinAdapter.ViewHolder
     @Override
     public void onBindViewHolder(ViewHolder holder, int position) {
         String item = items.get(position);
-        //holder.textView.setText(item);
-        //holder.textSetDateExpi.setText("");
+        String itemDate = itemsDate.get(position);
+        int myPosition = position;
 
 
-        holder.saveVaccin.setOnClickListener(new View.OnClickListener(){
-            @SuppressLint("ResourceAsColor")
-            @Override
-            public void onClick(View v) {
-                holder.setVaccin = !holder.setVaccin;
-                //Click sur bouton Enregistrer
-                if(holder.setVaccin){
-                    //holder.checkVaccin.setTextColor(Color.RED);
-                    holder.dateExpiLayout.setVisibility(View.GONE);
-                    holder.nameVaccinLayout.setVisibility(View.GONE);
-                    holder.textSetNameVaccin.setVisibility(View.VISIBLE);
-                    holder.textSetDateExpi.setVisibility(View.VISIBLE);
-                    holder.setBackground.setVisibility(View.VISIBLE);
-                    holder.deleteVacc.setVisibility(View.VISIBLE);
+        if(!Objects.equals(item, " ") && !Objects.equals(itemDate, " ")){
+            holder.textSetNameVaccin.setText(item);
+            holder.textSetDateExpi.setText(itemDate);
+            checkerVisibility(false, holder);
 
-                    // On récup la valeur venue des Input Layout dans une variable
-                    String vaccineName = holder.nameVaccinEditText.getText().toString();
-                    String dateE = holder.dateVaccinEditText.getText().toString();
-
-                    // On set le text avec ces valeurs
-                    holder.textSetNameVaccin.setText(vaccineName);
-                    holder.textSetDateExpi.setText(dateE);
-
-                }else{ //Pas de click sur bouton Enregistrer
-                    holder.setBackground.setBackgroundColor(R.color.checkVaccin);
-                    holder.dateExpiLayout.setVisibility(View.GONE);
-                    holder.nameVaccinLayout.setVisibility(View.GONE);
-                    holder.textSetNameVaccin.setVisibility(View.GONE);
-                    holder.textSetDateExpi.setVisibility(View.GONE);
-                    holder.setBackground.setVisibility(View.GONE);
-                    // donc il faudra supprimer de la list cette elm
-                    //items.remove(item);
+            holder.deleteVacc.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    try {
+                        listener.deleteOnData(myPosition);
+                    } catch (Exception e) {
+                        throw new RuntimeException(e);
+                    }
                 }
-            }
-        });
+            });
+        }
+        else{
+            checkerVisibility(true,holder);
+            holder.saveVaccin.setOnClickListener(new View.OnClickListener(){
+                @SuppressLint("ResourceAsColor")
+                @Override
+                public void onClick(View v) {
+
+
+                    try {
+                        listener.saveOnData(holder.nameVaccinEditText.getText().toString(),holder.dateVaccinEditText.getText().toString());
+                    } catch (Exception e) {
+                        throw new RuntimeException(e);
+                    }
+                }
+            });
+        }
+
+
+
 
         //Click sur la poubelle (logo poubelle visible après avoir cliqué sur le bouton Enregistrer)
-        holder.deleteVacc.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                holder.dateExpiLayout.setVisibility(View.GONE);
-                holder.nameVaccinLayout.setVisibility(View.GONE);
-                holder.textSetNameVaccin.setVisibility(View.GONE);
-                holder.textSetDateExpi.setVisibility(View.GONE);
-                holder.setBackground.setVisibility(View.GONE);
-                holder.saveVaccin.setVisibility(View.GONE);
-                holder.deleteVacc.setVisibility(View.GONE);
-            }
-        });
+
 
     }
 
+    private void checkerVisibility(boolean enrg, ViewHolder holder) {
+        if(!enrg){
+            holder.dateExpiLayout.setVisibility(View.GONE);
+            holder.nameVaccinLayout.setVisibility(View.GONE);
+            holder.textSetNameVaccin.setVisibility(View.VISIBLE);
+            holder.textSetDateExpi.setVisibility(View.VISIBLE);
+            holder.setBackground.setVisibility(View.VISIBLE);
+            holder.deleteVacc.setVisibility(View.VISIBLE);
+            holder.saveVaccin.setVisibility(View.GONE);
+
+        }else{
+            holder.dateExpiLayout.setVisibility(View.VISIBLE);
+            holder.nameVaccinLayout.setVisibility(View.VISIBLE);
+            holder.textSetNameVaccin.setVisibility(View.GONE);
+            holder.textSetDateExpi.setVisibility(View.GONE);
+            holder.setBackground.setVisibility(View.GONE);
+            holder.deleteVacc.setVisibility(View.GONE);
+            holder.saveVaccin.setVisibility(View.VISIBLE);
+        }
+    }
 
 
     // total number of rows
@@ -138,8 +148,4 @@ public class VaccinAdapter extends RecyclerView.Adapter<VaccinAdapter.ViewHolder
         return items.size();
     }
 
-    void addOne(){
-        List<String> myList = Arrays.asList("L","","","false");
-        items.add(String.format(Locale.getDefault(),"%d",items.size() + 1));
-    }
 }

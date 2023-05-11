@@ -1,14 +1,12 @@
 package com.example.grimmed;
 
 import android.content.Intent;
-import android.os.Build;
 import android.support.annotation.NonNull;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
-import android.util.Log;
 import android.view.View;
 import android.widget.ImageView;
 
@@ -20,11 +18,10 @@ import com.google.firebase.database.ValueEventListener;
 
 import org.json.JSONArray;
 import org.json.JSONException;
-import org.json.JSONObject;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Map;
+import java.util.Objects;
 
 public class ChildActivity extends AppCompatActivity {
 
@@ -46,12 +43,14 @@ public class ChildActivity extends AppCompatActivity {
         ImageView backHome7 = findViewById(R.id.backHome7);
         backHome7.setOnClickListener(this::onClick);
 
-        items.add("");
+        items.add(" ");
         ChildAdapter adapter = new ChildAdapter(items, this);
         recyclerView.setAdapter(adapter);
 
         LinearLayoutManager layoutManager = new LinearLayoutManager(this);
         recyclerView.setLayoutManager(layoutManager);
+
+        getData();
 
     }
 
@@ -64,7 +63,7 @@ public class ChildActivity extends AppCompatActivity {
         LinearLayoutManager layoutManager = new LinearLayoutManager(this);
         recyclerView.setLayoutManager(layoutManager);
     }
-    public void changeActivity(int i) {
+    public void changeActivity(int i, String item) {
         if(i==1) {
             Intent intent = new Intent(this, VaccinTimerActivity.class);
             startActivity(intent);
@@ -72,19 +71,20 @@ public class ChildActivity extends AppCompatActivity {
         if(i==2) {
             Intent intent = new Intent(this, DetailActivity.class);
             intent.putExtra("use", true);
+            intent.putExtra("childName", item);
             startActivity(intent);
         }
         if(i==3) {
             Intent intent = new Intent(this, DetailActivity.class);
             intent.putExtra("all", true);
+            intent.putExtra("childName", item);
             startActivity(intent);
         }
     }
     public void onClick(View v) {
         if (v.getId() == R.id.plusEnfants) {
-            ChildAdapter adapter = new ChildAdapter(items, this);
-            recyclerView.setAdapter(adapter);
-            adapter.addOne();
+            items.add(" ");
+            setRecyclerView();
         }
 
         if (v.getId() == R.id.backHome7) {
@@ -99,7 +99,7 @@ public class ChildActivity extends AppCompatActivity {
         DatabaseReference myRef = database.getReference("User");
 
         //Un enfant de l'username est enregistrez
-        myRef.child(DataUser.username).child(item).setValue("");
+        myRef.child(DataUser.username).child("enfant").child(item).setValue("");
     }
 
     private void getData(){
@@ -111,25 +111,28 @@ public class ChildActivity extends AppCompatActivity {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
                 Object nom = dataSnapshot.getValue(Object.class);
-                JSONObject myInfo = new JSONObject((Map) nom);
-                JSONArray newV = null;
+                JSONArray newV = new JSONArray();
 
                 for (DataSnapshot childSnapshot : dataSnapshot.getChildren()) {
                     // Get the key (i.e., the identifier) of the child node
                     String key = childSnapshot.getKey();
-                    newV.put(key);
 
+                    newV.put(key);
                 }
 
-                if(newV==null){
+                if(newV.length()==0){
+                    newV = new JSONArray();
                     newV.put(" ");
                 }
 
                 //On recup les données
                 for (int i = 0; i < newV.length(); i++) {
                     try {
-                        if (newV.getString(i) != " ") {
+                        if (!Objects.equals(newV.getString(i), " ")) {
                             items.add(newV.getString(i));
+                        }
+                        else{
+                            items.add(" ");
                         }
                     } catch (JSONException e) {
                         throw new RuntimeException(e);
