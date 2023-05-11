@@ -44,6 +44,9 @@ public class ProfilActivity extends AppCompatActivity {
         Switch enceinte = findViewById(R.id.enc);
         enceinte.setOnClickListener(this::onClick);
 
+        TextView name = findViewById(R.id.name);
+        name.setText(DataUser.username);
+
 
         ActionBar actionBar = getSupportActionBar();
         if (actionBar != null) {
