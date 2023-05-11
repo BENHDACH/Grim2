@@ -8,6 +8,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
+import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.Switch;
 import android.widget.TextView;
@@ -43,6 +44,12 @@ public class ProfilActivity extends AppCompatActivity {
 
         Switch enceinte = findViewById(R.id.enc);
         enceinte.setOnClickListener(this::onClick);
+
+        TextView name = findViewById(R.id.name);
+        name.setText(DataUser.username);
+
+        Button logOut = findViewById(R.id.logOut);
+        logOut.setOnClickListener(this::onClick);
 
 
         ActionBar actionBar = getSupportActionBar();
@@ -86,6 +93,11 @@ public class ProfilActivity extends AppCompatActivity {
 
         if (v.getId() == R.id.child) {
             Intent intent = new Intent(this, ChildActivity.class);
+            startActivity(intent);
+        }
+
+        if (v.getId() == R.id.logOut) {
+            Intent intent = new Intent(this, MainActivity.class);
             startActivity(intent);
         }
 

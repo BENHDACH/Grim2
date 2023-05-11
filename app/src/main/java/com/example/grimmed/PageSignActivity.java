@@ -160,7 +160,7 @@ public class PageSignActivity extends AppCompatActivity  {
         myRef.child(userText).child("vaccins").setValue("");
         myRef.child(userText).child("allergie").setValue("Aucune");
 
-        Intent intent = new Intent(this, BaseActivity.class);
+        Intent intent = new Intent(this, PageLogActivity.class);
         startActivity(intent);
     }
 
