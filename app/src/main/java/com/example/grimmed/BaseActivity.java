@@ -111,4 +111,8 @@ public class BaseActivity extends AppCompatActivity {
             startActivity(intent);
         }
     }
+
+    public void thefinisher(){
+        finish();
+    }
 }
