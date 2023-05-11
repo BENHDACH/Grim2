@@ -33,6 +33,8 @@ public class ChildAdapter extends RecyclerView.Adapter<ChildAdapter.ViewHolder>{
         public ImageView vaccinChild;
         public ImageView allChild;
         public ImageView usualChild;
+
+        public ImageView enrgChild;
         public Boolean setVaccin = false;
         public Boolean setAll = false;
         public Boolean setUsual = false;
@@ -45,6 +47,7 @@ public class ChildAdapter extends RecyclerView.Adapter<ChildAdapter.ViewHolder>{
             vaccinChild = view.findViewById(R.id.vaccinChild);
             allChild = view.findViewById(R.id.allChild);
             usualChild = view.findViewById(R.id.usualChild);
+            enrgChild = view.findViewById(R.id.saveE);
         }
         }
 
@@ -65,6 +68,26 @@ public class ChildAdapter extends RecyclerView.Adapter<ChildAdapter.ViewHolder>{
        /** holder.allChild.set;
         holder.usualChild.setImageIcon();
         holder.vaccinChild.setImageIcon();**/
+        EditText nameChildLayout = holder.nameChildEditText;
+
+        if(item!=" "){
+            checkerVisibility(false, holder);
+            holder.enrgChild.setOnClickListener(new View.OnClickListener(){
+                @Override
+                public void onClick(View v) {
+                    try {
+                        childActivity.saveOnData(nameChildLayout.getText().toString());
+                    } catch (Exception e) {
+                        throw new RuntimeException(e);
+                    }
+                }
+            });
+
+        }else{
+            checkerVisibility(true, holder);
+        }
+
+
 
         holder.vaccinChild.setOnClickListener(new View.OnClickListener(){
             @Override
@@ -84,9 +107,23 @@ public class ChildAdapter extends RecyclerView.Adapter<ChildAdapter.ViewHolder>{
                 childActivity.changeActivity(3);
             }
         });
+
+
+
     }
 
+    private void checkerVisibility(boolean enrg, ViewHolder holder) {
 
+        if(!enrg){
+            holder.allChild.setVisibility(View.VISIBLE);
+            holder.usualChild.setVisibility(View.VISIBLE);
+            holder.vaccinChild.setVisibility(View.VISIBLE);
+        }else{
+            holder.allChild.setVisibility(View.GONE);
+            holder.usualChild.setVisibility(View.GONE);
+            holder.vaccinChild.setVisibility(View.GONE);
+        }
+    }
 
 
     @Override

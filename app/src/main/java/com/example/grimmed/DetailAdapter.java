@@ -66,9 +66,7 @@ public class DetailAdapter extends RecyclerView.Adapter<DetailAdapter.ViewHolder
         //holder.textSetDateExpi.setText("");
         EditText nameMedocLayout = holder.nameMédocEditText;
 
-        Log.e("Cool",""+item);
         if(item!=" "){
-            Log.e("Cool",""+item);
             checkerVisibility(false, holder);
             nameMedocLayout.setText(item);
             holder.deleteMedoc.setOnClickListener(new View.OnClickListener() {
