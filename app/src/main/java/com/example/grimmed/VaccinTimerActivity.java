@@ -38,7 +38,7 @@ public class VaccinTimerActivity extends AppCompatActivity {
 
         ActionBar actionBar = getSupportActionBar();
         if (actionBar != null) {
-            actionBar.setTitle("Vaccin Timer");
+            actionBar.setTitle("Vaccinations");
         }
 
         mySuperList.add(new Object[]{"nom du vaccin", "dd/mm/yy", 1});

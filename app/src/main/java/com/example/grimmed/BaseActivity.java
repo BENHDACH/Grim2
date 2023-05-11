@@ -17,7 +17,7 @@ public class BaseActivity extends AppCompatActivity {
 
         ActionBar actionBar = getSupportActionBar();
         if (actionBar != null) {
-            actionBar.setTitle("Home");
+            actionBar.setTitle("Accueil");
         }
 
         ImageView buttonMedoc = findViewById(R.id.buttonMedoc);
