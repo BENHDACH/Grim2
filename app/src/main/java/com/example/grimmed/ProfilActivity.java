@@ -2,6 +2,7 @@ package com.example.grimmed;
 
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.support.annotation.NonNull;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
@@ -13,9 +14,20 @@ import android.widget.ImageView;
 import android.widget.Switch;
 import android.widget.TextView;
 
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
+
+import org.json.JSONException;
+import org.json.JSONObject;
+
+import java.util.Map;
+
 public class ProfilActivity extends AppCompatActivity {
 
-
+    Boolean estEnceinte = false;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -51,11 +63,44 @@ public class ProfilActivity extends AppCompatActivity {
         Button logOut = findViewById(R.id.logOut);
         logOut.setOnClickListener(this::onClick);
 
+        checkPregnant();
+
 
         ActionBar actionBar = getSupportActionBar();
         if (actionBar != null) {
             actionBar.setTitle("Profil");
         }
+    }
+
+    private void checkPregnant() {
+        DatabaseReference cibleReference = FirebaseDatabase.getInstance().getReference("User")
+                .child(DataUser.username);
+        cibleReference.addListenerForSingleValueEvent(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                Object nom = dataSnapshot.getValue(Object.class);
+                JSONObject myInfo = new JSONObject((Map) nom);
+                String newV = null;
+
+                try {
+                    newV = myInfo.getString("enceinte");
+                } catch (JSONException e) {
+                    throw new RuntimeException(e);
+                }
+
+                if(newV.equals("0")){
+                    estEnceinte = false;
+                }else{
+                    estEnceinte = true;
+                }
+
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError databaseError) {
+
+            }
+        });
     }
 
     public void onClick(View v) {
@@ -107,10 +152,10 @@ public class ProfilActivity extends AppCompatActivity {
 
         if (v.getId() == R.id.enc) {
             Switch enceinte = findViewById(R.id.enc);
-            if (enceinte.isChecked()) {
+            if (enceinte.isChecked() || estEnceinte) {
                 AlertDialog alertDialog = new AlertDialog.Builder(ProfilActivity.this).create();
-                alertDialog.setTitle("Pregnant Alert");
-                alertDialog.setMessage("Be aware that some medicines are not compatible with pregnancy. Please consult your doctor.");
+                alertDialog.setTitle("Attention !");
+                alertDialog.setMessage("Certains médicaments ne sont pas compatibles avec la grossesse. Veuillez consulter votre médecin.");
                 alertDialog.setButton(AlertDialog.BUTTON_NEUTRAL, "OK",
                         new DialogInterface.OnClickListener() {
                             @Override
@@ -119,8 +164,19 @@ public class ProfilActivity extends AppCompatActivity {
                             }
                         });
                 alertDialog.show();
+                changeData("1");
+            }
+            else{
+                changeData("0");
             }
         }
+    }
+
+    private void changeData(String s) {
+        FirebaseDatabase database = FirebaseDatabase.getInstance();
+        DatabaseReference myRef = database.getReference("User");
+
+        myRef.child(DataUser.username).child("enceinte").setValue(s);
     }
 
     @Override
