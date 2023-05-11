@@ -78,7 +78,8 @@ public class MainActivity extends AppCompatActivity {
         }
     }
 
-    private void buttonClick(){
-
+    @Override
+    public void onBackPressed() {
+        // On n'appelle pas le mode super (donc pas de retour possible)
     }
 }

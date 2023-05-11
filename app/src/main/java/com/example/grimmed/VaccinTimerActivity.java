@@ -43,20 +43,26 @@ public class VaccinTimerActivity extends AppCompatActivity {
         return list;
     }
 
-    List<Object[]> mySuperList = createList();
+    String childName;
 
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_vaccin_timer);
+        Bundle bundle = getIntent().getExtras();
+        if(bundle == null){
+
+            childName = "";
+        }
+        else{
+            childName = bundle.getString("childName","");
+        }
 
         ActionBar actionBar = getSupportActionBar();
         if (actionBar != null) {
             actionBar.setTitle("Vaccinations");
         }
-
-        mySuperList.add(new Object[]{"nom du vaccin", "dd/mm/yy", 1});
 
 
 
@@ -64,8 +70,6 @@ public class VaccinTimerActivity extends AppCompatActivity {
         initAffichageIcone();
 
         recyclerView = findViewById(R.id.recyclerVaccin);
-
-        itemsObjets.add(new String[]{"nom du vaccin", "dd/mm/yy", "SET?"});
 
         getData();
 
@@ -159,9 +163,16 @@ public class VaccinTimerActivity extends AppCompatActivity {
     private void getData(){
         items.clear();
         itemsDate.clear();
+        DatabaseReference cibleReference;
 
-        DatabaseReference cibleReference = FirebaseDatabase.getInstance().getReference("User")
-                .child(DataUser.username).child("vaccins");
+        if(!Objects.equals(childName, "")){
+             cibleReference = FirebaseDatabase.getInstance().getReference("User")
+                    .child(DataUser.username).child("enfant").child(childName).child("vaccins");
+        }
+        else{
+             cibleReference = FirebaseDatabase.getInstance().getReference("User")
+                    .child(DataUser.username).child("vaccins");
+        }
         cibleReference.addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
@@ -198,7 +209,6 @@ public class VaccinTimerActivity extends AppCompatActivity {
                 }
 
             }
-
             @Override
             public void onCancelled(@NonNull DatabaseError databaseError) {
 
@@ -212,17 +222,36 @@ public class VaccinTimerActivity extends AppCompatActivity {
         FirebaseDatabase database = FirebaseDatabase.getInstance();
         DatabaseReference myRef = database.getReference("User");
 
+
         if(!Objects.equals(item, "DELETE") && !Objects.equals(itemDate, "DELETE")){
-            myRef.child(DataUser.username).child("vaccins").child(item)
-                    .setValue(itemDate);
+            if(Objects.equals(childName, "")){
+
+                myRef.child(DataUser.username).child("vaccins").child(item)
+                        .setValue(itemDate);
+            }else{
+                myRef.child(DataUser.username).child("enfant").child(childName)
+                        .child("vaccins").child(item)
+                        .setValue(itemDate);
+            }
         }
         else{
+            if(Objects.equals(childName, "")){
                 myRef.child(DataUser.username).child("vaccins").setValue("");
-                for(int i = 0; i<items.size(); i++){
+            }else{
+
+                myRef.child(DataUser.username).child("enfant").child(childName)
+                        .child("vaccins").setValue("");
+            }
+            for(int i = 0; i<items.size(); i++){
+                if(Objects.equals(childName, "")){
                     myRef.child(DataUser.username).child("vaccins").child(items.get(i))
                             .setValue(itemsDate.get(i));
+                }else{
+                    myRef.child(DataUser.username).child("enfant").child(childName)
+                            .child("vaccins").child(items.get(i))
+                            .setValue(itemsDate.get(i));
                 }
-
+            }
         }
         getData();
     }

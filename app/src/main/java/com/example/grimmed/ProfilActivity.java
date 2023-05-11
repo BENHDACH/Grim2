@@ -153,7 +153,6 @@ public class ProfilActivity extends AppCompatActivity {
             DataUser.username="Default";
             Intent intent = new Intent(this, MainActivity.class);
             startActivity(intent);
-
             finish();
 
         }
