@@ -66,6 +66,7 @@ public class ChildActivity extends AppCompatActivity {
     public void changeActivity(int i, String item) {
         if(i==1) {
             Intent intent = new Intent(this, VaccinTimerActivity.class);
+            intent.putExtra("childName", item);
             startActivity(intent);
         }
         if(i==2) {
