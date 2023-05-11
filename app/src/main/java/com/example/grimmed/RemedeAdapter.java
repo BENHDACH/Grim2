@@ -8,16 +8,22 @@ import android.view.ViewGroup;
 import android.widget.TextView;
 
 import java.util.List;
+import java.util.Map;
+
 
 public class RemedeAdapter extends RecyclerView.Adapter<RemedeAdapter.ViewHolder> {
 
-    private List<String> items;
+    private List<String> symptomes;
+    private Map<String, List<String>> traitementsMap;
+    private OnItemClickListener itemClickListener;
 
-    public RemedeAdapter() {
-        this.items = items;
+    public interface OnItemClickListener {
+        void onItemClick(String symptome, List<String> traitements);
     }
 
-
+    public void setOnItemClickListener(OnItemClickListener listener) {
+        this.itemClickListener = listener;
+    }
 
     @NonNull
     @Override
@@ -28,18 +34,33 @@ public class RemedeAdapter extends RecyclerView.Adapter<RemedeAdapter.ViewHolder
 
     @Override
     public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
-        String item = items.get(position);
-        holder.bind(item);
+        String symptome = symptomes.get(position);
+        List<String> traitements = traitementsMap.get(symptome);
+
+        holder.bind(symptome);
+
+        holder.itemView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if (itemClickListener != null) {
+                    itemClickListener.onItemClick(symptome, traitements);
+                }
+            }
+        });
     }
 
     @Override
     public int getItemCount() {
-        return items != null ? items.size() : 0;
+        return symptomes != null ? symptomes.size() : 0;
     }
 
     public void setSymptomes(List<String> symptomes) {
-        this.items = symptomes;
+        this.symptomes = symptomes;
         notifyDataSetChanged();
+    }
+
+    public void setTraitements(Map<String, List<String>> traitementsMap) {
+        this.traitementsMap = traitementsMap;
     }
 
     static class ViewHolder extends RecyclerView.ViewHolder {
@@ -47,12 +68,11 @@ public class RemedeAdapter extends RecyclerView.Adapter<RemedeAdapter.ViewHolder
 
         ViewHolder(@NonNull View itemView) {
             super(itemView);
-            symptomeTextView = itemView.findViewById(R.id.symptomeTextView);
+            symptomeTextView = itemView.findViewById(R.id.txtSymptome);
         }
 
-        void bind(String item) {
-            symptomeTextView.setText(item);
+        void bind(String symptome) {
+            symptomeTextView.setText(symptome);
         }
     }
 }
-
