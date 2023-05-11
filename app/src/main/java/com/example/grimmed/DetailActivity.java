@@ -106,9 +106,8 @@ public class DetailActivity extends AppCompatActivity {
 
     public void onClick(View v) {
         if (v.getId() == R.id.plusDetail) {
-            DetailAdapter adapter = new DetailAdapter(items,this);
-            recyclerView.setAdapter(adapter);
-            adapter.addOne();
+            itemsDecrypt.add(" ");
+            setRecyclerView();
         }
 
         if (v.getId() == R.id.backHome6) {
@@ -127,8 +126,11 @@ public class DetailActivity extends AppCompatActivity {
             items.add(encryptedItem);
         }
 
-        if (allergies || all ){
+        if (allergies){
             myRef.child(DataUser.username).child("allergie").setValue(items);
+        }
+        else if(all){
+            myRef.child(DataUser.username).child("").child("allergie").setValue(items);
         }
         else if(usual || use){
             myRef.child(DataUser.username).child("traitement").setValue(items);
@@ -156,18 +158,17 @@ public class DetailActivity extends AppCompatActivity {
 
                     } else if (usual || use) {
                         newV = myInfo.getJSONArray("traitement");
-
                     }
                 } catch (JSONException e) {
                     newV = new JSONArray();
-                    newV.put("");
+                    newV.put(" ");
                 }
 
                 //On recup les données
                 for (int i = 0; i < newV.length(); i++) {
 
                     try {
-                        if(newV.getString(i)!=""){
+                        if(newV.getString(i)!=" "){
 
                             items.add(newV.getString(i));
 
@@ -185,7 +186,7 @@ public class DetailActivity extends AppCompatActivity {
 
                         }
                         else{
-                            itemsDecrypt.add("");
+                            itemsDecrypt.add(" ");
                         }
                     } catch (Exception e) {
                         throw new RuntimeException(e);

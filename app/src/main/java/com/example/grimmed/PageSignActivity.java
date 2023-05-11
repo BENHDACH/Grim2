@@ -80,7 +80,7 @@ public class PageSignActivity extends AppCompatActivity  {
         Log.e("MailValid?", "" + mailCheck);
 
 
-        /*
+
         //A t-il au moins 10 characters ?
         if (pswText.length() >= 10) {
             //A t-il au moins 1 chiffre ?
@@ -92,8 +92,7 @@ public class PageSignActivity extends AppCompatActivity  {
                     }
                 }
             }
-        }*/
-        pswCheck =true;
+        }
         Log.e("PswValid?", "" + pswCheck);
 
         /** Etape 3 username check (être ou ne pas être ?) **/
@@ -128,7 +127,7 @@ public class PageSignActivity extends AppCompatActivity  {
             saveDataUser();
         }
         else{
-            Toast.makeText(this, "Manque un truc bitch", Toast.LENGTH_SHORT).show();
+            Toast.makeText(this, "Veuillez renseignez tout les champs", Toast.LENGTH_SHORT).show();
         }
     }
 

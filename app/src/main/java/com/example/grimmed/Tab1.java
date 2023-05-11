@@ -39,8 +39,21 @@ public class Tab1 extends Fragment {
         TextView textView = view.findViewById(R.id.textCompo);
         TextView secondaryText = view.findViewById(R.id.textSecondEffect);
 
-        textView.setText(msg);
+
         secondaryText.setText(cibleMsg);
+
+        String concatMsgUsage = "";
+        for(int i=0;i<msg.length();i++){
+            if(msg.charAt(i) == '@'){
+                concatMsgUsage = concatMsgUsage+'\n';
+            }
+            else{
+                concatMsgUsage = concatMsgUsage+msg.charAt(i);
+            }
+        }
+        textView.setText(concatMsgUsage);
+
+
 
         ImageView imageView = view.findViewById(R.id.imageMedoc);
         Picasso.get().load(url).into(imageView);
