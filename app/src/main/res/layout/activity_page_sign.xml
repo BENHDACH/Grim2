@@ -13,7 +13,7 @@
         android:layout_marginTop="32dp"
         android:background="@drawable/login_page"
         android:backgroundTint="#D6D6D6"
-        android:text="Sign In"
+        android:text="S'inscrire"
         android:textColor="#3C6CA6"
         android:textSize="20sp"
         android:textStyle="bold"
@@ -28,7 +28,7 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="32dp"
         android:fontFamily="sans-serif"
-        android:text="Register to GrimMed"
+        android:text="Inscription"
         android:textSize="34sp"
         android:textStyle="bold"
         app:layout_constraintEnd_toEndOf="parent"
@@ -56,7 +56,7 @@
             android:background="@color/transparent"
             android:drawableStart="@android:drawable/sym_action_email"
             android:drawableTint="#3F559A"
-            android:hint="Email address"
+            android:hint="Adresse mail"
             android:paddingStart="10dp" />
     </android.support.design.widget.TextInputLayout>
 
@@ -81,7 +81,7 @@
             android:background="@color/transparent"
             android:drawableStart="?android:attr/fingerprintAuthDrawable"
             android:drawableTint="#3F559A"
-            android:hint="Username"
+            android:hint="Identifiant"
             android:paddingStart="10dp"
             />
     </android.support.design.widget.TextInputLayout>
@@ -108,7 +108,7 @@
             android:background="@color/transparent"
             android:drawableStart="@android:drawable/ic_lock_lock"
             android:drawableTint="#3F559A"
-            android:hint="Password"
+            android:hint="Mot de passe"
             android:paddingStart="10dp"
             android:paddingBottom="10dp"
             android:password="true"
@@ -120,7 +120,7 @@
         android:layout_width="wrap_content"
         android:layout_height="17dp"
         android:layout_marginBottom="32dp"
-        android:text="Already have an account ? Log in Here !"
+        android:text="Déjà inscrit sur GrimMed ? Connectez-vous ici !"
         android:textAllCaps="false"
         android:textColor="#3F559A"
         android:textStyle="bold"
