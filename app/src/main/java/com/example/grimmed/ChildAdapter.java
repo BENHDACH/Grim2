@@ -132,7 +132,6 @@ public class ChildAdapter extends RecyclerView.Adapter<ChildAdapter.ViewHolder>{
     }
 
     void addOne(){
-        List<String> listEnfants = Arrays.asList("L","","","false");
         items.add(String.format(Locale.getDefault(),"%d",items.size() + 1));
     }
 
