@@ -2,6 +2,7 @@ package com.example.grimmed;
 
 import android.support.annotation.NonNull;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -45,13 +46,18 @@ public class MamieAdapter extends RecyclerView.Adapter<MamieAdapter.ViewHolder>{
             JSONArray myArray = items;
             String concatInfo = "";
 
+            Log.e("item obtenu",""+items);
+            Log.e("item leng",""+myArray.length());
+
+
             for(int i=0;i<myArray.length();i++){
                 try {
+                    Log.e("item getString","i="+i+" string:"+myArray.getString(i));
                     concatInfo = concatInfo+myArray.getString(i);
                 } catch (JSONException e) {
                     throw new RuntimeException(e);
                 }
-                concatInfo = concatInfo+"\n";
+                concatInfo = concatInfo+"\n\n";
             }
 
             viewHolder.textView.setText(concatInfo);
@@ -61,7 +67,7 @@ public class MamieAdapter extends RecyclerView.Adapter<MamieAdapter.ViewHolder>{
 
         @Override
         public int getItemCount() {
-            return items.length();
+            return 1;
         }
 
 }
