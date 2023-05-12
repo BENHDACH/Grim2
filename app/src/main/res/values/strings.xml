@@ -4,4 +4,5 @@
     <string name="allergies">Entrez vos allergies</string>
     <string name="usual_traitement">Entrez votre traitement usuel</string>
     <string name="secondaryTitle">Ce médicament est couramment utilisé pour :</string>
+    <string name="SignMdpCondition">Le mot de passe doit contenir 10 caractères dont au moins 1 majuscule et 1 chiffre.</string>
 </resources>
