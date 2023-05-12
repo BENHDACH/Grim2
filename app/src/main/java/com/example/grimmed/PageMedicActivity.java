@@ -72,7 +72,7 @@ public class PageMedicActivity extends AppCompatActivity implements TabLayout.On
 
         //Adding the tabs using addTab() method
         tabLayout.addTab(tabLayout.newTab().setText("Notice"));
-        tabLayout.addTab(tabLayout.newTab().setText("Effects Secondaires"));
+        tabLayout.addTab(tabLayout.newTab().setText("Effets Secondaires"));
         tabLayout.addTab(tabLayout.newTab().setText("Détails"));
         tabLayout.setTabGravity(TabLayout.GRAVITY_FILL);
 
