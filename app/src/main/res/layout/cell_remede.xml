@@ -27,11 +27,21 @@
 
     <android.support.v7.widget.RecyclerView
         android:id="@+id/littleRecycler"
-        android:layout_width="382dp"
-        android:layout_height="160dp"
+        android:layout_width="399dp"
+        android:layout_height="177dp"
         android:paddingTop="20dp"
-        android:paddingBottom="20dp"
         android:visibility="visible" />
+
+    <View
+        android:id="@+id/view15"
+        android:layout_width="411dp"
+        android:layout_height="14dp" />
+
+    <TextView
+        android:id="@+id/textScore"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="TextView" />
 
 
 </LinearLayout>

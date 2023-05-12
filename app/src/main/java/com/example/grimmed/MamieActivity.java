@@ -1,5 +1,6 @@
 package com.example.grimmed;
 
+import android.content.Intent;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -29,6 +30,8 @@ public class MamieActivity extends AppCompatActivity{
     private DatabaseReference recetteRef;
 
     private List<String> items = new ArrayList<String>();
+
+    private List<Integer> itemsScore = new ArrayList<Integer>();
     private List<JSONArray> itemsSoluce = new ArrayList<JSONArray>();
     private List<Boolean> itemsShow = new ArrayList<Boolean>();
 
@@ -59,6 +62,9 @@ public class MamieActivity extends AppCompatActivity{
     private void loadDataFromFirebase() {
         items.clear();
         itemsSoluce.clear();
+        itemsShow.clear();
+        itemsScore.clear();
+
         recetteRef.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
@@ -73,9 +79,11 @@ public class MamieActivity extends AppCompatActivity{
                     Object nom = symptomeSnapshot.getValue();
                     JSONObject myInfo = new JSONObject((Map) nom);
                     JSONArray newV = new JSONArray();
+                    Integer score = 50;
 
                     try {
                         newV = myInfo.getJSONArray("Traitement");
+                        score = myInfo.getInt("Score");
                     } catch (JSONException e) {
                         newV.put(" ");
                     }

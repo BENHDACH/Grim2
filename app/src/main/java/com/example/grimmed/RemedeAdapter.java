@@ -36,12 +36,14 @@ public class RemedeAdapter extends RecyclerView.Adapter<RemedeAdapter.ViewHolder
     public class ViewHolder extends RecyclerView.ViewHolder {
         public TextView textView;
         private List<String> items;
+        public TextView textScore;
         private RecyclerView recyler;
 
         public ViewHolder(View view) {
             super(view);
             textView = view.findViewById(R.id.txtSymptome);
             recyler = view.findViewById(R.id.littleRecycler);
+            textScore = view.findViewById(R.id.textScore);
         }
 
     }
