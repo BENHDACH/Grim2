@@ -11,6 +11,7 @@
         android:id="@+id/imagenotice"
         android:layout_width="148dp"
         android:layout_height="132dp"
+        android:layout_marginTop="50dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
@@ -21,7 +22,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="32dp"
-        android:layout_marginTop="32dp"
+        android:layout_marginTop="40dp"
         android:layout_marginEnd="32dp"
         android:text="@string/secondaryTitle"
         android:textSize="20sp"
@@ -40,40 +41,57 @@
         app:layout_constraintStart_toStartOf="@+id/titleSecondary"
         app:layout_constraintTop_toBottomOf="@+id/titleSecondary" />
 
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_gravity="center_vertical"
-        android:layout_marginTop="32dp"
+    <View
+        android:id="@+id/view14"
+        android:layout_width="340dp"
+        android:layout_height="158dp"
         android:background="@drawable/login_page"
         android:backgroundTint="#3C6CA6"
-        android:orientation="horizontal"
-        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintBottom_toBottomOf="@+id/scrollView2"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.492"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/scrollView2"
+        app:layout_constraintVertical_bias="1.0" />
+
+    <ImageView
+        android:id="@+id/imageMedoc"
+        android:layout_width="148dp"
+        android:layout_height="132dp"
+        android:layout_gravity="center_vertical"
+        android:padding="16dp"
+        app:layout_constraintBottom_toBottomOf="@+id/view14"
+        app:layout_constraintEnd_toStartOf="@+id/scrollView2"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/view14"
+        app:srcCompat="@drawable/microsoftteams_image__11_" />
+
+    <ScrollView
+        android:id="@+id/scrollView2"
+        android:layout_width="254dp"
+        android:layout_height="127dp"
+        android:layout_marginStart="3dp"
+        android:layout_marginTop="80dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="1.0"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textSecondEffect"
-        app:layout_constraintVertical_bias="0.0">
+        app:layout_constraintTop_toBottomOf="@+id/textSecondEffect">
 
-        <ImageView
-            android:id="@+id/imageMedoc"
-            android:layout_width="148dp"
-            android:layout_height="132dp"
-            android:layout_gravity="center_vertical"
-            android:padding="16dp"
-            app:srcCompat="@drawable/microsoftteams_image__11_" />
-
-        <TextView
-            android:id="@+id/textCompo"
+        <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center_vertical"
-            android:padding="16dp"
-            android:text="Tab 1"
-            android:textAppearance="?android:attr/textAppearanceLarge"
-            android:textColor="#FFFFFF"
-            android:textSize="20sp" />
+            android:layout_height="wrap_content">
 
-    </LinearLayout>
+            <TextView
+                android:id="@+id/textCompo"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_vertical"
+                android:padding="16dp"
+                android:text="Tab 1"
+                android:textAppearance="?android:attr/textAppearanceLarge"
+                android:textColor="#FFFFFF"
+                android:textSize="20sp" />
+        </LinearLayout>
+    </ScrollView>
 
 </android.support.constraint.ConstraintLayout>

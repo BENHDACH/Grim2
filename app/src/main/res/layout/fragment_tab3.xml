@@ -7,131 +7,141 @@
     android:layout_height="match_parent"
     android:orientation="vertical">
 
-    <ImageView
-        android:id="@+id/imageDrugBox"
-        android:layout_width="146dp"
-        android:layout_height="165dp"
+    <ScrollView
+        android:layout_width="345dp"
+        android:layout_height="585dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:srcCompat="@drawable/drugbox" />
+        app:layout_constraintTop_toTopOf="parent">
 
-    <ImageView
-        android:id="@+id/imagewarning"
-        android:layout_width="29dp"
-        android:layout_height="21dp"
-        android:layout_marginTop="20dp"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/imageDrugBox"
-        app:srcCompat="@drawable/imagewarning" />
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
 
-    <TextView
-        android:id="@+id/textcompo"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_gravity="center"
-        android:layout_marginTop="20dp"
+            <ImageView
+                android:id="@+id/imageDrugBox"
+                android:layout_width="match_parent"
+                android:layout_height="168dp"
+                android:paddingStart="20dp"
+                app:srcCompat="@drawable/drugbox" />
 
-        android:gravity="center"
-        android:scaleType="centerInside"
-        android:text="Composition:"
-        android:textSize="16sp"
-        android:textStyle="bold"
-        app:layout_constraintStart_toEndOf="@+id/imagewarning"
-        app:layout_constraintTop_toBottomOf="@+id/imageDrugBox" />
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:orientation="horizontal">
 
-    <ImageView
-        android:id="@+id/imagebourse"
-        android:layout_width="29dp"
-        android:layout_height="21dp"
-        android:layout_marginTop="16dp"
-        app:layout_constraintStart_toStartOf="@+id/imagewarning"
-        app:layout_constraintTop_toBottomOf="@+id/textCompo"
-        app:srcCompat="@drawable/bourse" />
+                <ImageView
+                    android:id="@+id/imagewarning"
+                    android:layout_width="29dp"
+                    android:layout_height="21dp"
+                    android:layout_marginTop="20dp"
+                    app:srcCompat="@drawable/imagewarning" />
 
-    <TextView
-        android:id="@+id/textCompo"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_centerHorizontal="true"
-        android:layout_centerVertical="true"
-        android:layout_marginTop="16dp"
-        android:background="@drawable/login_page"
-        android:backgroundTint="#3C6CA6"
-        android:padding="16dp"
-        android:text="Tab 3"
-        android:textAppearance="?android:attr/textAppearanceLarge"
-        android:textColor="#FFFFFF"
-        android:textSize="20sp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.0"
-        app:layout_constraintStart_toStartOf="@+id/imagewarning"
-        app:layout_constraintTop_toBottomOf="@+id/textcompo" />
+                <TextView
+                    android:id="@+id/textcompo"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="20dp"
 
-    <TextView
-        android:id="@+id/textprix"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+                    android:gravity="center"
+                    android:scaleType="centerInside"
+                    android:text="Composition:"
+                    android:textSize="16sp"
+                    android:textStyle="bold" />
+            </LinearLayout>
 
-        android:layout_gravity="center"
-        android:layout_marginTop="16dp"
-        android:gravity="center"
-        android:text="Prix:"
-        android:textSize="16sp"
-        android:textStyle="bold"
-        app:layout_constraintStart_toEndOf="@+id/imagebourse"
-        app:layout_constraintTop_toBottomOf="@+id/textCompo" />
+            <TextView
+                android:id="@+id/textCompo"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerHorizontal="true"
+                android:layout_centerVertical="true"
+                android:layout_marginTop="16dp"
+                android:background="@drawable/login_page"
+                android:backgroundTint="#3C6CA6"
+                android:padding="16dp"
+                android:text="Tab 3"
+                android:textAppearance="?android:attr/textAppearanceLarge"
+                android:textColor="#FFFFFF"
+                android:textSize="20sp" />
 
-    <ImageView
-        android:id="@+id/imagecontreindic"
-        android:layout_width="29dp"
-        android:layout_height="21dp"
-        android:layout_marginTop="16dp"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textPrice"
-        app:srcCompat="@drawable/contreindication" />
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="47dp"
+                android:orientation="horizontal">
 
-    <TextView
-        android:id="@+id/textcontrindication"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_gravity="center"
+                <ImageView
+                    android:id="@+id/imagebourse"
+                    android:layout_width="29dp"
+                    android:layout_height="21dp"
+                    android:layout_marginTop="25dp"
+                    app:srcCompat="@drawable/bourse" />
 
-        android:layout_marginTop="16dp"
-        android:gravity="center"
-        android:text="Contre indication :"
-        android:textSize="16sp"
-        android:textStyle="bold"
-        app:layout_constraintStart_toEndOf="@+id/imagecontreindic"
-        app:layout_constraintTop_toBottomOf="@+id/textPrice" />
+                <TextView
+                    android:id="@+id/textprix"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
 
-    <TextView
-        android:id="@+id/textContreIndic"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="16dp"
-        android:background="@drawable/login_page"
-        android:backgroundTint="#3C6CA6"
-        android:padding="16dp"
-        android:text="TextView"
-        android:textColor="#FFFFFF"
-        android:textSize="20sp"
-        app:layout_constraintStart_toStartOf="@+id/imagewarning"
-        app:layout_constraintTop_toBottomOf="@+id/textcontrindication" />
+                    android:layout_gravity="center"
+                    android:layout_marginTop="16dp"
+                    android:gravity="center"
+                    android:text="Prix:"
+                    android:textSize="16sp"
+                    android:textStyle="bold" />
+            </LinearLayout>
 
-    <TextView
-        android:id="@+id/textPrice"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="16dp"
-        android:background="@drawable/login_page"
-        android:backgroundTint="#3C6CA6"
-        android:padding="16dp"
-        android:text="TextView"
-        android:textColor="#FFFFFF"
-        android:textSize="20sp"
-        app:layout_constraintStart_toStartOf="@+id/imagewarning"
-        app:layout_constraintTop_toBottomOf="@+id/textprix" />
+            <TextView
+                android:id="@+id/textPrice"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="16dp"
+                android:background="@drawable/login_page"
+                android:backgroundTint="#3C6CA6"
+                android:padding="16dp"
+                android:text="TextView"
+                android:textColor="#FFFFFF"
+                android:textSize="20sp" />
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="47dp"
+                android:orientation="horizontal">
+
+                <ImageView
+                    android:id="@+id/imagecontreindic"
+                    android:layout_width="29dp"
+                    android:layout_height="21dp"
+                    android:layout_marginTop="25dp"
+                    app:srcCompat="@drawable/contreindication" />
+
+                <TextView
+                    android:id="@+id/textcontrindication"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+
+                    android:layout_marginTop="16dp"
+                    android:gravity="center_horizontal"
+                    android:text="Contre indication :"
+                    android:textSize="16sp"
+                    android:textStyle="bold" />
+            </LinearLayout>
+
+            <TextView
+                android:id="@+id/textContreIndic"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="16dp"
+                android:background="@drawable/login_page"
+                android:backgroundTint="#3C6CA6"
+                android:padding="16dp"
+                android:text="TextView"
+                android:textColor="#FFFFFF"
+                android:textSize="20sp" />
+
+        </LinearLayout>
+    </ScrollView>
 
 
 </android.support.constraint.ConstraintLayout>
