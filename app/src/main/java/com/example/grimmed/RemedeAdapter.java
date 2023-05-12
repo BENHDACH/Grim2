@@ -1,78 +1,98 @@
 package com.example.grimmed;
 
 import android.support.annotation.NonNull;
+import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
+import org.json.JSONArray;
+
 import java.util.List;
-import java.util.Map;
 
 
 public class RemedeAdapter extends RecyclerView.Adapter<RemedeAdapter.ViewHolder> {
 
-    private List<String> symptomes;
-    private Map<String, List<String>> traitementsMap;
-    private OnItemClickListener itemClickListener;
+    private List<String> items;
 
-    public interface OnItemClickListener {
-        void onItemClick(String symptome, List<String> traitements);
+    private List<Boolean> itemsShow;
+
+    private List<JSONArray> itemsSoluce;
+
+
+    private MamieActivity mamieActivity;
+
+
+    public RemedeAdapter(List<String> items,List<JSONArray> itemsSoluce, List<Boolean> itemsShow, MamieActivity mamieActivity) {
+        this.items = items;
+        this.itemsSoluce = itemsSoluce;
+        this.itemsShow = itemsShow;
+        this.mamieActivity = mamieActivity;
     }
 
-    public void setOnItemClickListener(OnItemClickListener listener) {
-        this.itemClickListener = listener;
+    // inner class to hold a reference to each item view
+    public class ViewHolder extends RecyclerView.ViewHolder {
+        public TextView textView;
+        private List<String> items;
+        private RecyclerView recyler;
+
+        public ViewHolder(View view) {
+            super(view);
+            textView = view.findViewById(R.id.txtSymptome);
+            recyler = view.findViewById(R.id.littleRecycler);
+        }
+
     }
 
-    @NonNull
+    // inflates the item views
     @Override
-    public ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
+    public com.example.grimmed.RemedeAdapter.ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
         View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.cell_remede, parent, false);
-        return new ViewHolder(view);
+        return new com.example.grimmed.RemedeAdapter.ViewHolder(view);
     }
 
     @Override
     public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
-        String symptome = symptomes.get(position);
-        List<String> traitements = traitementsMap.get(symptome);
+        String item = items.get(position);
 
-        holder.bind(symptome);
+        Boolean itemBool = itemsShow.get(position);
+        holder.textView.setText(item);
+        int myPosition = position;
 
-        holder.itemView.setOnClickListener(new View.OnClickListener() {
+        holder.textView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if (itemClickListener != null) {
-                    itemClickListener.onItemClick(symptome, traitements);
-                }
+                mamieActivity.onItemClick(myPosition,itemBool);
             }
         });
+
+        if(itemBool){
+            setInternRecyclerView(holder,myPosition);
+        }
+        else{
+            RecyclerView recyclerView = holder.recyler;
+            recyclerView.setVisibility(View.GONE);
+        }
+
     }
 
+
+    // total number of rows
     @Override
     public int getItemCount() {
-        return symptomes != null ? symptomes.size() : 0;
+        return items.size();
     }
 
-    public void setSymptomes(List<String> symptomes) {
-        this.symptomes = symptomes;
-        notifyDataSetChanged();
-    }
+    private void setInternRecyclerView(ViewHolder holder, int myPosition){
 
-    public void setTraitements(Map<String, List<String>> traitementsMap) {
-        this.traitementsMap = traitementsMap;
-    }
+        RecyclerView recyclerView = holder.recyler;
+        recyclerView.setLayoutManager(new LinearLayoutManager(mamieActivity));
 
-    static class ViewHolder extends RecyclerView.ViewHolder {
-        private TextView symptomeTextView;
+        MamieAdapter adapter = new MamieAdapter(itemsSoluce.get(myPosition));
+        recyclerView.setAdapter(adapter);
+        recyclerView.setVisibility(View.VISIBLE);
 
-        ViewHolder(@NonNull View itemView) {
-            super(itemView);
-            symptomeTextView = itemView.findViewById(R.id.txtSymptome);
-        }
-
-        void bind(String symptome) {
-            symptomeTextView.setText(symptome);
-        }
     }
 }
