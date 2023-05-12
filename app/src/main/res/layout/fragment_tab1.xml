@@ -43,7 +43,7 @@
 
     <View
         android:id="@+id/view14"
-        android:layout_width="340dp"
+        android:layout_width="345dp"
         android:layout_height="158dp"
         android:background="@drawable/login_page"
         android:backgroundTint="#3C6CA6"
@@ -51,8 +51,7 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.492"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="@+id/scrollView2"
-        app:layout_constraintVertical_bias="1.0" />
+        app:layout_constraintTop_toTopOf="@+id/scrollView2" />
 
     <ImageView
         android:id="@+id/imageMedoc"
@@ -68,10 +67,10 @@
 
     <ScrollView
         android:id="@+id/scrollView2"
-        android:layout_width="254dp"
+        android:layout_width="245dp"
         android:layout_height="127dp"
         android:layout_marginStart="3dp"
-        android:layout_marginTop="80dp"
+        android:layout_marginTop="66dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="1.0"
         app:layout_constraintStart_toStartOf="parent"
