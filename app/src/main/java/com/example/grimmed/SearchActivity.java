@@ -1,6 +1,7 @@
 package com.example.grimmed;
 
 import android.content.Intent;
+import android.graphics.Color;
 import android.support.annotation.NonNull;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -99,18 +100,22 @@ public class SearchActivity extends AppCompatActivity {
         ImageView backHome5 = findViewById(R.id.backHome5);
         backHome5.setOnClickListener(this::clickHome);
 
-
     }
 
     private void onClick(View v) {
+        Button nom = findViewById(R.id.buttonNom);
+        Button cible = findViewById(R.id.buttonCible);
+        Button compo = findViewById(R.id.buttonCompo);
         if (v.getId() == R.id.buttonNom) {
             whichB = "Nom";
         }
         else if (v.getId() == R.id.buttonCible) {
             whichB = "Cible";
+
         }
         else if (v.getId() == R.id.buttonCompo) {
             whichB = "Compo";
+
         }
     }
 
