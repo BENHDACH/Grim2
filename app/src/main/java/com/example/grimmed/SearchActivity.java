@@ -103,11 +103,9 @@ public class SearchActivity extends AppCompatActivity {
     }
 
     private void onClick(View v) {
-        Button nom = findViewById(R.id.buttonNom);
-        Button cible = findViewById(R.id.buttonCible);
-        Button compo = findViewById(R.id.buttonCompo);
         if (v.getId() == R.id.buttonNom) {
             whichB = "Nom";
+
         }
         else if (v.getId() == R.id.buttonCible) {
             whichB = "Cible";

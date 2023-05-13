@@ -7,6 +7,8 @@ import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
+import android.view.View;
+import android.widget.ImageView;
 import android.widget.Toast;
 
 import com.google.firebase.database.DataSnapshot;
@@ -45,6 +47,8 @@ public class MamieActivity extends AppCompatActivity{
             actionBar.setTitle("Remèdes");
         }
 
+        ImageView backHome5 = findViewById(R.id.backHome3);
+        backHome5.setOnClickListener(this::clickHome);
 
         recetteRef = FirebaseDatabase.getInstance().getReference("Recette");
 
@@ -120,6 +124,13 @@ public class MamieActivity extends AppCompatActivity{
 
         setRecyclerView();
 
+    }
+
+    private void clickHome(View v) {
+        if (v.getId() == R.id.backHome3) {
+            Intent intent = new Intent(this, BaseActivity.class);
+            startActivity(intent);
+        }
     }
 
 }
