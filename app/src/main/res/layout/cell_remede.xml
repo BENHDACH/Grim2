@@ -1,47 +1,85 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/linearLayout"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:orientation="vertical"
     android:padding="8dp">
 
-    <TextView
-        android:id="@+id/symptomeTextView"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content" />
-
     <View
-        android:layout_width="match_parent"
-        android:layout_height="10dp" />
+        android:id="@+id/view16"
+        android:layout_width="389dp"
+        android:layout_height="66dp"
+        app:layout_constraintBottom_toBottomOf="@+id/txtSymptome"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/txtSymptome" />
 
     <TextView
         android:id="@+id/txtSymptome"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_width="382dp"
+        android:layout_height="63dp"
         android:background="@drawable/login_page"
         android:backgroundTint="#3C6CA6"
         android:gravity="center"
         android:padding="16dp"
         android:textAppearance="?android:attr/textAppearanceMedium"
-        android:textColor="@android:color/white" />
+        android:textColor="@android:color/white"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
 
     <android.support.v7.widget.RecyclerView
         android:id="@+id/littleRecycler"
-        android:layout_width="399dp"
-        android:layout_height="177dp"
+        android:layout_width="383dp"
+        android:layout_height="200dp"
+        android:layout_marginTop="8dp"
         android:paddingTop="20dp"
-        android:visibility="visible" />
-
-    <View
-        android:id="@+id/view15"
-        android:layout_width="411dp"
-        android:layout_height="14dp" />
+        android:visibility="visible"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/txtSymptome" />
 
     <TextView
         android:id="@+id/textScore"
-        android:layout_width="match_parent"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="TextView" />
+        android:text="TextView"
+        app:layout_constraintBottom_toBottomOf="@+id/view16"
+        app:layout_constraintEnd_toEndOf="@+id/view16"
+        app:layout_constraintHorizontal_bias="0.864"
+        app:layout_constraintStart_toStartOf="@+id/view16"
+        app:layout_constraintTop_toTopOf="@+id/view16"
+        app:layout_constraintVertical_bias="0.574" />
+
+    <ImageView
+        android:id="@+id/moinScore"
+        android:layout_width="20dp"
+        android:layout_height="16dp"
+        app:layout_constraintBottom_toBottomOf="@+id/txtSymptome"
+        app:layout_constraintEnd_toEndOf="@+id/view16"
+        app:layout_constraintHorizontal_bias="0.423"
+        app:layout_constraintStart_toEndOf="@+id/textScore"
+        app:layout_constraintTop_toTopOf="@+id/view16"
+        app:layout_constraintVertical_bias="0.586"
+        app:srcCompat="@drawable/moin" />
+
+    <ImageView
+        android:id="@+id/plusScore"
+        android:layout_width="22dp"
+        android:layout_height="19dp"
+        android:layout_marginBottom="12dp"
+        app:layout_constraintBottom_toBottomOf="@+id/txtSymptome"
+        app:layout_constraintEnd_toStartOf="@+id/textScore"
+        app:layout_constraintHorizontal_bias="0.964"
+        app:layout_constraintStart_toStartOf="@+id/txtSymptome"
+        app:layout_constraintTop_toTopOf="@+id/view16"
+        app:layout_constraintVertical_bias="0.848"
+        app:srcCompat="@drawable/plusicone" />
 
 
-</LinearLayout>
+</android.support.constraint.ConstraintLayout>
+
+
