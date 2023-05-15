@@ -13,7 +13,7 @@ import java.util.Base64;
 public class DataUser {
     public static String url = "http://test.api.catering.bluecodegames.com/menu";
     public static String idShopKey = "id_shop";
-    public static String jsonString = "{\"Composition\":[\"paracétamol\",\"amidon prégélatinisé\",\"povidone\",\"croscarmellose sodique\",\"stéarate de magnésium\"],\"Usage\":\"1 à 3 comprimés par jour, à prendre toutes les 4 à 6 heures en fonction des symptômes\",\"Cible\":\"Tête\",\"Prix\":\"1,59\",\"ContreI\":\"Allergie au paracétamol, insuffisance hépatique sévère, grossesse\",\"EffectS\":\": Hépatite, éruption cutanée, réaction allergique\",\"Url\":\"https://i.pinimg.com/originals/44/aa/36/44aa36e69396a8b78f37f12ed4cc585d.png\",\"Enceinte\":0}";
+    public static String jsonString = "{\"Composition\":[\"paracétamol\",\"amidon prégélatinisé\",\"povidone\",\"croscarmellose sodique\",\"stéarate de magnésium\"],\"Usage\":\"1 à 3 comprimés par jour, à prendre toutes les 4 à 6 heures en fonction des symptômes\",\"Cible\":\"Tête\",\"Prix\":\"1,59\",\"ContreI\":\"Allergie au paracétamol, insuffisance hépatique sévère, grossesse\",\"EffectS\":\"Hépatite, éruption cutanée, réaction allergique\",\"Url\":\"https://i.pinimg.com/originals/44/aa/36/44aa36e69396a8b78f37f12ed4cc585d.png\",\"Enceinte\":0}";
     public static JSONObject defaultObject;
 
     public static String username = "Default";
