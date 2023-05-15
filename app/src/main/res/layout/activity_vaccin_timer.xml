@@ -8,8 +8,8 @@
 
     <View
         android:id="@+id/view5"
-        android:layout_width="407dp"
-        android:layout_height="53dp"
+        android:layout_width="0dp"
+        android:layout_height="67dp"
         android:background="@color/white"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
@@ -19,7 +19,7 @@
         android:id="@+id/buttonMedoc3"
         android:layout_width="55dp"
         android:layout_height="41dp"
-        android:layout_marginStart="40dp"
+        android:layout_marginStart="32dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="@+id/view5"
@@ -30,35 +30,30 @@
         android:id="@+id/buttonVac3"
         android:layout_width="77dp"
         android:layout_height="44dp"
-        android:layout_marginStart="40dp"
         android:layout_marginBottom="4dp"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="@+id/view5"
-        app:layout_constraintHorizontal_bias="0.091"
+        app:layout_constraintEnd_toStartOf="@+id/buttonProfil3"
         app:layout_constraintStart_toEndOf="@+id/buttonMedoc3"
-        app:layout_constraintTop_toTopOf="@+id/buttonMedoc"
+        app:layout_constraintTop_toTopOf="@+id/buttonMedoc3"
+        app:layout_constraintVertical_bias="0.0"
         app:srcCompat="@drawable/microsoftteams_image__15_" />
 
     <ImageView
         android:id="@+id/buttonProfil3"
         android:layout_width="64dp"
         android:layout_height="42dp"
-        android:layout_marginStart="40dp"
         android:layout_marginEnd="40dp"
         android:layout_marginBottom="8dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.628"
-        app:layout_constraintStart_toEndOf="@+id/buttonVac"
-        app:layout_constraintTop_toTopOf="@+id/view"
-        app:layout_constraintVertical_bias="0.363"
+        app:layout_constraintTop_toTopOf="@+id/view5"
         app:srcCompat="@drawable/microsoftteams_image__9_" />
 
     <View
         android:id="@+id/view6"
-        android:layout_width="409dp"
+        android:layout_width="0dp"
         android:layout_height="1dp"
-        android:layout_marginBottom="8dp"
+        android:layout_marginBottom="4dp"
         android:background="#545661"
         android:backgroundTint="#545661"
         app:layout_constraintBottom_toTopOf="@+id/view5"
@@ -78,11 +73,11 @@
 
     <android.support.v7.widget.RecyclerView
         android:id="@+id/recyclerVaccin"
-        android:layout_width="413dp"
-        android:layout_height="437dp"
+        android:layout_width="0dp"
+        android:layout_height="443dp"
         android:layout_marginTop="108dp"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.666"
+        app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
@@ -91,10 +86,13 @@
         android:layout_width="67dp"
         android:layout_height="52dp"
         android:layout_marginTop="60dp"
+        android:layout_marginBottom="24dp"
         android:tint="@color/blue"
+        app:layout_constraintBottom_toTopOf="@+id/view6"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/recyclerVaccin"
+        app:layout_constraintVertical_bias="0.731"
         app:srcCompat="@drawable/microsoftteams_image__21_" />
 
     <TextView
@@ -125,16 +123,18 @@
 
     <TextView
         android:id="@+id/listeVide"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_width="400dp"
+        android:layout_height="41dp"
         android:text="Enregistrez vos rendez-vous de vaccins ici et recevez une notification le moment venu !"
         android:textAlignment="center"
-        android:textColor="#8C8F8989"
+        android:textColor="#706C6C"
         android:textStyle="bold"
-        app:layout_constraintBottom_toTopOf="@+id/view5"
-        app:layout_constraintEnd_toEndOf="@+id/recyclerVaccin"
+        app:layout_constraintBottom_toTopOf="@+id/view6"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.344"
         app:layout_constraintStart_toStartOf="@+id/recyclerVaccin"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.546" />
 
     <ImageView
         android:id="@+id/cloche"

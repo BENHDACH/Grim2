@@ -4,8 +4,62 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:padding="10dp"
     tools:context=".ProfilActivity">
+
+
+    <View
+        android:id="@+id/view3"
+        android:layout_width="0dp"
+        android:layout_height="67dp"
+        android:background="@color/white"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent" />
+
+    <ImageView
+        android:id="@+id/buttonMedoc4"
+        android:layout_width="55dp"
+        android:layout_height="41dp"
+        android:layout_marginStart="28dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/view3"
+        app:layout_constraintVertical_bias="0.615"
+        app:srcCompat="@drawable/microsoftteams_image__7_" />
+
+    <ImageView
+        android:id="@+id/buttonVac4"
+        android:layout_width="77dp"
+        android:layout_height="44dp"
+        android:layout_marginBottom="4dp"
+        app:layout_constraintBottom_toBottomOf="@+id/view3"
+        app:layout_constraintEnd_toStartOf="@+id/buttonProfil4"
+        app:layout_constraintStart_toEndOf="@+id/buttonMedoc4"
+        app:layout_constraintTop_toTopOf="@+id/buttonMedoc4"
+        app:srcCompat="@drawable/microsoftteams_image__14_" />
+
+    <ImageView
+        android:id="@+id/buttonProfil4"
+        android:layout_width="64dp"
+        android:layout_height="42dp"
+        android:layout_marginEnd="32dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/view3"
+        app:layout_constraintVertical_bias="0.64"
+        app:srcCompat="@drawable/microsoftteams_image__10_" />
+
+    <View
+        android:id="@+id/view4"
+        android:layout_width="0dp"
+        android:layout_height="1dp"
+        android:layout_marginBottom="16dp"
+        android:background="#545661"
+        android:backgroundTint="#545661"
+        app:layout_constraintBottom_toTopOf="@+id/buttonVac4"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="parent" />
 
     <ImageView
         android:id="@+id/backHome2"
@@ -16,77 +70,6 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:srcCompat="@drawable/microsoftteams_image__17_" />
-
-    <View
-        android:id="@+id/view3"
-        android:layout_width="451dp"
-        android:layout_height="53dp"
-        android:background="@color/white"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent" />
-
-    <View
-        android:id="@+id/view8"
-        android:layout_width="372dp"
-        android:layout_height="60dp"
-        android:background="@drawable/profil"
-        app:layout_constraintBottom_toBottomOf="@+id/enc"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="@+id/enc" />
-
-    <ImageView
-        android:id="@+id/buttonVac4"
-        android:layout_width="77dp"
-        android:layout_height="44dp"
-        android:layout_marginStart="40dp"
-        android:layout_marginBottom="4dp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="@+id/view3"
-        app:layout_constraintHorizontal_bias="0.15"
-        app:layout_constraintStart_toEndOf="@+id/buttonMedoc4"
-        app:layout_constraintTop_toTopOf="@+id/buttonMedoc"
-        app:layout_constraintVertical_bias="0.0"
-        app:srcCompat="@drawable/microsoftteams_image__14_" />
-
-    <ImageView
-        android:id="@+id/buttonProfil4"
-        android:layout_width="64dp"
-        android:layout_height="42dp"
-        android:layout_marginStart="40dp"
-        android:layout_marginEnd="40dp"
-        android:layout_marginBottom="8dp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="@+id/view3"
-        app:layout_constraintHorizontal_bias="0.462"
-        app:layout_constraintStart_toEndOf="@+id/buttonVac4"
-        app:layout_constraintTop_toTopOf="@+id/view"
-        app:layout_constraintVertical_bias="0.363"
-        app:srcCompat="@drawable/microsoftteams_image__10_" />
-
-    <ImageView
-        android:id="@+id/buttonMedoc4"
-        android:layout_width="55dp"
-        android:layout_height="41dp"
-        android:layout_marginStart="40dp"
-        android:layout_marginBottom="8dp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="@+id/view"
-        app:layout_constraintVertical_bias="0.25"
-        app:srcCompat="@drawable/microsoftteams_image__7_" />
-
-    <View
-        android:id="@+id/view4"
-        android:layout_width="451dp"
-        android:layout_height="1dp"
-        android:layout_marginBottom="12dp"
-        android:background="#545661"
-        android:backgroundTint="#545661"
-        app:layout_constraintBottom_toTopOf="@+id/buttonVac4"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent" />
 
     <ImageView
         android:id="@+id/imageView"
@@ -112,12 +95,25 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/imageView" />
 
+    <View
+        android:id="@+id/view8"
+        android:layout_width="0dp"
+        android:layout_height="60dp"
+        android:layout_marginStart="32dp"
+        android:layout_marginEnd="32dp"
+        android:background="@drawable/profil"
+        app:layout_constraintBottom_toBottomOf="@+id/enc"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/enc" />
+
     <Switch
         android:id="@+id/enc"
-        android:layout_width="366dp"
+        android:layout_width="0dp"
         android:layout_height="44dp"
-        android:layout_marginStart="16dp"
+        android:layout_marginStart="34dp"
         android:layout_marginTop="16dp"
+        android:layout_marginEnd="34dp"
         android:text="Enceinte"
         android:textSize="20sp"
         app:layout_constraintEnd_toEndOf="parent"
@@ -126,10 +122,11 @@
 
     <TextView
         android:id="@+id/allergies"
-        android:layout_width="360dp"
+        android:layout_width="0dp"
         android:layout_height="33dp"
-        android:layout_marginStart="16dp"
+        android:layout_marginStart="34dp"
         android:layout_marginTop="38dp"
+        android:layout_marginEnd="34dp"
         android:drawableEnd="@android:drawable/ic_media_play"
         android:drawableTint="@color/grimmed"
         android:paddingEnd="10dp"
@@ -143,9 +140,11 @@
 
     <View
         android:id="@+id/view12"
-        android:layout_width="372dp"
+        android:layout_width="0dp"
         android:layout_height="60dp"
+        android:layout_marginStart="32dp"
         android:layout_marginTop="16dp"
+        android:layout_marginEnd="32dp"
         android:background="@drawable/profil"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -153,9 +152,11 @@
 
     <View
         android:id="@+id/view13"
-        android:layout_width="372dp"
+        android:layout_width="0dp"
         android:layout_height="60dp"
+        android:layout_marginStart="32dp"
         android:layout_marginTop="16dp"
+        android:layout_marginEnd="32dp"
         android:background="@drawable/profil"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -163,10 +164,11 @@
 
     <TextView
         android:id="@+id/usual"
-        android:layout_width="360dp"
+        android:layout_width="0dp"
         android:layout_height="33dp"
-        android:layout_marginStart="16dp"
+        android:layout_marginStart="34dp"
         android:layout_marginTop="44dp"
+        android:layout_marginEnd="34dp"
         android:drawableEnd="@android:drawable/ic_media_play"
         android:drawableTint="@color/grimmed"
         android:paddingEnd="10dp"
@@ -178,12 +180,25 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/allergies" />
 
+    <View
+        android:id="@+id/view11"
+        android:layout_width="0dp"
+        android:layout_height="60dp"
+        android:layout_marginStart="32dp"
+        android:layout_marginTop="16dp"
+        android:layout_marginEnd="32dp"
+        android:background="@drawable/profil"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/view13" />
+
     <TextView
         android:id="@+id/child"
-        android:layout_width="360dp"
+        android:layout_width="0dp"
         android:layout_height="33dp"
-        android:layout_marginStart="16dp"
+        android:layout_marginStart="34dp"
         android:layout_marginTop="44dp"
+        android:layout_marginEnd="34dp"
         android:drawableEnd="@android:drawable/ic_media_play"
         android:drawableTint="@color/grimmed"
         android:paddingEnd="10dp"
@@ -194,16 +209,6 @@
         app:layout_constraintHorizontal_bias="0.1"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/usual" />
-
-    <View
-        android:id="@+id/view11"
-        android:layout_width="372dp"
-        android:layout_height="60dp"
-        android:layout_marginTop="16dp"
-        android:background="@drawable/profil"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/view13" />
 
     <Button
         android:id="@+id/logOut"
