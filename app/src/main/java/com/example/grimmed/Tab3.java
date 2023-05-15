@@ -48,7 +48,12 @@ public class Tab3 extends Fragment {
         String textCompo ="";
         for(int i =0; i<composition.length();i++){
             try {
-                textCompo=(CharSequence)composition.get(i)+","+textCompo;
+                if(i==0){
+                    textCompo= (String)composition.get(i)+".";
+                }
+                else{
+                    textCompo=(CharSequence)composition.get(i)+", "+textCompo;
+                }
             } catch (JSONException e) {
                 throw new RuntimeException(e);
             }

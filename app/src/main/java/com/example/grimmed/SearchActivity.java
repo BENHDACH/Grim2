@@ -1,8 +1,10 @@
 package com.example.grimmed;
 
 import android.content.Intent;
+import android.content.res.ColorStateList;
 import android.graphics.Color;
 import android.support.annotation.NonNull;
+import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
@@ -39,12 +41,30 @@ public class SearchActivity extends AppCompatActivity {
     private Boolean checkComplet = false;
     private Bundle bundle;
 
+    private Button bCompo;
+
+    private Button bCible;
+
+    private Button bNom;
+
 
     private String whichB = "Nom";
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_search);
+
+        bNom = findViewById(R.id.buttonNom);
+        bNom.setOnClickListener(this::onClick);
+
+        bCible = findViewById(R.id.buttonCible);
+        bCible.setOnClickListener(this::onClick);
+
+        bCompo = findViewById(R.id.buttonCompo);
+        bCompo.setOnClickListener(this::onClick);
+
+        ImageView backHome5 = findViewById(R.id.backHome5);
+        backHome5.setOnClickListener(this::clickHome);
 
 
         FirebaseDatabase database = FirebaseDatabase.getInstance();
@@ -64,9 +84,24 @@ public class SearchActivity extends AppCompatActivity {
         if(extraCible){
             whichB = bundle.getString("whichB");
             recupCesNoms(bundle.getString("nom"),whichB);
-            displayResult();
-        }
 
+            if(Objects.equals(whichB, "Cible")){
+                ColorStateList colorStateList1 = ContextCompat.getColorStateList(this, R.color.purple_200);
+                bCible.setBackgroundTintList(colorStateList1);
+
+            } else if (Objects.equals(whichB, "Compo")) {
+                ColorStateList colorStateList1 = ContextCompat.getColorStateList(this, R.color.purple_200);
+                bCompo.setBackgroundTintList(colorStateList1);
+            }
+            else{
+                ColorStateList colorStateList1 = ContextCompat.getColorStateList(this, R.color.purple_200);
+                bNom.setBackgroundTintList(colorStateList1);
+            }
+            displayResult();
+        }else{
+            ColorStateList colorStateList1 = ContextCompat.getColorStateList(this, R.color.purple_200);
+            bNom.setBackgroundTintList(colorStateList1);
+        }
 
         searchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
             @Override
@@ -88,17 +123,7 @@ public class SearchActivity extends AppCompatActivity {
 
         //firebaseSetup2();
 
-        Button bNom = findViewById(R.id.buttonNom);
-        bNom.setOnClickListener(this::onClick);
 
-        Button bCible = findViewById(R.id.buttonCible);
-        bCible.setOnClickListener(this::onClick);
-
-        Button bCompo = findViewById(R.id.buttonCompo);
-        bCompo.setOnClickListener(this::onClick);
-
-        ImageView backHome5 = findViewById(R.id.backHome5);
-        backHome5.setOnClickListener(this::clickHome);
 
     }
 
@@ -106,13 +131,39 @@ public class SearchActivity extends AppCompatActivity {
         if (v.getId() == R.id.buttonNom) {
             whichB = "Nom";
 
+            ColorStateList colorStateList = ContextCompat.getColorStateList(this, R.color.blue);
+            bCible.setBackgroundTintList(colorStateList);
+
+            ColorStateList colorStateList1 = ContextCompat.getColorStateList(this, R.color.blue);
+            bCompo.setBackgroundTintList(colorStateList1);
+
+            ColorStateList colorStateList2 = ContextCompat.getColorStateList(this, R.color.purple_200);
+            bNom.setBackgroundTintList(colorStateList2);
+
         }
         else if (v.getId() == R.id.buttonCible) {
             whichB = "Cible";
+            ColorStateList colorStateList = ContextCompat.getColorStateList(this, R.color.purple_200);
+            bCible.setBackgroundTintList(colorStateList);
+
+            ColorStateList colorStateList1 = ContextCompat.getColorStateList(this, R.color.blue);
+            bCompo.setBackgroundTintList(colorStateList1);
+
+            ColorStateList colorStateList2 = ContextCompat.getColorStateList(this, R.color.blue);
+            bNom.setBackgroundTintList(colorStateList2);
 
         }
         else if (v.getId() == R.id.buttonCompo) {
             whichB = "Compo";
+
+            ColorStateList colorStateList = ContextCompat.getColorStateList(this, R.color.blue);
+            bCible.setBackgroundTintList(colorStateList);
+
+            ColorStateList colorStateList1 = ContextCompat.getColorStateList(this, R.color.purple_200);
+            bCompo.setBackgroundTintList(colorStateList1);
+
+            ColorStateList colorStateList2 = ContextCompat.getColorStateList(this, R.color.blue);
+            bNom.setBackgroundTintList(colorStateList2);
 
         }
     }

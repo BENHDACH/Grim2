@@ -58,6 +58,9 @@ public class VaccinTimerActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_vaccin_timer);
         Bundle bundle = getIntent().getExtras();
+
+
+        createNotificationChannel();
         if (bundle == null) {
 
             childName = "";
@@ -233,7 +236,7 @@ public class VaccinTimerActivity extends AppCompatActivity {
 
                 myRef.child(DataUser.username).child("vaccins").child(item)
                         .setValue(itemDate);
-                //makeNotification(item, itemDate);
+                makeNotification(item, itemDate);
             } else {
                 myRef.child(DataUser.username).child("enfant").child(childName)
                         .child("vaccins").child(item)
@@ -272,26 +275,30 @@ public class VaccinTimerActivity extends AppCompatActivity {
     }
 
     private void makeNotification(String nomVaccin, String dateVaccin) {
-        createNotificationChannel();
         createNotTime(nomVaccin,dateVaccin);
     }
 
     private void createNotificationChannel() {
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
-            String name = "My Notification Channel";
+            String name = "My Notification Channel 2";
             String descriptionText = "My Notification Channel Description";
             int importance = NotificationManager.IMPORTANCE_HIGH;
             NotificationChannel channel = new NotificationChannel("my_channel_01", name, importance);
             channel.setDescription(descriptionText);
 
             NotificationManager notificationManager = getSystemService(NotificationManager.class);
-            notificationManager.createNotificationChannel(channel);
+            if (notificationManager != null) {
+                Log.e("Done","");
+                notificationManager.createNotificationChannel(channel);
+            }else{
+                Log.e("Is Nul","NULLLL");
+            }
         }
     }
 
-    public boolean createNotTime(String nomVaccin, String dateVaccin) {
+    public void createNotTime(String nomVaccin, String dateVaccin) {
         Intent notificationIntent = new Intent(this, NotificationVaccin.class);
-        notificationIntent.putExtra("message", "Vous avez réservé pour le " + getIntent().getStringExtra("CheminJour") + " à " + getIntent().getStringExtra("Heure") + "H");
+        notificationIntent.putExtra("Rappel", "Hey n'oubliez pas votre vaccin pour: " + nomVaccin);
         PendingIntent pendingIntent = PendingIntent.getBroadcast(this, 0, notificationIntent, PendingIntent.FLAG_IMMUTABLE | PendingIntent.FLAG_UPDATE_CURRENT);
 
         AlarmManager alarmManager = (AlarmManager) getSystemService(Context.ALARM_SERVICE);
@@ -299,71 +306,38 @@ public class VaccinTimerActivity extends AppCompatActivity {
         Calendar calNow = Calendar.getInstance();
         Calendar calendar = Calendar.getInstance();
 
-        Calendar calendrier = Calendar.getInstance();
         boolean booleanChecker = false;
 
         //------------
         int jour = Integer.parseInt(dateVaccin.substring(0, 2));
-        int mois = Integer.parseInt(dateVaccin.substring(0, 2));
+        int mois = Integer.parseInt(dateVaccin.substring(3, 5));
         int an = Integer.parseInt(dateVaccin.substring(6, 10));
 
         //On estime que c'est bon (à verif dans l'adapter avant de lancer)
+        /** VERIFIE LES INFO surtout an et mois (mois 00 ou + de 12) **/
 
+        calendar = Calendar.getInstance();
+        calendar.set(Calendar.YEAR, an);
+        calendar.set(Calendar.MONTH, mois-1);
+        calendar.set(Calendar.DAY_OF_MONTH, jour);
+        calendar.set(Calendar.HOUR_OF_DAY, 14);
+        calendar.set(Calendar.MINUTE, 38);
+        calendar.set(Calendar.SECOND, 0);
+        calendar.set(Calendar.MILLISECOND, 0);
 
+        Log.e("TimeMili", "" + calendar.getTimeInMillis());
 
-        //-----------
+        Log.e("Et le curren", "" + calNow.getTimeInMillis());
 
-        /*
-        String textVerifHour = binding.hourNumb.getText().toString();
-        String textVerifMinute = binding.minuteNumb.getText().toString();
-        Integer intHour = Integer.parseInt(textVerifHour);
-        Integer intMinute = Integer.parseInt(textVerifMinute);
-
-        //On verifie que l'horaire de notification est correct (un Int entre 0-23 H et 0-59 minutes)
-        if (intHour != null && intMinute != null && intHour >= 0 && intHour <= 23 && intMinute >= 0 && intMinute <= 59) {
-            //Si l'enregistrement ce fait le jour même ou un jour avant on met la notif au jour actuelle
-            booleanChecker = true;
-            if (date <= 2) {
-                Log.e("AllInfo", "Date:" + date + ",TimePickH:" + binding.hourNumb.getText() + ",TimePickM:" + binding.minuteNumb.getText());
-                calendar = Calendar.getInstance().set(Calendar.HOUR_OF_DAY, Integer.parseInt(binding.hourNumb.getText().toString()));
-                calendar.set(Calendar.MINUTE, Integer.parseInt(binding.minuteNumb.getText().toString()));
-                calendar.set(Calendar.SECOND, 0);
-                calendar.set(Calendar.MILLISECOND, 0);
-            } else {
-                calendrier.add(Calendar.DATE, (date != null ? date : 1) - 2);
-                int yearRes = calendrier.get(Calendar.YEAR);
-                int day = calendrier.get(Calendar.DAY_OF_MONTH);
-                int month = calendrier.get(Calendar.MONTH);
-                Log.e("CheckRES", day + "," + month + "," + yearRes);
-
-                calendar = Calendar.getInstance();
-                calendar.set(Calendar.YEAR, yearRes);
-                calendar.set(Calendar.MONTH, month);
-                calendar.set(Calendar.DAY_OF_MONTH, day);
-                calendar.set(Calendar.HOUR_OF_DAY, Integer.parseInt(binding.hourNumb.getText().toString()));
-                calendar.set(Calendar.MINUTE, Integer.parseInt(binding.minuteNumb.getText().toString()));
-                calendar.set(Calendar.SECOND, 0);
-                calendar.set(Calendar.MILLISECOND, 0);
-            }
-
-            Log.e("TimeMili", "" + calendar.getTimeInMillis());
-
-            Log.e("Et le curren", "" + calNow.getTimeInMillis());
-
-            //Si la notif est set avant l'heure actuelle alors on l'envoie maitenant
-            if ((calendar.getTimeInMillis() - calNow.getTimeInMillis()) < 0) {
-                calendar = calNow;
-            }
-            // On set l'alarme avec l'action , le temps et l'intent.
-            alarmManager.setExact(
-                    AlarmManager.RTC_WAKEUP,
-                    calendar.getTimeInMillis(),
-                    pendingIntent
-            );
-
-        } else {
-            Toast.makeText(this, "Veuillez entrez des entiers H et minute ", Toast.LENGTH_LONG).show()
-        }*/
-        return (booleanChecker);
+        //Si la notif est set avant l'heure actuelle alors on l'envoie maitenant
+        if ((calendar.getTimeInMillis() - calNow.getTimeInMillis()) < 0) {
+            calendar = calNow;
+        }
+        // On set l'alarme avec l'action , le temps et l'intent.
+        alarmManager.setExact(
+                AlarmManager.RTC_WAKEUP,
+                calendar.getTimeInMillis(),
+                pendingIntent
+        );
     }
 }
