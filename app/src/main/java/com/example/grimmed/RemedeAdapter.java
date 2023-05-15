@@ -99,13 +99,13 @@ public class RemedeAdapter extends RecyclerView.Adapter<RemedeAdapter.ViewHolder
         if(hasVoted){
             //Si il a voté upvote (pouce vert, flèche haut vert/bleu)
             if(isVote==1){
-                int colorRes = ContextCompat.getColor(mamieActivity, R.color.grimmed);
+                int colorRes = ContextCompat.getColor(mamieActivity, R.color.teal_200);
                 holder.plusScore.setColorFilter(colorRes);
             }
             //Si il a voté downvote (pouce rouge, flèche bas rouge)
             else{
-                //int colorRes = ContextCompat.getColor(mamieActivity, R.color.grimmed);
-                holder.moinScore.setColorFilter(Color.RED);
+                int colorES = ContextCompat.getColor(mamieActivity, R.color.purple_200);
+                holder.moinScore.setColorFilter(colorES);
             }
         }
 
