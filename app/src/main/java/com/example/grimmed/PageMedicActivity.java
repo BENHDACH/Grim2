@@ -2,7 +2,9 @@ package com.example.grimmed;
 
 import android.content.Intent;
 import android.os.AsyncTask;
+import android.os.Build;
 import android.provider.ContactsContract;
+import android.support.annotation.NonNull;
 import android.support.design.widget.TabLayout;
 import android.support.v4.view.ViewPager;
 import android.support.v7.app.ActionBar;
@@ -28,7 +30,10 @@ import java.io.InputStreamReader;
 import java.net.HttpURLConnection;
 import java.net.URL;
 import java.nio.charset.StandardCharsets;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Map;
+import java.util.Objects;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
@@ -41,6 +46,17 @@ public class PageMedicActivity extends AppCompatActivity implements TabLayout.On
 
     //This is our viewPager
     private ViewPager viewPager;
+
+    private String enceinteUser;
+
+    private List<String> itemsAllergiesUser = new ArrayList<String>();
+
+    private String enceinteMedoc;
+
+    private List<String> itemsCompoMedoc = new ArrayList<String>();
+    Bundle bundle;
+
+
 
     private static final Logger LOGGER = Logger.getLogger(PageMedicActivity.class.getName());
 
@@ -88,19 +104,69 @@ public class PageMedicActivity extends AppCompatActivity implements TabLayout.On
             actionBar.setTitle("Médicaments");
         }
 
-
-        Bundle bundle = getIntent().getExtras();
+        bundle = getIntent().getExtras();
         if(getIntent().hasExtra("nomMedoc")){
            //Log.e("MArche?",":"+bundle.getString("nomMedoc"));
-            myListeningTest(bundle.getString("nomMedoc"));
+            getValueUser(true);
         }
-        //myListening();
+        else{
+            getValueUser(false);
+        }
 
+        //myListening();
         pagerSetup();
         
     }
 
+    private void getValueUser(Boolean parMedoc) {
+        itemsAllergiesUser.clear();
+
+        DatabaseReference medReference = FirebaseDatabase.getInstance().getReference("User").child(DataUser.username);
+        medReference.addListenerForSingleValueEvent(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                Object nom = dataSnapshot.getValue(Object.class);
+                JSONObject myInfo = new JSONObject((Map) nom);
+                String enceinte = "0";
+                JSONArray listAllergie = new JSONArray();
+
+
+                try {
+                    enceinte = myInfo.getString("enceinte");
+                    listAllergie = myInfo.getJSONArray("allergie");
+                } catch (JSONException e) {
+                    throw new RuntimeException(e);
+                }
+
+                enceinteUser = enceinte;
+
+                for(int i = 0 ; i<listAllergie.length();i++){
+                    try {
+                        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
+                            itemsAllergiesUser.add(AES.decrypt(listAllergie.get(i).toString()));
+                        }
+                    } catch (Exception e) {
+                        throw new RuntimeException(e);
+                    }
+                }
+
+                if(parMedoc){
+                    myListeningTest(bundle.getString("nomMedoc"));
+                }
+
+
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError databaseError) {
+
+            }
+        });
+    }
+
     private void myListeningTest(String nomMedoc) {
+
+        itemsCompoMedoc.clear();
 
         DatabaseReference medReference = FirebaseDatabase.getInstance().getReference("Medicaments").child(nomMedoc);
         medReference.addListenerForSingleValueEvent(new ValueEventListener() {
@@ -108,7 +174,29 @@ public class PageMedicActivity extends AppCompatActivity implements TabLayout.On
             public void onDataChange(DataSnapshot dataSnapshot) {
                 Object nom = dataSnapshot.getValue(Object.class);
                 JSONObject myMedoc = new JSONObject((Map) nom);
-                Log.e("JsonObject",""+myMedoc);
+
+
+                int enceinte = 0;
+                JSONArray listCompo = new JSONArray();
+
+
+                try {
+                    enceinte = myMedoc.getInt("Enceinte");
+                    listCompo = myMedoc.getJSONArray("Composition");
+                } catch (JSONException e) {
+                    throw new RuntimeException(e);
+                }
+
+                enceinteMedoc = ""+enceinte;
+
+                for(int y=0;y<listCompo.length();y++){
+                    try {
+                        itemsCompoMedoc.add(listCompo.get(y).toString());
+                    } catch (JSONException e) {
+                        throw new RuntimeException(e);
+                    }
+                }
+
 
                 DataUser.defaultObject = myMedoc;
                 pagerSetup();
@@ -125,14 +213,31 @@ public class PageMedicActivity extends AppCompatActivity implements TabLayout.On
 
     private void pagerSetup(){
         //Initializing viewPager
+        Boolean enceinteCheck = false;
+        List<String> dangerAllergies = new ArrayList<String>();
+
+        for(int i = 0;i<itemsAllergiesUser.size();i++){
+            for(int y = 0;y<itemsCompoMedoc.size();y++){
+                if(Objects.equals(itemsCompoMedoc.get(y), itemsAllergiesUser.get(i))){
+                    dangerAllergies.add(itemsCompoMedoc.get(y));
+                }
+            }
+        }
+
+        if(Objects.equals(enceinteMedoc, enceinteUser) && Objects.equals(enceinteUser, "1")){
+            enceinteCheck = true;
+        }
+
         viewPager = (ViewPager) findViewById(R.id.pager);
 
 
         //Creating our pager adapter
-        Pager adapter = new Pager(getSupportFragmentManager(), tabLayout.getTabCount(),DataUser.defaultObject);
+        Pager adapter = new Pager(getSupportFragmentManager(), tabLayout.getTabCount(),DataUser.defaultObject,enceinteCheck,dangerAllergies);
 
         //Adding adapter to pager
         viewPager.setAdapter(adapter);
+
+        dangerAllergies.clear();
     }
 
     private void myListening() {

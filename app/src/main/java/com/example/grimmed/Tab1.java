@@ -11,6 +11,8 @@ import android.widget.TextView;
 
 import com.squareup.picasso.Picasso;
 
+import java.util.List;
+
 /**
  * Created by Belal on 2/3/2016.
  */
@@ -22,11 +24,17 @@ public class Tab1 extends Fragment {
     private String msg;
     private String cibleMsg;
     private String url;
+
+    List<String> dangerAllergies;
+    private Boolean enceinteCheck;
     @SuppressLint("ValidFragment")
-    public  Tab1(String msg, String url, String cibleMsg){
+    public  Tab1(String msg, String url, String cibleMsg, Boolean enceinteCheck,
+                 List<String> dangerAllergies){
         this.msg = msg;
         this.url = url;
         this.cibleMsg = cibleMsg;
+        this.enceinteCheck = enceinteCheck;
+        this.dangerAllergies = dangerAllergies;
     }
 
     //Overriden method onCreateView
@@ -39,8 +47,19 @@ public class Tab1 extends Fragment {
         TextView textView = view.findViewById(R.id.textCompo);
         TextView secondaryText = view.findViewById(R.id.textSecondEffect);
 
+        if(enceinteCheck){
+            secondaryText.setText("Enceinte attention !");
+        }
+        else{
+            secondaryText.setText(cibleMsg);
+        }
 
-        secondaryText.setText(cibleMsg);
+        if(!dangerAllergies.isEmpty()){
+            secondaryText.setText("Attention vous avez des allergies dans ce médicament");
+        }
+
+
+
 
         String concatMsgUsage = "";
         for(int i=0;i<msg.length();i++){
