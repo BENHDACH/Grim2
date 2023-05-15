@@ -5,21 +5,33 @@
     android:id="@+id/linearLayout"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:orientation="vertical"
-    android:padding="8dp">
+    android:orientation="vertical">
 
     <View
         android:id="@+id/view16"
-        android:layout_width="389dp"
+        android:layout_width="0dp"
         android:layout_height="66dp"
         app:layout_constraintBottom_toBottomOf="@+id/txtSymptome"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="@+id/txtSymptome" />
 
+    <View
+        android:id="@+id/view15"
+        android:layout_width="0dp"
+        android:layout_height="41dp"
+        android:layout_marginStart="3dp"
+        android:background="@drawable/login_page"
+        android:backgroundTint="@color/profil"
+        app:layout_constraintBottom_toBottomOf="@+id/txtSymptome"
+        app:layout_constraintEnd_toEndOf="@+id/view16"
+        app:layout_constraintStart_toEndOf="@+id/txtSymptome"
+        app:layout_constraintTop_toTopOf="parent" />
+
     <TextView
         android:id="@+id/txtSymptome"
         android:layout_width="0dp"
-        android:layout_height="60dp"
+        android:layout_height="55dp"
+        android:layout_marginEnd="80dp"
         android:background="@drawable/login_page"
         android:backgroundTint="#3C6CA6"
         android:gravity="center"
@@ -32,9 +44,11 @@
 
     <android.support.v7.widget.RecyclerView
         android:id="@+id/littleRecycler"
-        android:layout_width="383dp"
+        android:layout_width="0dp"
         android:layout_height="200dp"
+        android:layout_marginStart="32dp"
         android:layout_marginTop="8dp"
+        android:layout_marginEnd="32dp"
         android:paddingTop="20dp"
         android:visibility="visible"
         app:layout_constraintBottom_toBottomOf="parent"
@@ -46,36 +60,31 @@
         android:id="@+id/textScore"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="TextView"
-        app:layout_constraintBottom_toBottomOf="@+id/view16"
-        app:layout_constraintEnd_toEndOf="@+id/view16"
-        app:layout_constraintHorizontal_bias="0.864"
-        app:layout_constraintStart_toStartOf="@+id/view16"
-        app:layout_constraintTop_toTopOf="@+id/view16"
-        app:layout_constraintVertical_bias="0.574" />
+        android:text="0"
+        app:layout_constraintBottom_toBottomOf="@+id/view15"
+        app:layout_constraintEnd_toStartOf="@+id/moinScore"
+        app:layout_constraintHorizontal_bias="0.619"
+        app:layout_constraintStart_toEndOf="@+id/plusScore"
+        app:layout_constraintTop_toTopOf="@+id/view15" />
 
     <ImageView
         android:id="@+id/moinScore"
-        android:layout_width="20dp"
-        android:layout_height="16dp"
-        android:layout_marginStart="8dp"
-        app:layout_constraintBottom_toBottomOf="@+id/txtSymptome"
+        android:layout_width="13dp"
+        android:layout_height="24dp"
+        android:layout_marginEnd="12dp"
+        app:layout_constraintBottom_toBottomOf="@+id/textScore"
         app:layout_constraintEnd_toEndOf="@+id/view16"
-        app:layout_constraintStart_toEndOf="@+id/textScore"
-        app:layout_constraintTop_toTopOf="@+id/view16"
-        app:layout_constraintVertical_bias="0.586"
+        app:layout_constraintTop_toTopOf="@+id/textScore"
         app:srcCompat="@drawable/moin" />
 
     <ImageView
         android:id="@+id/plusScore"
-        android:layout_width="22dp"
-        android:layout_height="19dp"
-        android:layout_marginEnd="8dp"
-        android:layout_marginBottom="12dp"
-        app:layout_constraintBottom_toBottomOf="@+id/txtSymptome"
-        app:layout_constraintEnd_toStartOf="@+id/textScore"
-        app:layout_constraintTop_toTopOf="@+id/view16"
-        app:layout_constraintVertical_bias="0.848"
+        android:layout_width="13dp"
+        android:layout_height="20dp"
+        android:layout_marginStart="8dp"
+        app:layout_constraintBottom_toBottomOf="@+id/textScore"
+        app:layout_constraintStart_toStartOf="@+id/view15"
+        app:layout_constraintTop_toTopOf="@+id/textScore"
         app:srcCompat="@drawable/plusicone" />
 
 
