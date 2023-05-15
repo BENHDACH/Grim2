@@ -101,6 +101,9 @@ public class ChildActivity extends AppCompatActivity {
 
         //Un enfant de l'username est enregistrez
         myRef.child(DataUser.username).child("enfant").child(item).setValue("");
+        myRef.child(DataUser.username).child("enfant").child(item).child("vaccins").setValue("");
+
+        getData();
     }
 
     private void getData(){

@@ -5,7 +5,9 @@ import android.support.annotation.NonNull;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.KeyEvent;
 import android.view.View;
+import android.view.inputmethod.EditorInfo;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
@@ -40,6 +42,19 @@ public class PageLogActivity extends AppCompatActivity {
         //Vraiment a changer pour pas avoir les même id...
         usernameEditText = findViewById(R.id.caseId);
         pswEditText = findViewById(R.id.casePasswd);
+
+
+        pswEditText.setOnEditorActionListener(new TextView.OnEditorActionListener() {
+            @Override
+            public boolean onEditorAction(TextView v, int actionId, KeyEvent event) {
+                if(event.getAction() == KeyEvent.ACTION_DOWN && event.getKeyCode() == KeyEvent.KEYCODE_ENTER) {
+                    // Do something when the user clicks "Done" or "Enter" on the keyboard
+                    checkUser();
+                    return true;
+                }
+                return false;
+            }
+        });
     }
 
 
