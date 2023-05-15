@@ -8,19 +8,18 @@
 
     <View
         android:id="@+id/view"
-        android:layout_width="409dp"
+        android:layout_width="0dp"
         android:layout_height="67dp"
         android:background="@color/white"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent" />
 
     <ImageView
         android:id="@+id/buttonMedoc"
         android:layout_width="55dp"
         android:layout_height="41dp"
-        android:layout_marginStart="40dp"
+        android:layout_marginStart="32dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="@+id/view"
@@ -31,10 +30,9 @@
         android:id="@+id/buttonVac"
         android:layout_width="77dp"
         android:layout_height="44dp"
-        android:layout_marginStart="24dp"
+        android:layout_marginBottom="4dp"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="@+id/view"
-        app:layout_constraintHorizontal_bias="0.204"
+        app:layout_constraintEnd_toStartOf="@+id/buttonProfil"
         app:layout_constraintStart_toEndOf="@+id/buttonMedoc"
         app:layout_constraintTop_toTopOf="@+id/buttonMedoc"
         app:layout_constraintVertical_bias="0.0"
@@ -44,21 +42,18 @@
         android:id="@+id/buttonProfil"
         android:layout_width="64dp"
         android:layout_height="42dp"
-        android:layout_marginStart="40dp"
-        android:layout_marginEnd="40dp"
+        android:layout_marginEnd="32dp"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="@+id/view"
-        app:layout_constraintHorizontal_bias="0.628"
-        app:layout_constraintStart_toEndOf="@+id/buttonVac"
+        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toTopOf="@+id/view"
-        app:layout_constraintVertical_bias="0.363"
+        app:layout_constraintVertical_bias="0.36"
         app:srcCompat="@drawable/microsoftteams_image__9_" />
 
     <View
         android:id="@+id/view2"
-        android:layout_width="409dp"
+        android:layout_width="0dp"
         android:layout_height="1dp"
-        android:layout_marginBottom="12dp"
+        android:layout_marginBottom="8dp"
         android:background="#545661"
         android:backgroundTint="#545661"
         app:layout_constraintBottom_toTopOf="@+id/buttonVac"
@@ -70,9 +65,9 @@
         android:id="@+id/estomac"
         android:layout_width="140dp"
         android:layout_height="140dp"
-        android:layout_marginStart="40dp"
         android:layout_marginTop="68dp"
-        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="@+id/loupe"
+        app:layout_constraintStart_toStartOf="@+id/loupe"
         app:layout_constraintTop_toBottomOf="@+id/loupe"
         app:srcCompat="@drawable/estomac" />
 
@@ -103,10 +98,8 @@
         android:layout_width="140dp"
         android:layout_height="140dp"
         android:layout_marginTop="68dp"
-        android:layout_marginEnd="16dp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.626"
-        app:layout_constraintStart_toEndOf="@+id/estomac"
+        app:layout_constraintEnd_toEndOf="@+id/mamie"
+        app:layout_constraintStart_toStartOf="@+id/mamie"
         app:layout_constraintTop_toBottomOf="@+id/mamie"
         app:srcCompat="@drawable/tete" />
 
@@ -119,9 +112,7 @@
         android:textSize="18sp"
         android:textStyle="bold"
         app:layout_constraintBottom_toTopOf="@+id/estomac"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.126"
-        app:layout_constraintStart_toStartOf="parent" />
+        app:layout_constraintStart_toStartOf="@+id/estomac" />
 
     <ImageView
         android:id="@+id/loupe"
@@ -129,9 +120,8 @@
         android:layout_height="140dp"
         android:layout_marginStart="40dp"
         android:layout_marginTop="64dp"
-        android:layout_marginEnd="40dp"
-        app:layout_constraintEnd_toStartOf="@+id/mamie"
-        app:layout_constraintHorizontal_bias="0.0"
+        android:layout_marginEnd="188dp"
+        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:srcCompat="@drawable/search" />
@@ -140,17 +130,21 @@
         android:id="@+id/mamie"
         android:layout_width="140dp"
         android:layout_height="140dp"
+        android:layout_marginStart="44dp"
         android:layout_marginTop="64dp"
-        android:layout_marginEnd="44dp"
+        android:layout_marginEnd="40dp"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/loupe"
         app:layout_constraintTop_toTopOf="parent"
         app:srcCompat="@drawable/capture_d_cran_2023_05_06_125719" />
 
     <View
         android:id="@+id/view9"
-        android:layout_width="327dp"
+        android:layout_width="0dp"
         android:layout_height="1dp"
+        android:layout_marginStart="32dp"
         android:layout_marginTop="220dp"
+        android:layout_marginEnd="32dp"
         android:background="#C9535353"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
