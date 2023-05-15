@@ -8,6 +8,8 @@ import android.util.Log;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import java.util.List;
+
 /**
  * Created by Belal on 2/3/2016.
  */
@@ -18,13 +20,20 @@ public class Pager extends FragmentStatePagerAdapter {
     int tabCount;
     JSONObject myMedoc;
 
+    Boolean enceinteCheck;
+    List<String> dangerAllergies;
+
     //Constructor to the class
-    public Pager(FragmentManager fm, int tabCount, JSONObject myMedoc) {
+    public Pager(FragmentManager fm, int tabCount, JSONObject myMedoc,Boolean enceinteCheck, List<String> dangerAllergies) {
         super(fm);
         //Initializing tab count
         this.tabCount= tabCount;
         this.myMedoc = myMedoc;
+        this.enceinteCheck = enceinteCheck;
+        this.dangerAllergies = dangerAllergies;
+
     }
+
 
     //Overriding method getItem
     @Override
@@ -34,7 +43,7 @@ public class Pager extends FragmentStatePagerAdapter {
             case 0:
                 Tab1 tab1 = null;
                 try {
-                    tab1 = new Tab1(myMedoc.getString("Usage"),myMedoc.getString("Url"),myMedoc.getString("Cible"));
+                    tab1 = new Tab1(myMedoc.getString("Usage"),myMedoc.getString("Url"),myMedoc.getString("Cible"),enceinteCheck,dangerAllergies);
                 } catch (JSONException e) {
                     Log.e("Error tab1 Pager","Usage,Url, Cible non conforme");
                     throw new RuntimeException(e);
