@@ -3,12 +3,15 @@ package com.example.grimmed;
 import android.annotation.SuppressLint;
 import android.support.design.widget.TextInputLayout;
 import android.support.v7.widget.RecyclerView;
+import android.text.Editable;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import java.util.Arrays;
 import java.util.List;
@@ -101,13 +104,18 @@ public class VaccinAdapter extends RecyclerView.Adapter<VaccinAdapter.ViewHolder
                 @SuppressLint("ResourceAsColor")
                 @Override
                 public void onClick(View v) {
+                    //On peut check la sauvegarde si la date est une date pour commencer
 
-
-                    try {
-                        listener.saveOnData(holder.nameVaccinEditText.getText().toString(),holder.dateVaccinEditText.getText().toString());
-                    } catch (Exception e) {
-                        throw new RuntimeException(e);
+                    if(holder.dateVaccinEditText.getText().toString().matches("^\\d{2}\\/\\d{2}\\/\\d{4}$")){
+                        try {
+                            listener.saveOnData(holder.nameVaccinEditText.getText().toString(),holder.dateVaccinEditText.getText().toString());
+                        } catch (Exception e) {
+                            throw new RuntimeException(e);
+                        }
+                    }else{
+                        Toast.makeText(listener, "La date n'est pas conforme à dd/mm/yyyy exemple : 18/01/2000", Toast.LENGTH_SHORT).show();
                     }
+
                 }
             });
         }
