@@ -299,7 +299,6 @@ public class VaccinTimerActivity extends AppCompatActivity {
         Calendar calNow = Calendar.getInstance();
         Calendar calendar = Calendar.getInstance();
 
-        int date = Integer.parseInt(getIntent().getStringExtra("Jour"));
         Calendar calendrier = Calendar.getInstance();
         boolean booleanChecker = false;
 
@@ -308,7 +307,10 @@ public class VaccinTimerActivity extends AppCompatActivity {
         int mois = Integer.parseInt(dateVaccin.substring(0, 2));
         int an = Integer.parseInt(dateVaccin.substring(6, 10));
 
-        
+        //On estime que c'est bon (à verif dans l'adapter avant de lancer)
+
+
+
         //-----------
 
         /*

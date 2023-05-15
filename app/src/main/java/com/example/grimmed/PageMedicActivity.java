@@ -128,14 +128,14 @@ public class PageMedicActivity extends AppCompatActivity implements TabLayout.On
                 Object nom = dataSnapshot.getValue(Object.class);
                 JSONObject myInfo = new JSONObject((Map) nom);
                 String enceinte = "0";
-                JSONArray listAllergie = new JSONArray();
+                JSONArray listAllergie = null;
 
 
                 try {
                     enceinte = myInfo.getString("enceinte");
                     listAllergie = myInfo.getJSONArray("allergie");
                 } catch (JSONException e) {
-                    throw new RuntimeException(e);
+                    listAllergie = new JSONArray();
                 }
 
                 enceinteUser = enceinte;
