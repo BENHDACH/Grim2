@@ -1,6 +1,12 @@
 package com.example.grimmed;
 
+import android.app.AlarmManager;
+import android.app.NotificationChannel;
+import android.app.NotificationManager;
+import android.app.PendingIntent;
+import android.content.Context;
 import android.content.Intent;
+import android.os.Build;
 import android.support.annotation.NonNull;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
@@ -23,6 +29,7 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.List;
 import java.util.Map;
 import java.util.Objects;
@@ -51,12 +58,11 @@ public class VaccinTimerActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_vaccin_timer);
         Bundle bundle = getIntent().getExtras();
-        if(bundle == null){
+        if (bundle == null) {
 
             childName = "";
-        }
-        else{
-            childName = bundle.getString("childName","");
+        } else {
+            childName = bundle.getString("childName", "");
         }
 
         ActionBar actionBar = getSupportActionBar();
@@ -65,17 +71,16 @@ public class VaccinTimerActivity extends AppCompatActivity {
         }
 
 
-
-
         initAffichageIcone();
 
         recyclerView = findViewById(R.id.recyclerVaccin);
 
         getData();
 
+
     }
 
-    private void setRecyclerView(){
+    private void setRecyclerView() {
 
         ImageView imageView = findViewById(R.id.cloche);
         imageView.setVisibility(View.GONE);
@@ -91,14 +96,14 @@ public class VaccinTimerActivity extends AppCompatActivity {
 
         recyclerView.setVisibility(View.VISIBLE);
 
-        VaccinAdapter adapter = new VaccinAdapter(items, itemsDate,this);
+        VaccinAdapter adapter = new VaccinAdapter(items, itemsDate, this);
         recyclerView.setAdapter(adapter);
 
         LinearLayoutManager layoutManager = new LinearLayoutManager(this);
         recyclerView.setLayoutManager(layoutManager);
     }
 
-    private void voidRecyclerClocheOn(){
+    private void voidRecyclerClocheOn() {
 
         ImageView imageView = findViewById(R.id.cloche);
         imageView.setVisibility(View.VISIBLE);
@@ -113,7 +118,7 @@ public class VaccinTimerActivity extends AppCompatActivity {
 
     }
 
-    public void initAffichageIcone(){
+    public void initAffichageIcone() {
         ImageView buttonMedoc3 = findViewById(R.id.buttonMedoc3);
         buttonMedoc3.setOnClickListener(this::onClick);
 
@@ -160,17 +165,16 @@ public class VaccinTimerActivity extends AppCompatActivity {
         }
     }
 
-    private void getData(){
+    private void getData() {
         items.clear();
         itemsDate.clear();
         DatabaseReference cibleReference;
 
-        if(!Objects.equals(childName, "")){
-             cibleReference = FirebaseDatabase.getInstance().getReference("User")
+        if (!Objects.equals(childName, "")) {
+            cibleReference = FirebaseDatabase.getInstance().getReference("User")
                     .child(DataUser.username).child("enfant").child(childName).child("vaccins");
-        }
-        else{
-             cibleReference = FirebaseDatabase.getInstance().getReference("User")
+        } else {
+            cibleReference = FirebaseDatabase.getInstance().getReference("User")
                     .child(DataUser.username).child("vaccins");
         }
         cibleReference.addListenerForSingleValueEvent(new ValueEventListener() {
@@ -178,7 +182,7 @@ public class VaccinTimerActivity extends AppCompatActivity {
             public void onDataChange(DataSnapshot dataSnapshot) {
                 Object nom = dataSnapshot.getValue(Object.class);
                 assert nom != null;
-                if(!nom.toString().equals("")){
+                if (!nom.toString().equals("")) {
                     JSONObject myInfo = new JSONObject((Map) nom);
                     String newV = null;
 
@@ -196,7 +200,7 @@ public class VaccinTimerActivity extends AppCompatActivity {
                         itemsDate.add(newV);
 
                     }
-                    if(items.isEmpty()){
+                    if (items.isEmpty()) {
                         items.add(" ");
                         itemsDate.add(" ");
                     }
@@ -204,11 +208,12 @@ public class VaccinTimerActivity extends AppCompatActivity {
                     setRecyclerView();
                 }
                 //Si c'est vide ou que sa à était vidé
-                else{
+                else {
                     voidRecyclerClocheOn();
                 }
 
             }
+
             @Override
             public void onCancelled(@NonNull DatabaseError databaseError) {
 
@@ -223,30 +228,30 @@ public class VaccinTimerActivity extends AppCompatActivity {
         DatabaseReference myRef = database.getReference("User");
 
 
-        if(!Objects.equals(item, "DELETE") && !Objects.equals(itemDate, "DELETE")){
-            if(Objects.equals(childName, "")){
+        if (!Objects.equals(item, "DELETE") && !Objects.equals(itemDate, "DELETE")) {
+            if (Objects.equals(childName, "")) {
 
                 myRef.child(DataUser.username).child("vaccins").child(item)
                         .setValue(itemDate);
-            }else{
+                //makeNotification(item, itemDate);
+            } else {
                 myRef.child(DataUser.username).child("enfant").child(childName)
                         .child("vaccins").child(item)
                         .setValue(itemDate);
             }
-        }
-        else{
-            if(Objects.equals(childName, "")){
+        } else {
+            if (Objects.equals(childName, "")) {
                 myRef.child(DataUser.username).child("vaccins").setValue("");
-            }else{
+            } else {
 
                 myRef.child(DataUser.username).child("enfant").child(childName)
                         .child("vaccins").setValue("");
             }
-            for(int i = 0; i<items.size(); i++){
-                if(Objects.equals(childName, "")){
+            for (int i = 0; i < items.size(); i++) {
+                if (Objects.equals(childName, "")) {
                     myRef.child(DataUser.username).child("vaccins").child(items.get(i))
                             .setValue(itemsDate.get(i));
-                }else{
+                } else {
                     myRef.child(DataUser.username).child("enfant").child(childName)
                             .child("vaccins").child(items.get(i))
                             .setValue(itemsDate.get(i));
@@ -258,11 +263,105 @@ public class VaccinTimerActivity extends AppCompatActivity {
 
     public void deleteOnData(int position) {
 
-        Log.e("Pos",""+position+" l'item est:"+items.get(position));
+        Log.e("Pos", "" + position + " l'item est:" + items.get(position));
         itemsDate.remove(position);
         items.remove(position);
 
         //On met à jour la bdd
-        saveOnData("DELETE","DELETE");
+        saveOnData("DELETE", "DELETE");
+    }
+
+    private void makeNotification(String nomVaccin, String dateVaccin) {
+        createNotificationChannel();
+        createNotTime(nomVaccin,dateVaccin);
+    }
+
+    private void createNotificationChannel() {
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
+            String name = "My Notification Channel";
+            String descriptionText = "My Notification Channel Description";
+            int importance = NotificationManager.IMPORTANCE_HIGH;
+            NotificationChannel channel = new NotificationChannel("my_channel_01", name, importance);
+            channel.setDescription(descriptionText);
+
+            NotificationManager notificationManager = getSystemService(NotificationManager.class);
+            notificationManager.createNotificationChannel(channel);
+        }
+    }
+
+    public boolean createNotTime(String nomVaccin, String dateVaccin) {
+        Intent notificationIntent = new Intent(this, NotificationVaccin.class);
+        notificationIntent.putExtra("message", "Vous avez réservé pour le " + getIntent().getStringExtra("CheminJour") + " à " + getIntent().getStringExtra("Heure") + "H");
+        PendingIntent pendingIntent = PendingIntent.getBroadcast(this, 0, notificationIntent, PendingIntent.FLAG_IMMUTABLE | PendingIntent.FLAG_UPDATE_CURRENT);
+
+        AlarmManager alarmManager = (AlarmManager) getSystemService(Context.ALARM_SERVICE);
+
+        Calendar calNow = Calendar.getInstance();
+        Calendar calendar = Calendar.getInstance();
+
+        int date = Integer.parseInt(getIntent().getStringExtra("Jour"));
+        Calendar calendrier = Calendar.getInstance();
+        boolean booleanChecker = false;
+
+        //------------
+        int jour = Integer.parseInt(dateVaccin.substring(0, 2));
+        int mois = Integer.parseInt(dateVaccin.substring(0, 2));
+        int an = Integer.parseInt(dateVaccin.substring(6, 10));
+
+        
+        //-----------
+
+        /*
+        String textVerifHour = binding.hourNumb.getText().toString();
+        String textVerifMinute = binding.minuteNumb.getText().toString();
+        Integer intHour = Integer.parseInt(textVerifHour);
+        Integer intMinute = Integer.parseInt(textVerifMinute);
+
+        //On verifie que l'horaire de notification est correct (un Int entre 0-23 H et 0-59 minutes)
+        if (intHour != null && intMinute != null && intHour >= 0 && intHour <= 23 && intMinute >= 0 && intMinute <= 59) {
+            //Si l'enregistrement ce fait le jour même ou un jour avant on met la notif au jour actuelle
+            booleanChecker = true;
+            if (date <= 2) {
+                Log.e("AllInfo", "Date:" + date + ",TimePickH:" + binding.hourNumb.getText() + ",TimePickM:" + binding.minuteNumb.getText());
+                calendar = Calendar.getInstance().set(Calendar.HOUR_OF_DAY, Integer.parseInt(binding.hourNumb.getText().toString()));
+                calendar.set(Calendar.MINUTE, Integer.parseInt(binding.minuteNumb.getText().toString()));
+                calendar.set(Calendar.SECOND, 0);
+                calendar.set(Calendar.MILLISECOND, 0);
+            } else {
+                calendrier.add(Calendar.DATE, (date != null ? date : 1) - 2);
+                int yearRes = calendrier.get(Calendar.YEAR);
+                int day = calendrier.get(Calendar.DAY_OF_MONTH);
+                int month = calendrier.get(Calendar.MONTH);
+                Log.e("CheckRES", day + "," + month + "," + yearRes);
+
+                calendar = Calendar.getInstance();
+                calendar.set(Calendar.YEAR, yearRes);
+                calendar.set(Calendar.MONTH, month);
+                calendar.set(Calendar.DAY_OF_MONTH, day);
+                calendar.set(Calendar.HOUR_OF_DAY, Integer.parseInt(binding.hourNumb.getText().toString()));
+                calendar.set(Calendar.MINUTE, Integer.parseInt(binding.minuteNumb.getText().toString()));
+                calendar.set(Calendar.SECOND, 0);
+                calendar.set(Calendar.MILLISECOND, 0);
+            }
+
+            Log.e("TimeMili", "" + calendar.getTimeInMillis());
+
+            Log.e("Et le curren", "" + calNow.getTimeInMillis());
+
+            //Si la notif est set avant l'heure actuelle alors on l'envoie maitenant
+            if ((calendar.getTimeInMillis() - calNow.getTimeInMillis()) < 0) {
+                calendar = calNow;
+            }
+            // On set l'alarme avec l'action , le temps et l'intent.
+            alarmManager.setExact(
+                    AlarmManager.RTC_WAKEUP,
+                    calendar.getTimeInMillis(),
+                    pendingIntent
+            );
+
+        } else {
+            Toast.makeText(this, "Veuillez entrez des entiers H et minute ", Toast.LENGTH_LONG).show()
+        }*/
+        return (booleanChecker);
     }
 }
