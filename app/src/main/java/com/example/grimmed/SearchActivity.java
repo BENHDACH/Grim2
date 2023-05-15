@@ -86,7 +86,7 @@ public class SearchActivity extends AppCompatActivity {
             }
         });
 
-        firebaseSetup2();
+        //firebaseSetup2();
 
         Button bNom = findViewById(R.id.buttonNom);
         bNom.setOnClickListener(this::onClick);
