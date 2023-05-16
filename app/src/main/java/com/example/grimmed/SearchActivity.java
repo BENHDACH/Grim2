@@ -86,20 +86,20 @@ public class SearchActivity extends AppCompatActivity {
             recupCesNoms(bundle.getString("nom"),whichB);
 
             if(Objects.equals(whichB, "Cible")){
-                ColorStateList colorStateList1 = ContextCompat.getColorStateList(this, R.color.purple_200);
+                ColorStateList colorStateList1 = ContextCompat.getColorStateList(this, R.color.blue);
                 bCible.setBackgroundTintList(colorStateList1);
 
             } else if (Objects.equals(whichB, "Compo")) {
-                ColorStateList colorStateList1 = ContextCompat.getColorStateList(this, R.color.purple_200);
+                ColorStateList colorStateList1 = ContextCompat.getColorStateList(this, R.color.blue);
                 bCompo.setBackgroundTintList(colorStateList1);
             }
             else{
-                ColorStateList colorStateList1 = ContextCompat.getColorStateList(this, R.color.purple_200);
+                ColorStateList colorStateList1 = ContextCompat.getColorStateList(this, R.color.blue);
                 bNom.setBackgroundTintList(colorStateList1);
             }
             displayResult();
         }else{
-            ColorStateList colorStateList1 = ContextCompat.getColorStateList(this, R.color.purple_200);
+            ColorStateList colorStateList1 = ContextCompat.getColorStateList(this, R.color.blue);
             bNom.setBackgroundTintList(colorStateList1);
         }
 
@@ -131,38 +131,38 @@ public class SearchActivity extends AppCompatActivity {
         if (v.getId() == R.id.buttonNom) {
             whichB = "Nom";
 
-            ColorStateList colorStateList = ContextCompat.getColorStateList(this, R.color.blue);
+            ColorStateList colorStateList = ContextCompat.getColorStateList(this, R.color.boutons);
             bCible.setBackgroundTintList(colorStateList);
 
-            ColorStateList colorStateList1 = ContextCompat.getColorStateList(this, R.color.blue);
+            ColorStateList colorStateList1 = ContextCompat.getColorStateList(this, R.color.boutons);
             bCompo.setBackgroundTintList(colorStateList1);
 
-            ColorStateList colorStateList2 = ContextCompat.getColorStateList(this, R.color.purple_200);
+            ColorStateList colorStateList2 = ContextCompat.getColorStateList(this, R.color.blue);
             bNom.setBackgroundTintList(colorStateList2);
 
         }
         else if (v.getId() == R.id.buttonCible) {
             whichB = "Cible";
-            ColorStateList colorStateList = ContextCompat.getColorStateList(this, R.color.purple_200);
+            ColorStateList colorStateList = ContextCompat.getColorStateList(this, R.color.blue);
             bCible.setBackgroundTintList(colorStateList);
 
-            ColorStateList colorStateList1 = ContextCompat.getColorStateList(this, R.color.blue);
+            ColorStateList colorStateList1 = ContextCompat.getColorStateList(this, R.color.boutons);
             bCompo.setBackgroundTintList(colorStateList1);
 
-            ColorStateList colorStateList2 = ContextCompat.getColorStateList(this, R.color.blue);
+            ColorStateList colorStateList2 = ContextCompat.getColorStateList(this, R.color.boutons);
             bNom.setBackgroundTintList(colorStateList2);
 
         }
         else if (v.getId() == R.id.buttonCompo) {
             whichB = "Compo";
 
-            ColorStateList colorStateList = ContextCompat.getColorStateList(this, R.color.blue);
+            ColorStateList colorStateList = ContextCompat.getColorStateList(this, R.color.boutons);
             bCible.setBackgroundTintList(colorStateList);
 
-            ColorStateList colorStateList1 = ContextCompat.getColorStateList(this, R.color.purple_200);
+            ColorStateList colorStateList1 = ContextCompat.getColorStateList(this, R.color.blue);
             bCompo.setBackgroundTintList(colorStateList1);
 
-            ColorStateList colorStateList2 = ContextCompat.getColorStateList(this, R.color.blue);
+            ColorStateList colorStateList2 = ContextCompat.getColorStateList(this, R.color.boutons);
             bNom.setBackgroundTintList(colorStateList2);
 
         }
