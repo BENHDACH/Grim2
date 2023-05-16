@@ -27,7 +27,7 @@ public class NotificationVaccin extends BroadcastReceiver {
         NotificationCompat.Builder builder = new NotificationCompat.Builder(context, "my_channel_01")
                 .setContentTitle("My Notification")
                 .setContentText(intent.getStringExtra("Rappel"))
-                .setSmallIcon(R.mipmap.ic_launcher)
+                .setSmallIcon(R.drawable.icon_grimmed)
                 .setContentIntent(contentIntent)
                 .setPriority(NotificationCompat.PRIORITY_MAX)
                 .setAutoCancel(true);
