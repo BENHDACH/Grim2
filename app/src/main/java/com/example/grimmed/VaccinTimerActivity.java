@@ -17,7 +17,6 @@ import android.util.Log;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
@@ -25,7 +24,6 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 
-import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.util.ArrayList;
@@ -33,22 +31,15 @@ import java.util.Calendar;
 import java.util.List;
 import java.util.Map;
 import java.util.Objects;
+import java.util.Random;
 
 public class VaccinTimerActivity extends AppCompatActivity {
-
-
     private RecyclerView recyclerView;
     private List<String> items = new ArrayList<String>();
     private List<String> itemsDate = new ArrayList<String>();
-    private List<Object> itemsObjets = new ArrayList<>();
 
-    public static List<Object[]> createList(Object[]... elements) {
-        List<Object[]> list = new ArrayList<>();
-        for (Object[] array : elements) {
-            list.add(array);
-        }
-        return list;
-    }
+    private List<Integer> itemsId = new ArrayList<>();
+
 
     String childName;
 
@@ -58,7 +49,6 @@ public class VaccinTimerActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_vaccin_timer);
         Bundle bundle = getIntent().getExtras();
-
 
         createNotificationChannel();
         if (bundle == null) {
@@ -83,6 +73,7 @@ public class VaccinTimerActivity extends AppCompatActivity {
 
     }
 
+
     private void setRecyclerView() {
 
         ImageView imageView = findViewById(R.id.cloche);
@@ -99,7 +90,7 @@ public class VaccinTimerActivity extends AppCompatActivity {
 
         recyclerView.setVisibility(View.VISIBLE);
 
-        VaccinAdapter adapter = new VaccinAdapter(items, itemsDate, this);
+        VaccinAdapter adapter = new VaccinAdapter(items, itemsDate, itemsId, this);
         recyclerView.setAdapter(adapter);
 
         LinearLayoutManager layoutManager = new LinearLayoutManager(this);
@@ -163,6 +154,7 @@ public class VaccinTimerActivity extends AppCompatActivity {
 
             items.add(" ");
             itemsDate.add(" ");
+            itemsId.add(0);
 
             setRecyclerView();
         }
@@ -171,6 +163,7 @@ public class VaccinTimerActivity extends AppCompatActivity {
     private void getData() {
         items.clear();
         itemsDate.clear();
+        itemsId.clear();
         DatabaseReference cibleReference;
 
         if (!Objects.equals(childName, "")) {
@@ -186,26 +179,30 @@ public class VaccinTimerActivity extends AppCompatActivity {
                 Object nom = dataSnapshot.getValue(Object.class);
                 assert nom != null;
                 if (!nom.toString().equals("")) {
-                    JSONObject myInfo = new JSONObject((Map) nom);
-                    String newV = null;
-
+                    //JSONObject myInfo = new JSONObject((Map) nom);
+                    //String newV = null;
                     for (DataSnapshot childSnapshot : dataSnapshot.getChildren()) {
                         // Get the key (i.e., the identifier) of the child node
                         String key = childSnapshot.getKey();
 
-                        try {
-                            newV = myInfo.getString(key);
-                        } catch (JSONException e) {
-                            throw new RuntimeException(e);
-                        }
+                        Map<String, Object> childData = (Map<String, Object>) childSnapshot.getValue();
+
+                        // Extract the date and ID values from the child data
+                        assert childData != null;
+                        String date = Objects.requireNonNull(childData.get("date")).toString();
+                        int id = Integer.parseInt(Objects.requireNonNull(childData.get("id")).toString());
+
+
 
                         items.add(key);
-                        itemsDate.add(newV);
+                        itemsDate.add(date);
+                        itemsId.add(id);
 
                     }
                     if (items.isEmpty()) {
                         items.add(" ");
                         itemsDate.add(" ");
+                        itemsId.add(0);
                     }
 
                     setRecyclerView();
@@ -230,34 +227,53 @@ public class VaccinTimerActivity extends AppCompatActivity {
         FirebaseDatabase database = FirebaseDatabase.getInstance();
         DatabaseReference myRef = database.getReference("User");
 
-
         if (!Objects.equals(item, "DELETE") && !Objects.equals(itemDate, "DELETE")) {
+
+            Random random = new Random();
+            int idVaccin;
+            do {
+                idVaccin = random.nextInt(999) + 1;  // Generates a random number between 1 and 999
+            } while (itemsId.contains(idVaccin));
+
+
             if (Objects.equals(childName, "")) {
 
                 myRef.child(DataUser.username).child("vaccins").child(item)
-                        .setValue(itemDate);
-                makeNotification(item, itemDate);
+                        .child("date").setValue(itemDate);
+                myRef.child(DataUser.username).child("vaccins").child(item)
+                        .child("id").setValue(idVaccin);
+                createNotTime(item, itemDate, idVaccin);
             } else {
                 myRef.child(DataUser.username).child("enfant").child(childName)
-                        .child("vaccins").child(item)
+                        .child("vaccins").child(item).child("date")
                         .setValue(itemDate);
+                myRef.child(DataUser.username).child("enfant").child(childName)
+                        .child("vaccins").child(item).child("id")
+                        .setValue(idVaccin);
+                createNotTime(item, itemDate, idVaccin);
             }
         } else {
             if (Objects.equals(childName, "")) {
                 myRef.child(DataUser.username).child("vaccins").setValue("");
             } else {
-
                 myRef.child(DataUser.username).child("enfant").child(childName)
                         .child("vaccins").setValue("");
             }
             for (int i = 0; i < items.size(); i++) {
                 if (Objects.equals(childName, "")) {
                     myRef.child(DataUser.username).child("vaccins").child(items.get(i))
-                            .setValue(itemsDate.get(i));
+                            .child("date").setValue(itemsDate.get(i));
+
+                    myRef.child(DataUser.username).child("vaccins").child(items.get(i))
+                            .child("id").setValue(itemsId.get(i));
                 } else {
                     myRef.child(DataUser.username).child("enfant").child(childName)
-                            .child("vaccins").child(items.get(i))
+                            .child("vaccins").child(items.get(i)).child("date")
                             .setValue(itemsDate.get(i));
+
+                    myRef.child(DataUser.username).child("enfant").child(childName)
+                            .child("vaccins").child(items.get(i)).child("id")
+                            .setValue(itemsId.get(i));
                 }
             }
         }
@@ -266,16 +282,20 @@ public class VaccinTimerActivity extends AppCompatActivity {
 
     public void deleteOnData(int position) {
 
-        Log.e("Pos", "" + position + " l'item est:" + items.get(position));
         itemsDate.remove(position);
         items.remove(position);
+        Integer itemId = itemsId.get(position);
+        itemsId.remove(position);
 
         //On met à jour la bdd
         saveOnData("DELETE", "DELETE");
-    }
 
-    private void makeNotification(String nomVaccin, String dateVaccin) {
-        createNotTime(nomVaccin,dateVaccin);
+        AlarmManager alarmManager = (AlarmManager) getSystemService(Context.ALARM_SERVICE);
+        Intent notificationIntent = new Intent(this, NotificationVaccin.class);
+        PendingIntent pendingIntent = PendingIntent.getBroadcast(this, itemId, notificationIntent, PendingIntent.FLAG_IMMUTABLE | PendingIntent.FLAG_UPDATE_CURRENT);
+
+        alarmManager.cancel(pendingIntent);
+
     }
 
     private void createNotificationChannel() {
@@ -288,41 +308,37 @@ public class VaccinTimerActivity extends AppCompatActivity {
 
             NotificationManager notificationManager = getSystemService(NotificationManager.class);
             if (notificationManager != null) {
-                Log.e("Done","");
                 notificationManager.createNotificationChannel(channel);
-            }else{
-                Log.e("Is Nul","NULLLL");
             }
         }
     }
 
-    public void createNotTime(String nomVaccin, String dateVaccin) {
-        Intent notificationIntent = new Intent(this, NotificationVaccin.class);
-        notificationIntent.putExtra("Rappel", "Hey n'oubliez pas votre vaccin pour: " + nomVaccin);
-        PendingIntent pendingIntent = PendingIntent.getBroadcast(this, 0, notificationIntent, PendingIntent.FLAG_IMMUTABLE | PendingIntent.FLAG_UPDATE_CURRENT);
-
-        AlarmManager alarmManager = (AlarmManager) getSystemService(Context.ALARM_SERVICE);
-
+    public void createNotTime(String nomVaccin, String dateVaccin, int idVaccin) {
         Calendar calNow = Calendar.getInstance();
         Calendar calendar = Calendar.getInstance();
 
-        boolean booleanChecker = false;
+        Intent notificationIntent = new Intent(this, NotificationVaccin.class);
+        notificationIntent.putExtra("Rappel", "Hey n'oubliez pas votre vaccin pour: " + nomVaccin);
+        notificationIntent.putExtra("id", ""+idVaccin);
+        PendingIntent pendingIntent = PendingIntent.getBroadcast(this, idVaccin, notificationIntent, PendingIntent.FLAG_IMMUTABLE | PendingIntent.FLAG_UPDATE_CURRENT);
+
+
+        AlarmManager alarmManager = (AlarmManager) getSystemService(Context.ALARM_SERVICE);
+
+
 
         //------------
         int jour = Integer.parseInt(dateVaccin.substring(0, 2));
         int mois = Integer.parseInt(dateVaccin.substring(3, 5));
         int an = Integer.parseInt(dateVaccin.substring(6, 10));
 
-        //On estime que c'est bon (à verif dans l'adapter avant de lancer)
-        /** VERIFIE LES INFO surtout an et mois (mois 00 ou + de 12) **/
-
         calendar = Calendar.getInstance();
         calendar.set(Calendar.YEAR, an);
         calendar.set(Calendar.MONTH, mois-1);
         calendar.set(Calendar.DAY_OF_MONTH, jour);
-        calendar.set(Calendar.HOUR_OF_DAY, 14);
-        calendar.set(Calendar.MINUTE, 38);
-        calendar.set(Calendar.SECOND, 0);
+        calendar.set(Calendar.HOUR_OF_DAY, calNow.get(Calendar.HOUR_OF_DAY));
+        calendar.set(Calendar.MINUTE, calNow.get(Calendar.MINUTE)+2);
+        calendar.set(Calendar.SECOND, calNow.get(Calendar.SECOND));
         calendar.set(Calendar.MILLISECOND, 0);
 
         Log.e("TimeMili", "" + calendar.getTimeInMillis());

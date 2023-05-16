@@ -232,7 +232,7 @@ public class PageMedicActivity extends AppCompatActivity implements TabLayout.On
 
 
         //Creating our pager adapter
-        Pager adapter = new Pager(getSupportFragmentManager(), tabLayout.getTabCount(),DataUser.defaultObject,enceinteCheck,dangerAllergies);
+        Pager adapter = new Pager(getSupportFragmentManager(), tabLayout.getTabCount(),DataUser.defaultObject,enceinteCheck,dangerAllergies,this);
 
         //Adding adapter to pager
         viewPager.setAdapter(adapter);

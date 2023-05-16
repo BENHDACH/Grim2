@@ -11,7 +11,6 @@ import android.util.Log;
 public class NotificationVaccin extends BroadcastReceiver {
     @Override
     public void onReceive(Context context, Intent intent) {
-        Log.e("Here","Present present");
         NotificationManager notificationManager =
                 (NotificationManager) context.getSystemService(Context.NOTIFICATION_SERVICE);
 
@@ -27,12 +26,11 @@ public class NotificationVaccin extends BroadcastReceiver {
 
         NotificationCompat.Builder builder = new NotificationCompat.Builder(context, "my_channel_01")
                 .setContentTitle("My Notification")
-                .setContentText(intent.getStringExtra("message"))
-                .setSmallIcon(R.mipmap.ic_launcher)
+                .setContentText(intent.getStringExtra("Rappel"))
+                .setSmallIcon(R.drawable.icon_grimmed)
                 .setContentIntent(contentIntent)
-                .setPriority(NotificationCompat.PRIORITY_HIGH)
+                .setPriority(NotificationCompat.PRIORITY_MAX)
                 .setAutoCancel(true);
-
-        notificationManager.notify(0, builder.build());
+        notificationManager.notify(Integer.parseInt(intent.getStringExtra("id")), builder.build());
     }
 }

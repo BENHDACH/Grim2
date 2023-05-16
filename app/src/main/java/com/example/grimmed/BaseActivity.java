@@ -46,6 +46,9 @@ public class BaseActivity extends AppCompatActivity {
 
         ImageView mamie = findViewById(R.id.mamie);
         mamie.setOnClickListener(this::onClick);
+
+        ImageView qrCode = findViewById(R.id.qrCodeImg);
+        qrCode.setOnClickListener(this::onClick);
     }
 
     public void onClick(View v) {
@@ -108,6 +111,11 @@ public class BaseActivity extends AppCompatActivity {
         if (v.getId() == R.id.mamie) {
             Toast.makeText(getApplicationContext(),"Remèdes de grand-mère", Toast.LENGTH_SHORT).show();
             Intent intent = new Intent(this, MamieActivity.class);
+            startActivity(intent);
+        }
+        if (v.getId() == R.id.qrCodeImg) {
+            Toast.makeText(getApplicationContext(),"Scanner !", Toast.LENGTH_SHORT).show();
+            Intent intent = new Intent(this, QRCodeActivity.class);
             startActivity(intent);
         }
     }
