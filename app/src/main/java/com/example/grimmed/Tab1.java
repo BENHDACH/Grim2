@@ -3,6 +3,7 @@ package com.example.grimmed;
 import android.annotation.SuppressLint;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
+import android.support.v4.content.ContextCompat;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -27,14 +28,16 @@ public class Tab1 extends Fragment {
 
     List<String> dangerAllergies;
     private Boolean enceinteCheck;
+    private PageMedicActivity pageMedicActivity;
     @SuppressLint("ValidFragment")
     public  Tab1(String msg, String url, String cibleMsg, Boolean enceinteCheck,
-                 List<String> dangerAllergies){
+                 List<String> dangerAllergies, PageMedicActivity pageMedicActivity){
         this.msg = msg;
         this.url = url;
         this.cibleMsg = cibleMsg;
         this.enceinteCheck = enceinteCheck;
         this.dangerAllergies = dangerAllergies;
+        this.pageMedicActivity = pageMedicActivity;
     }
 
     //Overriden method onCreateView
@@ -46,17 +49,23 @@ public class Tab1 extends Fragment {
         @SuppressLint({"MissingInflatedId", "LocalSuppress"})
         TextView textView = view.findViewById(R.id.textCompo);
         TextView secondaryText = view.findViewById(R.id.textSecondEffect);
+        TextView alertText = view.findViewById(R.id.alerte);
 
-        if(enceinteCheck){
-            secondaryText.setText("Enceinte attention !");
-        }
-        else{
-            secondaryText.setText(cibleMsg);
+        secondaryText.setText(cibleMsg);
+        int colorRes = R.color.rougeAlerte;
+        int textColor = ContextCompat.getColor(pageMedicActivity, colorRes);
+        alertText.setTextColor(textColor);
+
+        if(enceinteCheck && !dangerAllergies.isEmpty()){
+            alertText.setText("Attention ce médicament est dangereux pour les femmes enceintes et vous possèdez des allergies à sa composition ! ");
+        } else if(enceinteCheck){
+            alertText.setText("Attention contre indiquez pour les femmes enceintes !");
+        } else if (!dangerAllergies.isEmpty()) {
+            alertText.setText("Attention vous avez des allergies dans ce médicament !");
+        } else{
+            alertText.setText("");
         }
 
-        if(!dangerAllergies.isEmpty()){
-            secondaryText.setText("Attention vous avez des allergies dans ce médicament");
-        }
 
 
 
