@@ -75,7 +75,7 @@
         android:id="@+id/cycle"
         android:layout_width="140dp"
         android:layout_height="140dp"
-        android:layout_marginTop="40dp"
+        android:layout_marginTop="16dp"
         app:layout_constraintEnd_toEndOf="@+id/tete"
         app:layout_constraintHorizontal_bias="1.0"
         app:layout_constraintStart_toStartOf="@+id/tete"
@@ -86,7 +86,7 @@
         android:id="@+id/gorge"
         android:layout_width="140dp"
         android:layout_height="140dp"
-        android:layout_marginTop="40dp"
+        android:layout_marginTop="16dp"
         app:layout_constraintEnd_toEndOf="@+id/estomac"
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="@+id/estomac"
@@ -98,9 +98,9 @@
         android:layout_width="140dp"
         android:layout_height="140dp"
         android:layout_marginTop="68dp"
-        app:layout_constraintEnd_toEndOf="@+id/mamie"
-        app:layout_constraintStart_toStartOf="@+id/mamie"
-        app:layout_constraintTop_toBottomOf="@+id/mamie"
+        app:layout_constraintEnd_toEndOf="@+id/qrCodelmg"
+        app:layout_constraintStart_toStartOf="@+id/qrCodelmg"
+        app:layout_constraintTop_toBottomOf="@+id/qrCodelmg"
         app:srcCompat="@drawable/tete" />
 
     <TextView
@@ -119,44 +119,62 @@
         android:layout_width="140dp"
         android:layout_height="140dp"
         android:layout_marginStart="40dp"
-        android:layout_marginTop="64dp"
-        android:layout_marginEnd="190dp"
+        android:layout_marginTop="45dp"
+        android:layout_marginEnd="230dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:srcCompat="@drawable/search" />
 
     <ImageView
-        android:id="@+id/mamie"
+        android:id="@+id/qrCodelmg"
         android:layout_width="140dp"
         android:layout_height="140dp"
         android:layout_marginStart="44dp"
-        android:layout_marginTop="64dp"
+        android:layout_marginTop="45dp"
         android:layout_marginEnd="40dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toEndOf="@+id/loupe"
         app:layout_constraintTop_toTopOf="parent"
-        app:srcCompat="@drawable/capture_d_cran_2023_05_06_125719" />
+        app:srcCompat="@drawable/qrcode" />
 
     <View
         android:id="@+id/view9"
         android:layout_width="0dp"
         android:layout_height="1dp"
         android:layout_marginStart="32dp"
-        android:layout_marginTop="220dp"
+        android:layout_marginTop="210dp"
         android:layout_marginEnd="32dp"
         android:background="#C9535353"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
+    <View
+        android:id="@+id/view17"
+        android:layout_width="0dp"
+        android:layout_height="1dp"
+        android:layout_marginStart="32dp"
+        android:layout_marginTop="8dp"
+        android:layout_marginEnd="32dp"
+        android:layout_marginBottom="8dp"
+        android:background="#C9535353"
+        app:layout_constraintBottom_toTopOf="@+id/mamie"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="1.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/cycle" />
+
     <ImageView
-        android:id="@+id/qrCodeImg"
-        android:layout_width="105dp"
-        android:layout_height="46dp"
+        android:id="@+id/mamie"
+        android:layout_width="321dp"
+        android:layout_height="87dp"
+        android:layout_marginTop="16dp"
+        android:layout_marginBottom="16dp"
+        app:layout_constraintBottom_toTopOf="@+id/view"
         app:layout_constraintEnd_toEndOf="@+id/cycle"
         app:layout_constraintStart_toStartOf="@+id/gorge"
         app:layout_constraintTop_toBottomOf="@+id/gorge"
-        app:srcCompat="@drawable/microsoftteams_image__18_" />
+        app:srcCompat="@drawable/capture_d_cran_2023_05_17_091230" />
 
 </android.support.constraint.ConstraintLayout>

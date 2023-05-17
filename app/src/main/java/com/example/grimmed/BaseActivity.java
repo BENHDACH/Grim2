@@ -44,11 +44,11 @@ public class BaseActivity extends AppCompatActivity {
         ImageView loupe = findViewById(R.id.loupe);
         loupe.setOnClickListener(this::onClick);
 
+        ImageView qrCode = findViewById(R.id.qrCodelmg);
+        qrCode.setOnClickListener(this::onClick);
+
         ImageView mamie = findViewById(R.id.mamie);
         mamie.setOnClickListener(this::onClick);
-
-        ImageView qrCode = findViewById(R.id.qrCodeImg);
-        qrCode.setOnClickListener(this::onClick);
     }
 
     public void onClick(View v) {
@@ -113,7 +113,7 @@ public class BaseActivity extends AppCompatActivity {
             Intent intent = new Intent(this, MamieActivity.class);
             startActivity(intent);
         }
-        if (v.getId() == R.id.qrCodeImg) {
+        if (v.getId() == R.id.qrCodelmg) {
             Toast.makeText(getApplicationContext(),"Scanner !", Toast.LENGTH_SHORT).show();
             Intent intent = new Intent(this, QRCodeActivity.class);
             startActivity(intent);
