@@ -5,6 +5,9 @@ import android.support.annotation.NonNull;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.View;
+import android.widget.Button;
+import android.widget.ImageView;
 import android.widget.Toast;
 
 import com.google.firebase.database.DataSnapshot;
@@ -29,10 +32,17 @@ public class QRCodeActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_qrcode);
 
+        Button button = findViewById(R.id.reScan);
+        button.setOnClickListener(this::onClick);
+
+        ImageView backHome5 = findViewById(R.id.backHomeQR);
+        backHome5.setOnClickListener(this::onClick);
+
         IntentIntegrator integrator = new IntentIntegrator(this);
         integrator.setCaptureActivity(CaptureActivity.class);
         integrator.setOrientationLocked(false);
         integrator.initiateScan();
+
     }
 
 
@@ -48,6 +58,15 @@ public class QRCodeActivity extends AppCompatActivity {
 
             nomMedocCheck(qrCodeValue);
 
+        }
+    }
+
+    private void onClick(View v) {
+        if (v.getId() == R.id.reScan) {
+            restartScan();
+        } else if (v.getId() == R.id.backHomeQR) {
+            Intent intent = new Intent(this, BaseActivity.class);
+            startActivity(intent);
         }
     }
 
@@ -83,10 +102,6 @@ public class QRCodeActivity extends AppCompatActivity {
                 if(foundMedoc){
                     launchMedocActivity(nomMedoc);
                 }
-                else {
-                    restartScan(nomMedoc);
-                }
-
             }
             @Override
             public void onCancelled(@NonNull DatabaseError databaseError) {
@@ -95,8 +110,8 @@ public class QRCodeActivity extends AppCompatActivity {
         });
     }
 
-    private void restartScan(String qrCodeValue) {
-        Toast.makeText(this, "Valeur inconnue :"+qrCodeValue, Toast.LENGTH_SHORT).show();
+    private void restartScan() {
+        Toast.makeText(this, "Valeur inconnue", Toast.LENGTH_SHORT).show();
         IntentIntegrator integrator = new IntentIntegrator(this);
         integrator.setCaptureActivity(CaptureActivity.class);
         integrator.setOrientationLocked(false);
