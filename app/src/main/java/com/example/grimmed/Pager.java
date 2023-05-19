@@ -21,6 +21,8 @@ public class Pager extends FragmentStatePagerAdapter {
     JSONObject myMedoc;
 
     Boolean enceinteCheck;
+
+    Boolean ordoCheck;
     List<String> dangerAllergies;
     List<String> dangerEnfant;
     PageMedicActivity pageMedicActivity;
@@ -28,7 +30,7 @@ public class Pager extends FragmentStatePagerAdapter {
     //Constructor to the class
     public Pager(FragmentManager fm, int tabCount, JSONObject myMedoc,
                  Boolean enceinteCheck, List<String> dangerAllergies,
-                 List<String> dangerEnfant, PageMedicActivity pageMedicActivity) {
+                 List<String> dangerEnfant, Boolean ordoCheck, PageMedicActivity pageMedicActivity) {
         super(fm);
         //Initializing tab count
         this.tabCount= tabCount;
@@ -37,6 +39,7 @@ public class Pager extends FragmentStatePagerAdapter {
         this.dangerAllergies = dangerAllergies;
         this.dangerEnfant = dangerEnfant;
         this.pageMedicActivity = pageMedicActivity;
+        this.ordoCheck = ordoCheck;
 
     }
 
@@ -49,7 +52,8 @@ public class Pager extends FragmentStatePagerAdapter {
             case 0:
                 Tab1 tab1 = null;
                 try {
-                    tab1 = new Tab1(myMedoc.getString("Usage"),myMedoc.getString("Url"),myMedoc.getString("Cible"),enceinteCheck,dangerAllergies,dangerEnfant,pageMedicActivity);
+                    tab1 = new Tab1(myMedoc.getString("Usage"),myMedoc.getString("Url"),myMedoc.getString("Cible")
+                            ,enceinteCheck,dangerAllergies,dangerEnfant,pageMedicActivity,ordoCheck);
                 } catch (JSONException e) {
                     Log.e("Error tab1 Pager","Usage,Url, Cible non conforme");
                     throw new RuntimeException(e);

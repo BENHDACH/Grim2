@@ -12,6 +12,8 @@ import android.widget.TextView;
 
 import com.squareup.picasso.Picasso;
 
+import org.w3c.dom.Text;
+
 import java.util.List;
 
 /**
@@ -29,10 +31,11 @@ public class Tab1 extends Fragment {
     List<String> dangerAllergies;
     List<String> dangerEnfant;
     private Boolean enceinteCheck;
+    private Boolean ordoCheck;
     private PageMedicActivity pageMedicActivity;
     @SuppressLint("ValidFragment")
     public  Tab1(String msg, String url, String cibleMsg, Boolean enceinteCheck,
-                 List<String> dangerAllergies, List<String> dangerEnfant, PageMedicActivity pageMedicActivity){
+                 List<String> dangerAllergies, List<String> dangerEnfant, PageMedicActivity pageMedicActivity, Boolean ordoCheck){
         this.msg = msg;
         this.url = url;
         this.cibleMsg = cibleMsg;
@@ -40,6 +43,7 @@ public class Tab1 extends Fragment {
         this.dangerAllergies = dangerAllergies;
         this.dangerEnfant = dangerEnfant;
         this.pageMedicActivity = pageMedicActivity;
+        this.ordoCheck = ordoCheck;
     }
 
     //Overriden method onCreateView
@@ -52,6 +56,7 @@ public class Tab1 extends Fragment {
         TextView textView = view.findViewById(R.id.textCompo);
         TextView secondaryText = view.findViewById(R.id.textSecondEffect);
         TextView alertText = view.findViewById(R.id.alerte);
+        TextView ordoText = view.findViewById(R.id.ordo);
 
         secondaryText.setText(cibleMsg);
         int colorRes = R.color.rougeAlerte;
@@ -76,8 +81,11 @@ public class Tab1 extends Fragment {
             alertText.setText("");
         }
 
-
-
+        if(ordoCheck){
+            ordoText.setText("Ce médicament nécessite une ordonnance.");
+        }else{
+            ordoText.setText("");
+        }
 
 
         String concatMsgUsage = "";

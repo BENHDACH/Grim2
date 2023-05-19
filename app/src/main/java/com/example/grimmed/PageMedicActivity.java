@@ -54,6 +54,7 @@ public class PageMedicActivity extends AppCompatActivity implements TabLayout.On
     private List<String> itemsAllergiesEnfant = new ArrayList<String>();
 
     private String enceinteMedoc;
+    private String ordoMedoc;
 
     private List<String> itemsCompoMedoc = new ArrayList<String>();
     Bundle bundle;
@@ -228,17 +229,20 @@ public class PageMedicActivity extends AppCompatActivity implements TabLayout.On
 
 
                 int enceinte = 0;
+                int ordo = 0;
                 JSONArray listCompo = new JSONArray();
 
 
                 try {
                     enceinte = myMedoc.getInt("Enceinte");
+                    ordo = myMedoc.getInt("Ordo");
                     listCompo = myMedoc.getJSONArray("Composition");
                 } catch (JSONException e) {
                     throw new RuntimeException(e);
                 }
 
                 enceinteMedoc = ""+enceinte;
+                ordoMedoc = ""+ordo;
 
                 for(int y=0;y<listCompo.length();y++){
                     try {
@@ -265,6 +269,7 @@ public class PageMedicActivity extends AppCompatActivity implements TabLayout.On
     private void pagerSetup(){
         //Initializing viewPager
         Boolean enceinteCheck = false;
+        Boolean ordoCheck = false;
         List<String> dangerAllergies = new ArrayList<String>();
         List<String> dangerEnfant = new ArrayList<String>();
 
@@ -287,12 +292,16 @@ public class PageMedicActivity extends AppCompatActivity implements TabLayout.On
         if(Objects.equals(enceinteMedoc, enceinteUser) && Objects.equals(enceinteUser, "1")){
             enceinteCheck = true;
         }
+        if(Objects.equals(ordoMedoc, "1")){
+            ordoCheck = true;
+        }
 
         viewPager = (ViewPager) findViewById(R.id.pager);
 
 
         //Creating our pager adapter
-        Pager adapter = new Pager(getSupportFragmentManager(), tabLayout.getTabCount(),DataUser.defaultObject,enceinteCheck,dangerAllergies,dangerEnfant,this);
+        Pager adapter = new Pager(getSupportFragmentManager(), tabLayout.getTabCount(),DataUser.defaultObject,
+                enceinteCheck,dangerAllergies,dangerEnfant,ordoCheck,this);
 
         //Adding adapter to pager
         viewPager.setAdapter(adapter);
