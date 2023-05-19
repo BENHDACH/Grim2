@@ -27,16 +27,18 @@ public class Tab1 extends Fragment {
     private String url;
 
     List<String> dangerAllergies;
+    List<String> dangerEnfant;
     private Boolean enceinteCheck;
     private PageMedicActivity pageMedicActivity;
     @SuppressLint("ValidFragment")
     public  Tab1(String msg, String url, String cibleMsg, Boolean enceinteCheck,
-                 List<String> dangerAllergies, PageMedicActivity pageMedicActivity){
+                 List<String> dangerAllergies, List<String> dangerEnfant, PageMedicActivity pageMedicActivity){
         this.msg = msg;
         this.url = url;
         this.cibleMsg = cibleMsg;
         this.enceinteCheck = enceinteCheck;
         this.dangerAllergies = dangerAllergies;
+        this.dangerEnfant = dangerEnfant;
         this.pageMedicActivity = pageMedicActivity;
     }
 
@@ -56,12 +58,20 @@ public class Tab1 extends Fragment {
         int textColor = ContextCompat.getColor(pageMedicActivity, colorRes);
         alertText.setTextColor(textColor);
 
-        if(enceinteCheck && !dangerAllergies.isEmpty()){
+        if (enceinteCheck && !dangerAllergies.isEmpty() && !dangerEnfant.isEmpty()) {
+            alertText.setText("Attention ce médicament est dangereux pour les femmes enceintes et vous et l'un de vos enfant possèdez des allergies à sa composition ! ");
+        } else if (enceinteCheck && !dangerAllergies.isEmpty()) {
             alertText.setText("Attention ce médicament est dangereux pour les femmes enceintes et vous possèdez des allergies à sa composition ! ");
-        } else if(enceinteCheck){
+        } else if (enceinteCheck && !dangerEnfant.isEmpty()) {
+            alertText.setText("Attention ce médicament est dangereux pour les femmes enceintes et l'un de vos enfants a des allergies dans sa composition ! ");
+        } else if (!dangerEnfant.isEmpty() && !dangerAllergies.isEmpty()) {
+            alertText.setText("Attention vous et l'un de vos enfants possèdez des allergies à sa composition ! ");
+        }else if (enceinteCheck) {
             alertText.setText("Attention contre indiquez pour les femmes enceintes !");
         } else if (!dangerAllergies.isEmpty()) {
             alertText.setText("Attention vous avez des allergies dans ce médicament !");
+        } else if (!dangerEnfant.isEmpty()) {
+            alertText.setText("Attention votre enfant a des allergies dans ce médicament !");
         } else{
             alertText.setText("");
         }

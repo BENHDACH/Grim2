@@ -51,6 +51,8 @@ public class PageMedicActivity extends AppCompatActivity implements TabLayout.On
 
     private List<String> itemsAllergiesUser = new ArrayList<String>();
 
+    private List<String> itemsAllergiesEnfant = new ArrayList<String>();
+
     private String enceinteMedoc;
 
     private List<String> itemsCompoMedoc = new ArrayList<String>();
@@ -151,9 +153,58 @@ public class PageMedicActivity extends AppCompatActivity implements TabLayout.On
                 }
 
                 if(parMedoc){
-                    myListeningTest(bundle.getString("nomMedoc"));
+                    getValueEnfant(parMedoc);
                 }
 
+
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError databaseError) {
+
+            }
+        });
+    }
+
+    private void getValueEnfant(Boolean parMedoc) {
+        itemsAllergiesEnfant.clear();
+
+        DatabaseReference medReference = FirebaseDatabase.getInstance().getReference("User").child(DataUser.username)
+                .child("enfant");
+        medReference.addListenerForSingleValueEvent(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                if(dataSnapshot != null) {
+                    for(DataSnapshot childSnapshot : dataSnapshot.getChildren()) {
+                        Object nom = dataSnapshot.getValue();
+                        JSONObject myInfo = new JSONObject((Map) nom);
+                        String i = childSnapshot.getKey();
+                        JSONArray listAllergie = null;
+                        try {
+                            JSONObject nenfant = myInfo.getJSONObject(i);
+                            listAllergie = nenfant.getJSONArray("allergie");
+                         //   Log.e("TAG",""+nenfantAll);
+                        } catch (JSONException e) {
+                            listAllergie = new JSONArray();
+                        }
+
+                        Log.e("TAG",""+i);
+
+                        for (int y = 0; y < listAllergie.length(); y++) {
+                            try {
+                                if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
+                                    itemsAllergiesEnfant.add(AES.decrypt(listAllergie.get(y).toString()));
+                                }
+                            } catch (Exception e) {
+                                throw new RuntimeException(e);
+                            }
+                        }
+                    }
+
+                    if (parMedoc) {
+                        myListeningTest(bundle.getString("nomMedoc"));
+                    }
+                }
 
             }
 
@@ -215,11 +266,20 @@ public class PageMedicActivity extends AppCompatActivity implements TabLayout.On
         //Initializing viewPager
         Boolean enceinteCheck = false;
         List<String> dangerAllergies = new ArrayList<String>();
+        List<String> dangerEnfant = new ArrayList<String>();
 
         for(int i = 0;i<itemsAllergiesUser.size();i++){
             for(int y = 0;y<itemsCompoMedoc.size();y++){
                 if(Objects.equals(itemsCompoMedoc.get(y), itemsAllergiesUser.get(i))){
                     dangerAllergies.add(itemsCompoMedoc.get(y));
+                }
+            }
+        }
+
+        for(int i = 0;i<itemsAllergiesEnfant.size();i++){
+            for(int y = 0;y<itemsCompoMedoc.size();y++){
+                if(Objects.equals(itemsCompoMedoc.get(y), itemsAllergiesEnfant.get(i))){
+                    dangerEnfant.add(itemsCompoMedoc.get(y));
                 }
             }
         }
@@ -232,12 +292,13 @@ public class PageMedicActivity extends AppCompatActivity implements TabLayout.On
 
 
         //Creating our pager adapter
-        Pager adapter = new Pager(getSupportFragmentManager(), tabLayout.getTabCount(),DataUser.defaultObject,enceinteCheck,dangerAllergies,this);
+        Pager adapter = new Pager(getSupportFragmentManager(), tabLayout.getTabCount(),DataUser.defaultObject,enceinteCheck,dangerAllergies,dangerEnfant,this);
 
         //Adding adapter to pager
         viewPager.setAdapter(adapter);
 
         dangerAllergies.clear();
+        dangerEnfant.clear();
     }
 
     private void myListening() {
