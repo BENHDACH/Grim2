@@ -2,6 +2,7 @@ package com.example.grimmed;
 
 import android.annotation.SuppressLint;
 import android.content.Intent;
+import android.content.pm.ActivityInfo;
 import android.graphics.Color;
 import android.graphics.Typeface;
 import android.graphics.drawable.GradientDrawable;
@@ -20,11 +21,17 @@ import java.util.List;
 
 public class MainActivity extends AppCompatActivity {
 
+    @SuppressLint("SourceLockedOrientationActivity")
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+
+        this.setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT);
+
         TextView textView = findViewById(R.id.titleCo);
+
+
 
         /** Ici vous pouvez set la base de données
          La réference sera Medicaments -- modifié le nom (du médicament) et la setValue(...),

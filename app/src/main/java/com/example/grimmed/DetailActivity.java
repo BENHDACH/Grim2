@@ -1,6 +1,8 @@
 package com.example.grimmed;
 
+import android.annotation.SuppressLint;
 import android.content.Intent;
+import android.content.pm.ActivityInfo;
 import android.os.Build;
 import android.support.annotation.NonNull;
 import android.support.v7.app.ActionBar;
@@ -41,11 +43,15 @@ public class DetailActivity extends AppCompatActivity {
 
     String childName;
 
+    @SuppressLint("SourceLockedOrientationActivity")
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_detail);
-        Log.e("PROBLEME", "PROBLEME");
+        this.setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT);
+
+
+
         TextView consignes = findViewById(R.id.consignes);
         ImageView plusDetail = findViewById(R.id.plusDetail);
         plusDetail.setOnClickListener(this::onClick);

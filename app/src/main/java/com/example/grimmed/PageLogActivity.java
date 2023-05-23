@@ -1,6 +1,8 @@
 package com.example.grimmed;
 
+import android.annotation.SuppressLint;
 import android.content.Intent;
+import android.content.pm.ActivityInfo;
 import android.support.annotation.NonNull;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -29,10 +31,14 @@ public class PageLogActivity extends AppCompatActivity {
 
     EditText usernameEditText;
     EditText pswEditText;
+    @SuppressLint("SourceLockedOrientationActivity")
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_page_log);
+
+        this.setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT);
+
 
         Button logPage = findViewById(R.id.logPage);
         TextView redirection = findViewById(R.id.redirection);

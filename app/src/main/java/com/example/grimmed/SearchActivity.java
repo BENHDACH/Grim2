@@ -1,6 +1,8 @@
 package com.example.grimmed;
 
+import android.annotation.SuppressLint;
 import android.content.Intent;
+import android.content.pm.ActivityInfo;
 import android.content.res.ColorStateList;
 import android.graphics.Color;
 import android.support.annotation.NonNull;
@@ -49,10 +51,13 @@ public class SearchActivity extends AppCompatActivity {
 
 
     private String whichB = "Nom";
+    @SuppressLint("SourceLockedOrientationActivity")
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_search);
+
+        this.setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT);
 
         bNom = findViewById(R.id.buttonNom);
         bNom.setOnClickListener(this::onClick);
@@ -401,7 +406,6 @@ public class SearchActivity extends AppCompatActivity {
 
     /* Une fonction pour check chaque clique sur le recycler view (appellé dans l'adapter)*/
     public void onItemClick(String item) {
-        Log.e("MyName IS", item);
         //Si l'item obtenu provient du mode Nom (c'est donc un médicament)
         if(whichB.equals("Nom")){
             Intent intent = new Intent(this, PageMedicActivity.class);

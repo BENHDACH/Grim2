@@ -88,7 +88,7 @@
         android:layout_width="67dp"
         android:layout_height="52dp"
         android:layout_marginTop="60dp"
-        android:layout_marginBottom="24dp"
+        android:layout_marginBottom="60dp"
         android:tint="@color/blue"
         app:layout_constraintBottom_toTopOf="@+id/view6"
         app:layout_constraintEnd_toEndOf="parent"
@@ -147,5 +147,16 @@
         app:layout_constraintHorizontal_bias="0.498"
         app:layout_constraintStart_toStartOf="parent"
         app:srcCompat="@drawable/cloche" />
+
+    <TextView
+        android:id="@+id/relanceText"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/Relance"
+        android:visibility="invisible"
+        app:layout_constraintBottom_toTopOf="@+id/view5"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/plusVaccinNotif" />
 
 </android.support.constraint.ConstraintLayout>

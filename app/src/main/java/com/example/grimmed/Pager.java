@@ -52,7 +52,7 @@ public class Pager extends FragmentStatePagerAdapter {
             case 0:
                 Tab1 tab1 = null;
                 try {
-                    tab1 = new Tab1(myMedoc.getString("Usage"),myMedoc.getString("Url"),myMedoc.getString("Cible")
+                    tab1 = new Tab1(myMedoc.getString("Usage"),myMedoc.getString("Url"),myMedoc.getJSONArray("CibleText")
                             ,enceinteCheck,dangerAllergies,dangerEnfant,pageMedicActivity,ordoCheck);
                 } catch (JSONException e) {
                     Log.e("Error tab1 Pager","Usage,Url, Cible non conforme");
