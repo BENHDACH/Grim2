@@ -1,6 +1,9 @@
 package com.example.grimmed;
 
+import android.annotation.SuppressLint;
 import android.content.Intent;
+import android.content.pm.ActivityInfo;
+import android.content.res.Configuration;
 import android.os.AsyncTask;
 import android.os.Build;
 import android.provider.ContactsContract;
@@ -63,10 +66,16 @@ public class PageMedicActivity extends AppCompatActivity implements TabLayout.On
 
     private static final Logger LOGGER = Logger.getLogger(PageMedicActivity.class.getName());
 
+    @SuppressLint("SourceLockedOrientationActivity")
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_page_medic);
+
+        this.setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT);
+
+
 
         ImageView buttonMedoc = findViewById(R.id.buttonMedoc);
         buttonMedoc.setOnClickListener(this::onClick);
@@ -98,8 +107,6 @@ public class PageMedicActivity extends AppCompatActivity implements TabLayout.On
         //Adding onTabSelectedListener to swipe views
         tabLayout.setOnTabSelectedListener(this);
 
-        //makeRequest();
-        new NetworkTask().execute();
 
         //----------------------------->
         ActionBar actionBar = getSupportActionBar();
@@ -107,17 +114,24 @@ public class PageMedicActivity extends AppCompatActivity implements TabLayout.On
             actionBar.setTitle("Médicaments");
         }
 
-        bundle = getIntent().getExtras();
-        if(getIntent().hasExtra("nomMedoc")){
-           //Log.e("MArche?",":"+bundle.getString("nomMedoc"));
-            getValueUser(true);
-        }
-        else{
-            getValueUser(false);
+
+
+        int orientation = getResources().getConfiguration().orientation;
+        if (orientation == Configuration.ORIENTATION_PORTRAIT) {
+
+            bundle = getIntent().getExtras();
+            if(getIntent().hasExtra("nomMedoc")){
+                //Log.e("MArche?",":"+bundle.getString("nomMedoc"));
+                getValueUser(true);
+            }
+            else{
+                getValueUser(false);
+            }
+
+            pagerSetup();
+
         }
 
-        //myListening();
-        pagerSetup();
         
     }
 
@@ -298,6 +312,7 @@ public class PageMedicActivity extends AppCompatActivity implements TabLayout.On
 
         viewPager = (ViewPager) findViewById(R.id.pager);
 
+        Log.e("Pager:","man"+getSupportFragmentManager());
 
         //Creating our pager adapter
         Pager adapter = new Pager(getSupportFragmentManager(), tabLayout.getTabCount(),DataUser.defaultObject,
@@ -382,69 +397,6 @@ public class PageMedicActivity extends AppCompatActivity implements TabLayout.On
     @Override
     public void onTabReselected(TabLayout.Tab tab) {
 
-    }
-    private void makeRequest() {
-            try {
-                // Create a URL object from the API endpoint
-                URL url = new URL("https://restcountries.com/v3.1/all");
-
-                // Open a connection to the URL using HttpURLConnection
-                HttpURLConnection conn = (HttpURLConnection) url.openConnection();
-                conn.setRequestMethod("GET");
-
-                // Read the response from the API
-                BufferedReader in = new BufferedReader(new InputStreamReader(conn.getInputStream(), StandardCharsets.UTF_8));
-                StringBuilder responseBuilder = new StringBuilder();
-                String inputLine;
-                while ((inputLine = in.readLine()) != null) {
-                    responseBuilder.append(inputLine);
-                }
-                in.close();
-
-                // Print the response to the console using a log
-                LOGGER.log(Level.INFO, responseBuilder.toString());
-
-                // Disconnect the connection
-                conn.disconnect();
-
-            } catch (Exception e) {
-                LOGGER.log(Level.SEVERE, "Error: " + e.getMessage(), e);
-            }
-        }
-
-
-        //----------> AJOUT TEST
-
-    private class NetworkTask extends AsyncTask<Void, Void, String> {
-
-        @Override
-        protected String doInBackground(Void... voids) {
-            // Perform network operation here
-            String result = "";
-            try {
-                URL url = new URL("https://restcountries.com/v3.1/all");
-                HttpURLConnection conn = (HttpURLConnection) url.openConnection();
-                conn.setRequestMethod("GET");
-                conn.connect();
-
-                BufferedReader in = new BufferedReader(new InputStreamReader(conn.getInputStream(), StandardCharsets.UTF_8));
-                String line;
-                while ((line = in.readLine()) != null) {
-                    result += line;
-                }
-                in.close();
-            } catch (IOException e) {
-                e.printStackTrace();
-            }
-            Log.e("VOICIII",result);
-            return result;
-        }
-
-        @Override
-        protected void onPostExecute(String result) {
-            // Update UI with the result
-            //mTextView.setText(result);
-        }
     }
 
 }

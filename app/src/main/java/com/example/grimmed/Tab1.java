@@ -12,7 +12,8 @@ import android.widget.TextView;
 
 import com.squareup.picasso.Picasso;
 
-import org.w3c.dom.Text;
+import org.json.JSONArray;
+import org.json.JSONException;
 
 import java.util.List;
 
@@ -25,7 +26,7 @@ import java.util.List;
 public class Tab1 extends Fragment {
 
     private String msg;
-    private String cibleMsg;
+    private JSONArray cibleMsg;
     private String url;
 
     List<String> dangerAllergies;
@@ -33,8 +34,9 @@ public class Tab1 extends Fragment {
     private Boolean enceinteCheck;
     private Boolean ordoCheck;
     private PageMedicActivity pageMedicActivity;
+
     @SuppressLint("ValidFragment")
-    public  Tab1(String msg, String url, String cibleMsg, Boolean enceinteCheck,
+    public  Tab1(String msg, String url, JSONArray cibleMsg, Boolean enceinteCheck,
                  List<String> dangerAllergies, List<String> dangerEnfant, PageMedicActivity pageMedicActivity, Boolean ordoCheck){
         this.msg = msg;
         this.url = url;
@@ -45,6 +47,8 @@ public class Tab1 extends Fragment {
         this.pageMedicActivity = pageMedicActivity;
         this.ordoCheck = ordoCheck;
     }
+
+
 
     //Overriden method onCreateView
     @Override
@@ -57,8 +61,15 @@ public class Tab1 extends Fragment {
         TextView secondaryText = view.findViewById(R.id.textSecondEffect);
         TextView alertText = view.findViewById(R.id.alerte);
         TextView ordoText = view.findViewById(R.id.ordo);
-
-        secondaryText.setText(cibleMsg);
+        String concateur = "";
+        for(int j=0;j<cibleMsg.length();j++){
+            try {
+                concateur = concateur + cibleMsg.get(j);
+            } catch (JSONException e) {
+                throw new RuntimeException(e);
+            }
+        }
+        secondaryText.setText(concateur);
         int colorRes = R.color.rougeAlerte;
         int textColor = ContextCompat.getColor(pageMedicActivity, colorRes);
         alertText.setTextColor(textColor);

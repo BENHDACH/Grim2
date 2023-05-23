@@ -1,6 +1,8 @@
 package com.example.grimmed;
 
+import android.annotation.SuppressLint;
 import android.content.Intent;
+import android.content.pm.ActivityInfo;
 import android.support.annotation.NonNull;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
@@ -27,10 +29,14 @@ public class ChildActivity extends AppCompatActivity {
 
     private RecyclerView recyclerView;
     private List<String> items = new ArrayList<String>();
+    @SuppressLint("SourceLockedOrientationActivity")
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_child);
+
+        this.setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT);
+
 
         ActionBar actionBar = getSupportActionBar();
         actionBar.setTitle("Vos enfants");

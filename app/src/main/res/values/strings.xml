@@ -6,4 +6,6 @@
     <string name="secondaryTitle">Ce médicament est couramment utilisé pour :</string>
     <string name="SignMdpCondition">Le mot de passe doit contenir 10 caractères dont au moins 1 majuscule et 1 chiffre.</string>
     <string name="QRText">Un problème ou bien mauvais QR code ? Reesayer une nouvelle fois !</string>
+    <string name="Relance">Replacer les notifications sur ce téléphone en cliquant ICI !</string>
+
 </resources>

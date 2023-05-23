@@ -22,6 +22,8 @@ public class Tab2 extends Fragment {
         this.effectS = effectS;
     }
 
+
+
     //Overriden method onCreateView
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {

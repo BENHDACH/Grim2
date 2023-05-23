@@ -1,6 +1,8 @@
 package com.example.grimmed;
 
+import android.annotation.SuppressLint;
 import android.content.Intent;
+import android.content.pm.ActivityInfo;
 import android.os.Build;
 import android.support.annotation.NonNull;
 import android.support.v7.app.AppCompatActivity;
@@ -39,10 +41,13 @@ public class PageSignActivity extends AppCompatActivity  {
     Boolean mailCheck = false;
     Boolean pswCheck = false;
     final Boolean[] usernameCheck = {false};
+    @SuppressLint("SourceLockedOrientationActivity")
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_page_sign);
+
+        this.setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT);
 
         Button logPage = findViewById(R.id.sigPage);
         TextView redirectionLog = findViewById(R.id.redirectionLog);

@@ -31,6 +31,7 @@ public class Tab3 extends Fragment {
         this.contreIndic = contreIndic;
     }
 
+
     //Overriden method onCreateView
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {

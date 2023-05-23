@@ -1,7 +1,9 @@
 package com.example.grimmed;
 
+import android.annotation.SuppressLint;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.content.pm.ActivityInfo;
 import android.support.annotation.NonNull;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.AlertDialog;
@@ -28,10 +30,14 @@ import java.util.Map;
 public class ProfilActivity extends AppCompatActivity {
 
     Boolean estEnceinte = false;
+    @SuppressLint("SourceLockedOrientationActivity")
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_profil);
+
+        this.setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT);
+
 
         ImageView buttonMedoc4 = findViewById(R.id.buttonMedoc4);
         buttonMedoc4.setOnClickListener(this::onClick);

@@ -1,11 +1,13 @@
 package com.example.grimmed;
 
+import android.annotation.SuppressLint;
 import android.app.AlarmManager;
 import android.app.NotificationChannel;
 import android.app.NotificationManager;
 import android.app.PendingIntent;
 import android.content.Context;
 import android.content.Intent;
+import android.content.pm.ActivityInfo;
 import android.os.Build;
 import android.support.annotation.NonNull;
 import android.support.v7.app.ActionBar;
@@ -17,6 +19,7 @@ import android.util.Log;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
@@ -44,10 +47,13 @@ public class VaccinTimerActivity extends AppCompatActivity {
     String childName;
 
 
+    @SuppressLint("SourceLockedOrientationActivity")
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_vaccin_timer);
+        this.setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT);
+
         Bundle bundle = getIntent().getExtras();
 
         createNotificationChannel();
@@ -84,6 +90,9 @@ public class VaccinTimerActivity extends AppCompatActivity {
         nomVaccin.setVisibility(View.VISIBLE);
         TextView dateVaccin = findViewById(R.id.dateVacc);
         dateVaccin.setVisibility(View.VISIBLE);
+        TextView relance = findViewById(R.id.relanceText);
+        relance.setVisibility(View.VISIBLE);
+        relance.setOnClickListener(this::onClick);
 
 
         recyclerView = findViewById(R.id.recyclerVaccin);
@@ -107,6 +116,8 @@ public class VaccinTimerActivity extends AppCompatActivity {
         nomVaccin.setVisibility(View.GONE);
         TextView dateVaccin = findViewById(R.id.dateVacc);
         dateVaccin.setVisibility(View.GONE);
+        TextView relance = findViewById(R.id.relanceText);
+        relance.setVisibility(View.GONE);
 
         recyclerView.setVisibility(View.GONE);
 
@@ -157,6 +168,9 @@ public class VaccinTimerActivity extends AppCompatActivity {
             itemsId.add(0);
 
             setRecyclerView();
+        }
+        if(v.getId() == R.id.relanceText){
+            setAllVaccin();
         }
     }
 
@@ -355,5 +369,13 @@ public class VaccinTimerActivity extends AppCompatActivity {
                 calendar.getTimeInMillis(),
                 pendingIntent
         );
+    }
+
+    private void setAllVaccin(){
+        //On set sur tout les vaccins la notification
+        for(int i = 0;i<items.size();i++){
+            createNotTime(items.get(i),itemsDate.get(i),itemsId.get(i));
+        }
+        Toast.makeText(this, "Toute les notifications sont entrées !", Toast.LENGTH_SHORT).show();
     }
 }
