@@ -373,9 +373,11 @@ public class VaccinTimerActivity extends AppCompatActivity {
 
     private void setAllVaccin(){
         //On set sur tout les vaccins la notification
-        for(int i = 0;i<items.size();i++){
-            createNotTime(items.get(i),itemsDate.get(i),itemsId.get(i));
+        if(items.size()>=1 && items.get(0)!=" "){
+            for(int i = 0;i<items.size();i++){
+                createNotTime(items.get(i),itemsDate.get(i),itemsId.get(i));
+            }
+            Toast.makeText(this, "Toute les notifications sont entrées !", Toast.LENGTH_SHORT).show();
         }
-        Toast.makeText(this, "Toute les notifications sont entrées !", Toast.LENGTH_SHORT).show();
     }
 }
