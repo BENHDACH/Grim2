@@ -1,6 +1,8 @@
 package com.example.grimmed;
 
 import android.annotation.SuppressLint;
+import android.content.Context;
+import android.content.res.ColorStateList;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v4.content.ContextCompat;
@@ -61,6 +63,12 @@ public class Tab1 extends Fragment {
         TextView secondaryText = view.findViewById(R.id.textSecondEffect);
         TextView alertText = view.findViewById(R.id.alerte);
         TextView ordoText = view.findViewById(R.id.ordo);
+
+
+
+
+
+
         String concateur = "";
         for(int j=0;j<cibleMsg.length();j++){
             try {
@@ -73,6 +81,8 @@ public class Tab1 extends Fragment {
         int colorRes = R.color.rougeAlerte;
         int textColor = ContextCompat.getColor(pageMedicActivity, colorRes);
         alertText.setTextColor(textColor);
+
+
 
         if (enceinteCheck && !dangerAllergies.isEmpty() && !dangerEnfant.isEmpty()) {
             alertText.setText("Attention ce médicament est dangereux pour les femmes enceintes et vous et l'un de vos enfant possèdez des allergies à sa composition ! ");
